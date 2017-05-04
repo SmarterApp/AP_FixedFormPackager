@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FixedFormPackager.Common.Utilities;
 using NLog;
 
 namespace FixedFormPackager
@@ -65,6 +66,24 @@ namespace FixedFormPackager
                             Directory.CreateDirectory(args[i]);
                         }
                             break;
+                        case "-id":
+                            ++i;
+                            if (i >= args.Length)
+                            {
+                                Logger.Error("-id option must be followed by a valid string value");
+                                throw new ArgumentException(
+                                    "Invalid command line. '-id' option not followed by value.");
+                            }
+                            break;
+                        // If this argument is not provided, the application will infer the grade based on the items
+                        case "-grade":
+                            if (i >= args.Length)
+                            {
+                                Logger.Error("-id option must be followed by a valid string value");
+                                throw new ArgumentException(
+                                    "Invalid command line. '-id' option not followed by value.");
+                            }
+                            break;
                         default:
                             Logger.Error($"Unknown command line option '{args[i]}'. Use '-h' for syntax help.");
                             throw new ArgumentException(
@@ -83,10 +102,7 @@ namespace FixedFormPackager
                 }
                 else
                 {
-                    inputFilenames.ToList().ForEach(x =>
-                    {
-                        // Make excellent xml
-                    });
+                    var result = inputFilenames.ToList().SelectMany(CsvExtractor.ExtractTestItemInput).ToList();
                 }
             }
             catch (Exception e)
