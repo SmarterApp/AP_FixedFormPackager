@@ -6,5 +6,6 @@
         public static string Output { get; set; }
         public static string UniqueId { get; set; }
         public static string Grade { get; set; }
+        public static string publisher { get; set; }
     }
 }
