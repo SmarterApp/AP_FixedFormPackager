@@ -10,7 +10,21 @@ namespace FixedFormPackager.Test.Common.Integration
     [TestFixture]
     public class ItemInputTests
     {
-        public static readonly string ResourcesDirectory = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName, "Resources");
+        public static readonly string ResourcesDirectory =
+            Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName, "Resources");
+
+        [Test]
+        public void BadFilePathShouldFail()
+        {
+            // Arrange
+            const string filePath = "randomfilepath";
+
+            //Act
+            ActualValueDelegate<object> testDelegate = () => CsvExtractor.ExtractItemInput(filePath);
+
+            //Assert
+            Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
+        }
 
         [Test]
         public void CorrectFilePathWithCorrectExtensionAndHeadersShouldSucceed()
@@ -30,10 +44,10 @@ namespace FixedFormPackager.Test.Common.Integration
         }
 
         [Test]
-        public void BadFilePathShouldFail()
+        public void CorrectFilePathWithCorrectExtensionAndIncorrectHeadersShouldFail()
         {
             // Arrange
-            const string filePath = "randomfilepath";
+            var filePath = Path.Combine(ResourcesDirectory, "BAD-FFP_Sample.csv");
 
             //Act
             ActualValueDelegate<object> testDelegate = () => CsvExtractor.ExtractItemInput(filePath);
@@ -47,19 +61,6 @@ namespace FixedFormPackager.Test.Common.Integration
         {
             // Arrange
             var filePath = Path.Combine(ResourcesDirectory, "test.txt");
-
-            //Act
-            ActualValueDelegate<object> testDelegate = () => CsvExtractor.ExtractItemInput(filePath);
-
-            //Assert
-            Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
-        }
-
-        [Test]
-        public void CorrectFilePathWithCorrectExtensionAndIncorrectHeadersShouldFail()
-        {
-            // Arrange
-            var filePath = Path.Combine(ResourcesDirectory, "BAD-FFP_Sample.csv");
 
             //Act
             ActualValueDelegate<object> testDelegate = () => CsvExtractor.ExtractItemInput(filePath);
