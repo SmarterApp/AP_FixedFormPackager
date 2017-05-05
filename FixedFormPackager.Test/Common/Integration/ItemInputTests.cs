@@ -2,19 +2,21 @@
 using System.IO;
 using System.Linq;
 using FixedFormPackager.Common.Utilities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace FixedFormPackager.Test.Common.Integration
 {
-    [TestClass]
+    [TestFixture]
     public class ItemInputTests
     {
-        [TestMethod]
+        public static readonly string ResourcesDirectory = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName, "Resources");
+
+        [Test]
         public void CorrectFilePathWithCorrectExtensionAndHeadersShouldSucceed()
         {
             // Arrange
-            var filePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, "Resources",
-                "FFP_Sample.csv");
+            var filePath = Path.Combine(ResourcesDirectory, "FFP_Sample.csv");
 
             // Act
             var result = CsvExtractor.ExtractItemInput(filePath);
@@ -27,39 +29,43 @@ namespace FixedFormPackager.Test.Common.Integration
             Assert.IsTrue(result.Count(x => string.IsNullOrEmpty(x.AssociatedStimuliId)) == 1);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void BadFilePathShouldFail()
         {
             // Arrange
             const string filePath = "randomfilepath";
 
-            // Act
-            CsvExtractor.ExtractItemInput(filePath);
+            //Act
+            ActualValueDelegate<object> testDelegate = () => CsvExtractor.ExtractItemInput(filePath);
+
+            //Assert
+            Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void CorrectFilePathWithIncorrectExtensionShouldFail()
         {
             // Arrange
-            var filePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, "Resources",
-                "test.txt");
+            var filePath = Path.Combine(ResourcesDirectory, "test.txt");
 
-            // Act
-            CsvExtractor.ExtractItemInput(filePath);
+            //Act
+            ActualValueDelegate<object> testDelegate = () => CsvExtractor.ExtractItemInput(filePath);
+
+            //Assert
+            Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void CorrectFilePathWithCorrectExtensionAndIncorrectHeadersShouldFail()
         {
             // Arrange
-            var filePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, "Resources",
-                "BAD-FFP_Sample.csv");
+            var filePath = Path.Combine(ResourcesDirectory, "BAD-FFP_Sample.csv");
 
-            // Act
-            CsvExtractor.ExtractItemInput(filePath);
+            //Act
+            ActualValueDelegate<object> testDelegate = () => CsvExtractor.ExtractItemInput(filePath);
+
+            //Assert
+            Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
         }
     }
 }
