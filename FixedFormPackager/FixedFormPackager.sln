@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixedFormPackager", "FixedF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixedFormPackager.Common", "..\FixedFormPackager.Common\FixedFormPackager.Common.csproj", "{BD149CA6-9857-473C-AD46-4B71F5E67D05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixedFormPackager.Common.Test", "FixedFormPackager.Test\FixedFormPackager.Common.Test.csproj", "{DAC296CD-457F-4764-8CA8-024EC563E653}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixedFormPackager.Test", "..\FixedFormPackager.Test\FixedFormPackager.Test.csproj", "{0F3E7D7C-0026-48BF-BB98-2074971EA7F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{BD149CA6-9857-473C-AD46-4B71F5E67D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD149CA6-9857-473C-AD46-4B71F5E67D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD149CA6-9857-473C-AD46-4B71F5E67D05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DAC296CD-457F-4764-8CA8-024EC563E653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAC296CD-457F-4764-8CA8-024EC563E653}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAC296CD-457F-4764-8CA8-024EC563E653}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAC296CD-457F-4764-8CA8-024EC563E653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F3E7D7C-0026-48BF-BB98-2074971EA7F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F3E7D7C-0026-48BF-BB98-2074971EA7F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F3E7D7C-0026-48BF-BB98-2074971EA7F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F3E7D7C-0026-48BF-BB98-2074971EA7F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

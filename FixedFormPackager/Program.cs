@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FixedFormPackager.Common.Utilities;
@@ -20,9 +19,6 @@ namespace FixedFormPackager
             Logger.Debug("Fixed Form Packager Initialized");
             try
             {
-                var inputFilenames = new List<string>();
-                string outputFilename = null;
-
                 var help = false;
 
                 for (var i = 0; i < args.Length; ++i)
@@ -42,8 +38,12 @@ namespace FixedFormPackager
                                 throw new ArgumentException(
                                     "Invalid command line. '-i' option not followed by filename.");
                             }
+                            if (!string.IsNullOrEmpty(ExtractionSettings.Input))
+                            {
+                                throw new ArgumentException("Only one input filename may be specified.");
+                            }
                             Logger.Info($"Input found: {args[i]}");
-                            inputFilenames.Add(args[i]);
+                            ExtractionSettings.Input = args[i];
                         }
                             break;
                         case "-o":
@@ -55,13 +55,11 @@ namespace FixedFormPackager
                                 throw new ArgumentException(
                                     "Invalid command line. '-o' option not followed by filename.");
                             }
-                            if (outputFilename != null)
+                            if (!string.IsNullOrEmpty(ExtractionSettings.Output))
                             {
-                                Logger.Error(
-                                    $"Output filename already set to: {outputFilename}, cannot set to {args[i]}");
                                 throw new ArgumentException("Only one item output filename may be specified.");
                             }
-                            outputFilename = args[i];
+                            ExtractionSettings.Output = args[i];
                             Logger.Info($"Output filename set to: {args[i]}");
                             Directory.CreateDirectory(args[i]);
                         }
@@ -74,15 +72,28 @@ namespace FixedFormPackager
                                 throw new ArgumentException(
                                     "Invalid command line. '-id' option not followed by value.");
                             }
+                            ExtractionSettings.UniqueId = args[i];
                             break;
                         // If this argument is not provided, the application will infer the grade based on the items
-                        case "-grade":
+                        case "-g":
                             if (i >= args.Length)
                             {
-                                Logger.Error("-id option must be followed by a valid string value");
+                                Logger.Error("-g option must be followed by a valid string value");
                                 throw new ArgumentException(
-                                    "Invalid command line. '-id' option not followed by value.");
+                                    "Invalid command line. '-g' option not followed by value.");
                             }
+                            ExtractionSettings.Grade = args[i];
+                            break;
+                        // If this argument is not provided, the application will attempt to infer the publisher based on the uniqueid.
+                        // If unable to determine the publisher from either input or uniqueid, it will fall back to the config value
+                        case "-p":
+                            if (i >= args.Length)
+                            {
+                                Logger.Error("-p option must be followed by a valid string value");
+                                throw new ArgumentException(
+                                    "Invalid command line. '-p' option not followed by value.");
+                            }
+                            ExtractionSettings.Grade = args[i];
                             break;
                         default:
                             Logger.Error($"Unknown command line option '{args[i]}'. Use '-h' for syntax help.");
@@ -95,14 +106,16 @@ namespace FixedFormPackager
                 {
                     Console.WriteLine(HelpMessage);
                 }
-                else if (inputFilenames.Count == 0 || outputFilename == null)
+                else if (string.IsNullOrEmpty(ExtractionSettings.Input) ||
+                         string.IsNullOrEmpty(ExtractionSettings.Output) ||
+                         string.IsNullOrEmpty(ExtractionSettings.UniqueId))
                 {
                     Logger.Error(
-                        "Invalid command line. One output filename and at least one input filename must be specified.");
+                        "Invalid command line. Output filename (-o), input filename (-i), and unique identifier (-id) are required inputs.");
                 }
                 else
                 {
-                    var result = inputFilenames.ToList().SelectMany(CsvExtractor.ExtractTestItemInput).ToList();
+                    var result = CsvExtractor.ExtractItemInput(ExtractionSettings.Input);
                 }
             }
             catch (Exception e)
