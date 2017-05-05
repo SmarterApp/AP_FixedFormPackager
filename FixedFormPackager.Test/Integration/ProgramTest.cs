@@ -13,11 +13,6 @@ namespace FixedFormPackager.Test.Integration
     [TestFixture]
     public class ProgramTest
     {
-        private const string OutputName = "FFP_Test";
-        // TODO: Swap out this placeholder value with the relative path to the output of the FFP
-        private const string InputName = "C:\\Projects\\SmarterBalanced\\Resources\\DELETE\\STS-Limited-Perf-ELA-3.xml";
-        public static readonly string ExecutionDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
         [SetUp]
         public void Setup()
         {
@@ -26,14 +21,28 @@ namespace FixedFormPackager.Test.Integration
                 $"-i \"{InputName}\" -o \"{OutputName}\" -sv");
         }
 
+        private const string OutputName = "FFP_Test";
+        // TODO: Swap out this placeholder value with the relative path to the output of the FFP
+        private const string InputName = "C:\\Projects\\SmarterBalanced\\Resources\\DELETE\\STS-Limited-Perf-ELA-3.xml";
+        public static readonly string ExecutionDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+        private static IEnumerable<TestPackageTabulatorError> GetErrorList(string fileName)
+        {
+            var csvReader = new CsvReader(new StreamReader(File.OpenRead(fileName)), new CsvConfiguration
+            {
+                HasHeaderRecord = true
+            });
+            return csvReader.GetRecords<TestPackageTabulatorError>().ToList();
+        }
+
         [Test]
-        public void TestForPresenceOfSevereErrors()
+        public void TestForPresenceOfBenignErrors()
         {
             // Act
             var result = GetErrorList($"{ExecutionDirectory}\\{OutputName}.errors.csv");
 
             // Assert
-            Assert.IsTrue(!result.Any(x => x.ErrorSeverity.Equals("Severe", StringComparison.OrdinalIgnoreCase)));
+            Assert.IsTrue(!result.Any(x => x.ErrorSeverity.Equals("Benign", StringComparison.OrdinalIgnoreCase)));
         }
 
         [Test]
@@ -47,22 +56,13 @@ namespace FixedFormPackager.Test.Integration
         }
 
         [Test]
-        public void TestForPresenceOfBenignErrors()
+        public void TestForPresenceOfSevereErrors()
         {
             // Act
             var result = GetErrorList($"{ExecutionDirectory}\\{OutputName}.errors.csv");
 
             // Assert
-            Assert.IsTrue(!result.Any(x => x.ErrorSeverity.Equals("Benign", StringComparison.OrdinalIgnoreCase)));
-        }
-
-        private static IEnumerable<TestPackageTabulatorError> GetErrorList(string fileName)
-        {
-            var csvReader = new CsvReader(new StreamReader(File.OpenRead(fileName)), new CsvConfiguration
-            {
-                HasHeaderRecord = true
-            });
-            return csvReader.GetRecords<TestPackageTabulatorError>().ToList();
+            Assert.IsTrue(!result.Any(x => x.ErrorSeverity.Equals("Severe", StringComparison.OrdinalIgnoreCase)));
         }
     }
 }
