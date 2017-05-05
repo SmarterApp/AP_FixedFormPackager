@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BAD_FFP_Sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BAD-FFP_Sample.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FFP_Sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FFP_Sample.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="NLog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NLog.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -174,6 +180,9 @@
   </data>
   <data name="TabulateSmarterTestPackage_vshost_exe1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabulateSmarterTestPackage.vshost.exe.manifest;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="test" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\test.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="ValidateSmarterTestPackage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ValidateSmarterTestPackage.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

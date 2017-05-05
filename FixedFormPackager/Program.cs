@@ -115,7 +115,7 @@ namespace FixedFormPackager
                 }
                 else
                 {
-                    var result = CsvExtractor.ExtractTestItemInput(ExtractionSettings.Input);
+                    var result = CsvExtractor.ExtractItemInput(ExtractionSettings.Input);
                 }
             }
             catch (Exception e)

@@ -14,7 +14,7 @@ namespace FixedFormPackager.Common.Utilities
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static IList<ItemInput> ExtractTestItemInput(string fileName)
+        public static IList<ItemInput> ExtractItemInput(string fileName)
         {
             try
             {

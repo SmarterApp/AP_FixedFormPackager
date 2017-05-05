@@ -21,7 +21,7 @@ namespace FixedFormPackager.Test.Utilities
             // Use ProcessStartInfo class
             var startInfo = new ProcessStartInfo
             {
-                CreateNoWindow = true,
+                CreateNoWindow = false,
                 UseShellExecute = true,
                 FileName = executablePath,
                 WindowStyle = ProcessWindowStyle.Normal,

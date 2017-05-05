@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\FixedFormPackager\packages\CsvHelper.2.16.3.0\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\FixedFormPackager\packages\MSTest.TestFramework.1.1.11\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
@@ -52,7 +55,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Integration\ItemInputTests.cs" />
     <Compile Include="Integration\ProgramTest.cs" />
+    <Compile Include="Models\TestPackageTabulatorError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -62,6 +67,8 @@
     <Compile Include="Utilities\ProcessUtility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\BAD-FFP_Sample.csv" />
+    <None Include="Resources\FFP_Sample.csv" />
     <None Include="packages.config" />
     <None Include="Resources\NLog.config" />
     <None Include="Resources\TabulateSmarterTestAdminPackage.dll.config" />
@@ -70,13 +77,21 @@
     <None Include="Resources\TabulateSmarterTestAdminPackage.vshost.exe.manifest" />
     <None Include="Resources\TabulateSmarterTestPackage.exe.config" />
     <None Include="Resources\TabulateSmarterTestPackage.vshost.exe.config" />
-    <None Include="Resources\TabulateSmarterTestPackage.vshost.exe.manifest" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TabulateSmarterTestPackage.vshost.exe.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FixedFormPackager.Common\FixedFormPackager.Common.csproj">
+      <Project>{bd149ca6-9857-473c-ad46-4b71f5e67d05}</Project>
+      <Name>FixedFormPackager.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NLog.dll" />
@@ -118,10 +133,10 @@
     <None Include="Resources\ValidateSmarterTestPackage.pdb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FixedFormPackager.Common\FixedFormPackager.Common.csproj">
-      <Project>{bd149ca6-9857-473c-ad46-4b71f5e67d05}</Project>
-      <Name>FixedFormPackager.Common</Name>
-    </ProjectReference>
+    <None Include="Resources\test.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Unit\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

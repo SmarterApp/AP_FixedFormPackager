@@ -61,6 +61,36 @@ namespace FixedFormPackager.Test.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to These,Are,Bad,Column,Headers
+        ///187-300,187-999,187-560,Test-Segment-1,1
+        ///187-301,187-999,187-560,Test-Segment-1,1
+        ///187-302,187-999,187-560,Test-Segment-1,1
+        ///187-303,187-999,187-560,Test-Segment-1,1
+        ///187-304,,187-561,Test-Segment-2,2
+        ///.
+        /// </summary>
+        internal static string BAD_FFP_Sample {
+            get {
+                return ResourceManager.GetString("BAD_FFP_Sample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ItemId,AssociatedStimuliId,FormPartitionId,SegmentId,SegmentPosition
+        ///187-300,187-999,187-560,Test-Segment-1,1
+        ///187-301,187-999,187-560,Test-Segment-1,1
+        ///187-302,187-999,187-560,Test-Segment-1,1
+        ///187-303,187-999,187-560,Test-Segment-1,1
+        ///187-304,,187-561,Test-Segment-2,2
+        ///.
+        /// </summary>
+        internal static string FFP_Sample {
+            get {
+                return ResourceManager.GetString("FFP_Sample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;nlog xmlns=&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;
         ///      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
@@ -294,6 +324,15 @@ namespace FixedFormPackager.Test.Properties {
             get {
                 object obj = ResourceManager.GetObject("TabulateSmarterTestPackage1", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to test.
+        /// </summary>
+        internal static string test {
+            get {
+                return ResourceManager.GetString("test", resourceCulture);
             }
         }
         
