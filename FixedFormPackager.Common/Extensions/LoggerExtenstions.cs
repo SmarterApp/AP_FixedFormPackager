@@ -17,7 +17,8 @@ namespace FixedFormPackager.Common.Extensions
 
         public static void LogInfo(this Logger logger, ProcessingReportItem processingReportItem, string message = "")
         {
-            var info = new LogEventInfo(LogLevel.Info, "", processingReportItem.UniqueId);
+            var info = new LogEventInfo(LogLevel.Info, "",
+                string.IsNullOrEmpty(message) ? processingReportItem.UniqueId : message);
             info.Properties["Source"] = ExtractionSettings.Input;
             info.Properties["Type"] = processingReportItem.Type;
             info.Properties["Destination"] = processingReportItem.Destination;
