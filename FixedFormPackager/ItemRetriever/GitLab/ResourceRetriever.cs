@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using FixedFormPackager.Common.Models;
 using LibGit2Sharp;
@@ -11,19 +12,47 @@ namespace ItemRetriever.GitLab
         {
             var cloneOptions = new CloneOptions
             {
-                CredentialsProvider =
-                    (url, user, cred) =>
-                        new UsernamePasswordCredentials
-                        {
-                            Username = gitLabInfo.Username,
-                            Password = gitLabInfo.Password
-                        }
+                CredentialsProvider = (url, user, cred) =>
+                    GenerateCredentials(gitLabInfo)
             };
 
-            Repository.Clone(
-                $"{gitLabInfo.BaseUrl}{gitLabInfo.Group}/{identifier}.git",
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, identifier.Contains("Item") ? "Items" : "Stimuli",
-                    identifier), cloneOptions);
+            var resourcePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                identifier.Contains("Item") ? "Items" : "Stimuli",
+                identifier);
+            if (!Directory.Exists(resourcePath))
+            {
+                Repository.Clone(
+                    $"{gitLabInfo.BaseUrl}{gitLabInfo.Group}/{identifier}.git",
+                    resourcePath, cloneOptions);
+            }
+            else
+            {
+                using (var repository = new Repository(resourcePath))
+                {
+                    var pullOptions = new PullOptions
+                    {
+                        FetchOptions = new FetchOptions
+                        {
+                            CredentialsProvider = (url, user, cred) =>
+                                GenerateCredentials(gitLabInfo)
+                        }
+                    };
+                    Commands.Pull(repository,
+                        new Signature(new Identity(
+                                ConfigurationManager.AppSettings["userName"],
+                                ConfigurationManager.AppSettings["userEmail"])
+                            , DateTimeOffset.Now), pullOptions);
+                }
+            }
+        }
+
+        private static UsernamePasswordCredentials GenerateCredentials(GitLabInfo gitLabInfo)
+        {
+            return new UsernamePasswordCredentials
+            {
+                Username = gitLabInfo.Username,
+                Password = gitLabInfo.Password
+            };
         }
     }
 }
