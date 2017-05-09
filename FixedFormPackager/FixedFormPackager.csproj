@@ -63,9 +63,9 @@
       <Project>{bd149ca6-9857-473c-ad46-4b71f5e67d05}</Project>
       <Name>FixedFormPackager.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="ItemRetriever\ItemRetriever.csproj">
+    <ProjectReference Include="ItemRetriever\ContentPackageGenerator.csproj">
       <Project>{d879e03e-b597-47e3-8786-0407aa0fe13b}</Project>
-      <Name>ItemRetriever</Name>
+      <Name>ContentPackageGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

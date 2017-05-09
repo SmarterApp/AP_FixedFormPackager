@@ -9,7 +9,7 @@ using NLog;
 
 namespace ItemRetriever.GitLab
 {
-    public class ResourceRetriever
+    public class ResourceGenerator
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 

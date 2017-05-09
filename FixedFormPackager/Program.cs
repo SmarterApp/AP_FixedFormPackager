@@ -38,10 +38,10 @@ namespace FixedFormPackager
                     var result = CsvExtractor.ExtractItemInput(ExtractionSettings.Input);
                     result.ToList().ForEach(x =>
                     {
-                        ResourceRetriever.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
+                        ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
                         if (!string.IsNullOrEmpty(x.AssociatedStimuliId))
                         {
-                            ResourceRetriever.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
+                            ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
                         }
                     });
                 }
