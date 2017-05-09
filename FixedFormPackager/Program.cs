@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using CommandLine;
+using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Utilities;
+using ItemRetriever.GitLab;
 using NLog;
 
 namespace FixedFormPackager
@@ -26,7 +28,22 @@ namespace FixedFormPackager
                 {
                     ExtractionSettings.UniqueId = options.UniqueId;
                     ExtractionSettings.Input = options.Input;
+                    ExtractionSettings.GitLabInfo = new GitLabInfo
+                    {
+                        BaseUrl = options.GitLabBaseUrl,
+                        Group = options.GitLabGroup,
+                        Password = options.GitLabPassword,
+                        Username = options.GitLabUsername
+                    };
                     var result = CsvExtractor.ExtractItemInput(ExtractionSettings.Input);
+                    result.ToList().ForEach(x =>
+                    {
+                        ResourceRetriever.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
+                        if (!string.IsNullOrEmpty(x.AssociatedStimuliId))
+                        {
+                            ResourceRetriever.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
+                        }
+                    });
                 }
             }
             catch (Exception e)
