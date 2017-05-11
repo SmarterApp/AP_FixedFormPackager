@@ -4,6 +4,7 @@ using CommandLine;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Utilities;
 using ItemRetriever.GitLab;
+using ItemRetriever.Utilities;
 using NLog;
 
 namespace FixedFormPackager
@@ -35,8 +36,8 @@ namespace FixedFormPackager
                         Password = options.GitLabPassword,
                         Username = options.GitLabUsername
                     };
-                    var result = CsvExtractor.ExtractItemInput(ExtractionSettings.Input);
-                    result.ToList().ForEach(x =>
+                    var result = CsvExtractor.ExtractItemInput(ExtractionSettings.Input).ToList();
+                    result.ForEach(x =>
                     {
                         ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
                         if (!string.IsNullOrEmpty(x.AssociatedStimuliId))
@@ -44,6 +45,10 @@ namespace FixedFormPackager
                             ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
                         }
                     });
+                    var itemContent = result.Select(x => ContentAccess.RetrieveDocument($"item-{x.ItemId}")).ToList();
+                    var stimContent =
+                        result.Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId))
+                            .Select(x => ContentAccess.RetrieveDocument($"stim-{x.AssociatedStimuliId}")).ToList();
                 }
             }
             catch (Exception e)
