@@ -225,7 +225,7 @@
     <xs:attribute name="name" type="xs:string" use="required" />
   </xs:complexType>
   <xs:complexType name="WrapperTargetBase" abstract="true">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="target" type="Target" minOccurs="1" maxOccurs="1" />
@@ -236,10 +236,10 @@
           <xs:element name="compound-target-ref" type="TargetRef" minOccurs="1" maxOccurs="1" />
         </xs:choice>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="CompoundTargetBase" abstract="true">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="target" type="Target" minOccurs="1" maxOccurs="unbounded" />
@@ -250,7 +250,7 @@
           <xs:element name="compound-target-ref" type="TargetRef" minOccurs="1" maxOccurs="1" />
         </xs:choice>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="Filter" abstract="true"></xs:complexType>
   <xs:complexType name="TimeSource" abstract="true"></xs:complexType>
@@ -265,7 +265,7 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="AsyncWrapper">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="WrapperTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -312,7 +312,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="NLog.Targets.Wrappers.AsyncTargetWrapperOverflowAction">
     <xs:restriction base="xs:string">
@@ -322,7 +322,7 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="AutoFlushWrapper">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="WrapperTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -351,10 +351,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="BufferingWrapper">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="WrapperTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -375,7 +375,7 @@
         </xs:attribute>
         <xs:attribute name="flushTimeout" type="xs:integer">
           <xs:annotation>
-            <xs:documentation>Timeout (in milliseconds) after which the contents of buffer will be flushed if there's no write in the specified period of time. Use -1 to disable timed flushes.</xs:documentation>
+            <xs:documentation>Timeout (in milliseconds) after which the assessmentContents of buffer will be flushed if there's no write in the specified period of time. Use -1 to disable timed flushes.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="slidingTimeout" type="xs:boolean">
@@ -389,10 +389,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="Chainsaw">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -486,7 +486,7 @@
         </xs:attribute>
         <xs:attribute name="includeNdc" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include  stack contents.</xs:documentation>
+            <xs:documentation>Indicates whether to include  stack assessmentContents.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="includeSourceInfo" type="xs:boolean">
@@ -501,7 +501,7 @@
         </xs:attribute>
         <xs:attribute name="includeMdc" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include  dictionary contents.</xs:documentation>
+            <xs:documentation>Indicates whether to include  dictionary assessmentContents.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="includeCallSite" type="xs:boolean">
@@ -521,7 +521,7 @@
         </xs:attribute>
         <xs:attribute name="includeMdlc" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include  dictionary contents.</xs:documentation>
+            <xs:documentation>Indicates whether to include  dictionary assessmentContents.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="optimizeBufferReuse" type="xs:boolean">
@@ -530,7 +530,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="NLog.Targets.NetworkTargetConnectionsOverflowAction">
     <xs:restriction base="xs:string">
@@ -563,7 +563,7 @@
     </xs:attribute>
   </xs:complexType>
   <xs:complexType name="ColoredConsole">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -624,7 +624,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="NLog.Targets.ConsoleOutputColor">
     <xs:restriction base="xs:string">
@@ -716,7 +716,7 @@
     </xs:attribute>
   </xs:complexType>
   <xs:complexType name="Console">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -769,10 +769,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="Database">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -864,7 +864,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="System.Data.CommandType">
     <xs:restriction base="xs:string">
@@ -937,7 +937,7 @@
     </xs:attribute>
   </xs:complexType>
   <xs:complexType name="Debugger">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -972,10 +972,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="Debug">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -998,10 +998,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="EventLog">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1072,7 +1072,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="NLog.Targets.EventLogTargetOverflowAction">
     <xs:restriction base="xs:string">
@@ -1082,7 +1082,7 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="FallbackGroup">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="CompoundTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1105,10 +1105,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="File">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1137,7 +1137,7 @@
           <xs:element name="enableFileDelete" minOccurs="0" maxOccurs="1" type="xs:boolean" />
           <xs:element name="fileAttributes" minOccurs="0" maxOccurs="1" type="NLog.Targets.Win32FileAttributes" />
           <xs:element name="deleteOldFileOnStartup" minOccurs="0" maxOccurs="1" type="xs:boolean" />
-          <xs:element name="replaceFileContentsOnEachWrite" minOccurs="0" maxOccurs="1" type="xs:boolean" />
+          <xs:element name="replaceFileAssessmentContentsOnEachWrite" minOccurs="0" maxOccurs="1" type="xs:boolean" />
           <xs:element name="concurrentWrites" minOccurs="0" maxOccurs="1" type="xs:boolean" />
           <xs:element name="keepFileOpen" minOccurs="0" maxOccurs="1" type="xs:boolean" />
           <xs:element name="maxLogFilenames" minOccurs="0" maxOccurs="1" type="xs:integer" />
@@ -1280,9 +1280,9 @@
             <xs:documentation>Indicates whether to delete old log file on startup.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="replaceFileContentsOnEachWrite" type="xs:boolean">
+        <xs:attribute name="replaceFileAssessmentContentsOnEachWrite" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to replace file contents on each write instead of appending log message at the end.</xs:documentation>
+            <xs:documentation>Indicates whether to replace file assessmentContents on each write instead of appending log message at the end.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="concurrentWrites" type="xs:boolean">
@@ -1341,7 +1341,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="NLog.Targets.ArchiveNumberingMode">
     <xs:restriction base="xs:string">
@@ -1387,7 +1387,7 @@
       <xs:enumeration value="SparseFile" />
       <xs:enumeration value="ReparsePoint" />
       <xs:enumeration value="Compressed" />
-      <xs:enumeration value="NotContentIndexed" />
+      <xs:enumeration value="NotAssessmentContentIndexed" />
       <xs:enumeration value="Encrypted" />
       <xs:enumeration value="WriteThrough" />
       <xs:enumeration value="NoBuffering" />
@@ -1396,7 +1396,7 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="FilteringWrapper">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="WrapperTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1419,10 +1419,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="ImpersonatingWrapper">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="WrapperTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1481,7 +1481,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="NLog.Targets.Wrappers.SecurityImpersonationLevel">
     <xs:restriction base="xs:string">
@@ -1507,7 +1507,7 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="LimitingWrapper">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="WrapperTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1536,10 +1536,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="LogReceiverService">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1593,7 +1593,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="NLog.Targets.MethodCallParameter">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -1624,7 +1624,7 @@
     </xs:attribute>
   </xs:complexType>
   <xs:complexType name="Mail">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1785,7 +1785,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="NLog.Targets.SmtpAuthenticationMode">
     <xs:restriction base="xs:string">
@@ -1802,7 +1802,7 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="Memory">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1825,10 +1825,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="MSMQ">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1893,10 +1893,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="MethodCall">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -1926,10 +1926,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="Network">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2018,10 +2018,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="NLogViewer">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2115,7 +2115,7 @@
         </xs:attribute>
         <xs:attribute name="includeNdc" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include  stack contents.</xs:documentation>
+            <xs:documentation>Indicates whether to include  stack assessmentContents.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="includeSourceInfo" type="xs:boolean">
@@ -2130,7 +2130,7 @@
         </xs:attribute>
         <xs:attribute name="includeMdc" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include  dictionary contents.</xs:documentation>
+            <xs:documentation>Indicates whether to include  dictionary assessmentContents.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="includeCallSite" type="xs:boolean">
@@ -2150,7 +2150,7 @@
         </xs:attribute>
         <xs:attribute name="includeMdlc" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include  dictionary contents.</xs:documentation>
+            <xs:documentation>Indicates whether to include  dictionary assessmentContents.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="optimizeBufferReuse" type="xs:boolean">
@@ -2159,10 +2159,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="Null">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2191,10 +2191,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="OutputDebugString">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2217,10 +2217,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="PerfCounter">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2279,7 +2279,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="System.Diagnostics.PerformanceCounterType">
     <xs:restriction base="xs:string">
@@ -2314,7 +2314,7 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="PostFilteringWrapper">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="WrapperTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2338,7 +2338,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="NLog.Targets.Wrappers.FilteringRule">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -2357,7 +2357,7 @@
     </xs:attribute>
   </xs:complexType>
   <xs:complexType name="RandomizeGroup">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="CompoundTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2374,10 +2374,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="RepeatingWrapper">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="WrapperTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2400,10 +2400,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="RetryingWrapper">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="WrapperTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2432,10 +2432,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="RoundRobinGroup">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="CompoundTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2452,10 +2452,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="SplitGroup">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="CompoundTargetBase">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2472,10 +2472,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="Trace">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2498,10 +2498,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="WebService">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Target">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2579,7 +2579,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="NLog.Targets.WebServiceProtocol">
     <xs:restriction base="xs:string">
@@ -2592,19 +2592,19 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="CompoundLayout">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Layout">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="layout" minOccurs="0" maxOccurs="unbounded" type="Layout" />
         </xs:choice>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="Layout">
     <xs:choice minOccurs="0" maxOccurs="unbounded" />
   </xs:complexType>
   <xs:complexType name="CsvLayout">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Layout">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="footer" minOccurs="0" maxOccurs="1" type="Layout" />
@@ -2658,7 +2658,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="NLog.Layouts.CsvColumnDelimiterMode">
     <xs:restriction base="xs:string">
@@ -2695,7 +2695,7 @@
     </xs:attribute>
   </xs:complexType>
   <xs:complexType name="JsonLayout">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Layout">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="attribute" minOccurs="0" maxOccurs="unbounded" type="NLog.Layouts.JsonAttribute" />
@@ -2725,7 +2725,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="NLog.Layouts.JsonAttribute">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -2756,7 +2756,7 @@
     </xs:attribute>
   </xs:complexType>
   <xs:complexType name="LayoutWithHeaderAndFooter">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Layout">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="footer" minOccurs="0" maxOccurs="1" type="Layout" />
@@ -2779,10 +2779,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="Log4JXmlEventLayout">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Layout">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="includeAllProperties" minOccurs="0" maxOccurs="1" type="xs:boolean" />
@@ -2796,19 +2796,19 @@
         </xs:attribute>
         <xs:attribute name="includeMdc" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include contents of the  dictionary.</xs:documentation>
+            <xs:documentation>Indicates whether to include assessmentContents of the  dictionary.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="includeMdlc" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include contents of the  dictionary.</xs:documentation>
+            <xs:documentation>Indicates whether to include assessmentContents of the  dictionary.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="SimpleLayout">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Layout">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="text" minOccurs="0" maxOccurs="1" type="xs:string" />
@@ -2819,10 +2819,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="when">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Filter">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="action" minOccurs="0" maxOccurs="1" type="FilterResult" />
@@ -2839,7 +2839,7 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:simpleType name="FilterResult">
     <xs:restriction base="xs:string">
@@ -2851,7 +2851,7 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="whenContains">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Filter">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="action" minOccurs="0" maxOccurs="1" type="FilterResult" />
@@ -2880,10 +2880,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="whenEqual">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Filter">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="action" minOccurs="0" maxOccurs="1" type="FilterResult" />
@@ -2912,10 +2912,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="whenNotContains">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Filter">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="action" minOccurs="0" maxOccurs="1" type="FilterResult" />
@@ -2944,10 +2944,10 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="whenNotEqual">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="Filter">
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="action" minOccurs="0" maxOccurs="1" type="FilterResult" />
@@ -2976,34 +2976,34 @@
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="AccurateLocal">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="TimeSource">
         <xs:choice minOccurs="0" maxOccurs="unbounded" />
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="AccurateUTC">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="TimeSource">
         <xs:choice minOccurs="0" maxOccurs="unbounded" />
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="FastLocal">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="TimeSource">
         <xs:choice minOccurs="0" maxOccurs="unbounded" />
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
   <xs:complexType name="FastUTC">
-    <xs:complexContent>
+    <xs:complexAssessmentContent>
       <xs:extension base="TimeSource">
         <xs:choice minOccurs="0" maxOccurs="unbounded" />
       </xs:extension>
-    </xs:complexContent>
+    </xs:complexAssessmentContent>
   </xs:complexType>
 </xs:schema>

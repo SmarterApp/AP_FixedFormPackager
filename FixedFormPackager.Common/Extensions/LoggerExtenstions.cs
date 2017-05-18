@@ -9,7 +9,7 @@ namespace FixedFormPackager.Common.Extensions
         public static void LogError(this Logger logger, ErrorReportItem errorReportItem, string message = "")
         {
             var info = new LogEventInfo(errorReportItem.Severity, "", message);
-            info.Properties["Source"] = ExtractionSettings.Input;
+            info.Properties["Source"] = ExtractionSettings.ItemInput;
             info.Properties["Severity"] = errorReportItem.Severity.ToString();
             info.Properties["Location"] = errorReportItem.Location;
             logger.Log(info);
@@ -19,7 +19,7 @@ namespace FixedFormPackager.Common.Extensions
         {
             var info = new LogEventInfo(LogLevel.Info, "",
                 string.IsNullOrEmpty(message) ? processingReportItem.UniqueId : message);
-            info.Properties["Source"] = ExtractionSettings.Input;
+            info.Properties["Source"] = ExtractionSettings.ItemInput;
             info.Properties["Type"] = processingReportItem.Type;
             info.Properties["Destination"] = processingReportItem.Destination;
             info.Properties["UniqueId"] = processingReportItem.UniqueId;

@@ -2100,7 +2100,7 @@
     </member>
     <member name="M:NLog.Config.ConfigurationItemFactory.Clear">
       <summary>
-        Clears the contents of all factories.
+        Clears the assessmentContents of all factories.
       </summary>
     </member>
     <member name="M:NLog.Config.ConfigurationItemFactory.RegisterType(System.Type,System.String)">
@@ -2233,7 +2233,7 @@
     </member>
     <member name="F:NLog.Config.ExceptionRenderingFormat.Data">
       <summary>
-        Appends the contents of an Exception's Data property to the specified target.
+        Appends the assessmentContents of an Exception's Data property to the specified target.
       </summary>
     </member>
     <member name="T:NLog.Config.Factory`2">
@@ -2311,7 +2311,7 @@
     </member>
     <member name="M:NLog.Config.Factory`2.Clear">
       <summary>
-        Clears the contents of the factory.
+        Clears the assessmentContents of the factory.
       </summary>
     </member>
     <member name="M:NLog.Config.Factory`2.RegisterDefinition(System.String,System.Type)">
@@ -2918,7 +2918,7 @@
     </member>
     <member name="M:NLog.Config.MethodFactory`2.Clear">
       <summary>
-        Clears contents of the factory.
+        Clears assessmentContents of the factory.
       </summary>
     </member>
     <member name="M:NLog.Config.MethodFactory`2.RegisterDefinition(System.String,System.Reflection.MethodInfo)">
@@ -3327,7 +3327,7 @@
         setting is enabled - throws <c>NLogConfigurationException</c>, otherwise
         just write an internal log at Warn level.
       </summary>
-      <param name="rootContentElement">Root NLog configuration xml element</param>
+      <param name="rootAssessmentContentElement">Root NLog configuration xml element</param>
     </member>
     <member name="M:NLog.Config.XmlLoggingConfiguration.CheckUnusedTargets">
       <summary>
@@ -3347,7 +3347,7 @@
       <summary>
         Parse the root
       </summary>
-      <param name="content"></param>
+      <param name="assessmentContent"></param>
       <param name="filePath">path to config file.</param>
       <param name="autoReloadDefault">The default value for the autoReload option.</param>
     </member>
@@ -4018,7 +4018,7 @@
     </member>
     <member name="M:NLog.GDC.Clear">
       <summary>
-        Clears the content of the GDC.
+        Clears the assessmentContent of the GDC.
       </summary>
     </member>
     <member name="T:NLog.GlobalDiagnosticsContext">
@@ -4098,24 +4098,24 @@
     </member>
     <member name="M:NLog.GlobalDiagnosticsContext.Clear">
       <summary>
-        Clears the content of the GDC.
+        Clears the assessmentContent of the GDC.
       </summary>
     </member>
     <member name="T:NLog.ILogger">
       <summary>
         Provides logging interface and utility functions.
       </summary>
-      <content>
+      <assessmentContent>
         Auto-generated Logger members for binary compatibility with NLog 1.0.
-      </content>
+      </assessmentContent>
     </member>
     <member name="T:NLog.ILoggerBase">
       <summary>
         Logger with only generic methods (passing 'LogLevel' to methods) and core properties.
       </summary>
-      <content>
+      <assessmentContent>
         Auto-generated Logger members for binary compatibility with NLog 1.0.
-      </content>
+      </assessmentContent>
     </member>
     <member name="M:NLog.ILoggerBase.IsEnabled(NLog.LogLevel)">
       <summary>
@@ -10240,7 +10240,7 @@
     <member
       name="M:NLog.LayoutRenderers.ExceptionLayoutRenderer.AppendData(System.Text.StringBuilder,System.Exception)">
       <summary>
-        Appends the contents of an Exception's Data property to the specified
+        Appends the assessmentContents of an Exception's Data property to the specified
         <see cref="T:System.Text.StringBuilder" />.
       </summary>
       <param name="sb">The <see cref="T:System.Text.StringBuilder" /> to append the rendered data to.</param>
@@ -10310,32 +10310,33 @@
       <docgen category="Rendering Options" order="10" />
       <see cref="T:NLog.Config.ExceptionRenderingFormat" />
     </member>
-    <member name="T:NLog.LayoutRenderers.FileContentsLayoutRenderer">
+    <member name="T:NLog.LayoutRenderers.FileAssessmentContentsLayoutRenderer">
       <summary>
-        Renders contents of the specified file.
+        Renders assessmentContents of the specified file.
       </summary>
     </member>
-    <member name="M:NLog.LayoutRenderers.FileContentsLayoutRenderer.#ctor">
+    <member name="M:NLog.LayoutRenderers.FileAssessmentContentsLayoutRenderer.#ctor">
       <summary>
-        Initializes a new instance of the <see cref="T:NLog.LayoutRenderers.FileContentsLayoutRenderer" /> class.
+        Initializes a new instance of the <see cref="T:NLog.LayoutRenderers.FileAssessmentContentsLayoutRenderer" />
+        class.
       </summary>
     </member>
     <member
-      name="M:NLog.LayoutRenderers.FileContentsLayoutRenderer.Append(System.Text.StringBuilder,NLog.LogEventInfo)">
+      name="M:NLog.LayoutRenderers.FileAssessmentContentsLayoutRenderer.Append(System.Text.StringBuilder,NLog.LogEventInfo)">
       <summary>
-        Renders the contents of the specified file and appends it to the specified
+        Renders the assessmentContents of the specified file and appends it to the specified
         <see cref="T:System.Text.StringBuilder" />.
       </summary>
       <param name="builder">The <see cref="T:System.Text.StringBuilder" /> to append the rendered data to.</param>
       <param name="logEvent">Logging event.</param>
     </member>
-    <member name="P:NLog.LayoutRenderers.FileContentsLayoutRenderer.FileName">
+    <member name="P:NLog.LayoutRenderers.FileAssessmentContentsLayoutRenderer.FileName">
       <summary>
         Gets or sets the name of the file.
       </summary>
       <docgen category='File Options' order='10' />
     </member>
-    <member name="P:NLog.LayoutRenderers.FileContentsLayoutRenderer.Encoding">
+    <member name="P:NLog.LayoutRenderers.FileAssessmentContentsLayoutRenderer.Encoding">
       <summary>
         Gets or sets the encoding used in the file.
       </summary>
@@ -10653,14 +10654,14 @@
     </member>
     <member name="P:NLog.LayoutRenderers.Log4JXmlEventLayoutRenderer.IncludeMdc">
       <summary>
-        Gets or sets a value indicating whether to include contents of the
+        Gets or sets a value indicating whether to include assessmentContents of the
         <see cref="T:NLog.MappedDiagnosticsContext" /> dictionary.
       </summary>
       <docgen category="Payload Options" order="10" />
     </member>
     <member name="P:NLog.LayoutRenderers.Log4JXmlEventLayoutRenderer.IncludeNdc">
       <summary>
-        Gets or sets a value indicating whether to include contents of the
+        Gets or sets a value indicating whether to include assessmentContents of the
         <see cref="T:NLog.NestedDiagnosticsContext" /> stack.
       </summary>
       <docgen category="Payload Options" order="10" />
@@ -11710,10 +11711,10 @@
     </member>
     <member name="M:NLog.LayoutRenderers.Wrappers.WrapperLayoutRendererBase.RenderInner(NLog.LogEventInfo)">
       <summary>
-        Renders the inner layout contents.
+        Renders the inner layout assessmentContents.
       </summary>
       <param name="logEvent">The log event.</param>
-      <returns>Contents of inner layout.</returns>
+      <returns>AssessmentContents of inner layout.</returns>
     </member>
     <member name="P:NLog.LayoutRenderers.Wrappers.WrapperLayoutRendererBase.Inner">
       <summary>
@@ -11748,10 +11749,10 @@
     </member>
     <member name="M:NLog.LayoutRenderers.Wrappers.CachedLayoutRendererWrapper.RenderInner(NLog.LogEventInfo)">
       <summary>
-        Renders the inner layout contents.
+        Renders the inner layout assessmentContents.
       </summary>
       <param name="logEvent">The log event.</param>
-      <returns>Contents of inner layout.</returns>
+      <returns>AssessmentContents of inner layout.</returns>
     </member>
     <member name="P:NLog.LayoutRenderers.Wrappers.CachedLayoutRendererWrapper.Cached">
       <summary>
@@ -11821,7 +11822,7 @@
     <member
       name="M:NLog.LayoutRenderers.Wrappers.WrapperLayoutRendererBuilderBase.RenderFormattedMessage(NLog.LogEventInfo,System.Text.StringBuilder)">
       <summary>
-        Renders the inner layout contents.
+        Renders the inner layout assessmentContents.
       </summary>
       <param name="logEvent">Logging</param>
       <param name="target">Initially empty <see cref="T:System.Text.StringBuilder" /> for the result</param>
@@ -11929,11 +11930,11 @@
     </member>
     <member name="M:NLog.LayoutRenderers.Wrappers.OnExceptionLayoutRendererWrapper.RenderInner(NLog.LogEventInfo)">
       <summary>
-        Renders the inner layout contents.
+        Renders the inner layout assessmentContents.
       </summary>
       <param name="logEvent">The log event.</param>
       <returns>
-        Contents of inner layout.
+        AssessmentContents of inner layout.
       </returns>
     </member>
     <member name="T:NLog.LayoutRenderers.Wrappers.PaddingHorizontalAlignment">
@@ -12256,7 +12257,7 @@
     <member
       name="M:NLog.LayoutRenderers.Wrappers.WhenEmptyLayoutRendererWrapper.RenderFormattedMessage(NLog.LogEventInfo,System.Text.StringBuilder)">
       <summary>
-        Renders the inner layout contents.
+        Renders the inner layout assessmentContents.
       </summary>
       <param name="logEvent">The log event.</param>
       <param name="target">Initially empty <see cref="T:System.Text.StringBuilder" /> for the result</param>
@@ -12282,7 +12283,7 @@
     <member
       name="M:NLog.LayoutRenderers.Wrappers.WhenLayoutRendererWrapper.RenderFormattedMessage(NLog.LogEventInfo,System.Text.StringBuilder)">
       <summary>
-        Renders the inner layout contents.
+        Renders the inner layout assessmentContents.
       </summary>
       <param name="logEvent">The log event.</param>
       <param name="target">Initially empty <see cref="T:System.Text.StringBuilder" /> for the result</param>
@@ -12505,7 +12506,7 @@
       <remarks>
         Layout is thread-agnostic if it has been marked with [ThreadAgnostic] attribute and all its children are
         like that as well.
-        Thread-agnostic layouts only use contents of <see cref="T:NLog.LogEventInfo" /> for its output.
+        Thread-agnostic layouts only use assessmentContents of <see cref="T:NLog.LogEventInfo" /> for its output.
       </remarks>
     </member>
     <member name="P:NLog.Layouts.Layout.LoggingConfiguration">
@@ -13704,9 +13705,9 @@
 
         See: https://msdn.microsoft.com/en-us/library/4xssyw96%28v=vs.90%29.aspx
       </remarks>
-      <content>
+      <assessmentContent>
         Auto-generated Logger members for binary compatibility with NLog 1.0.
-      </content>
+      </assessmentContent>
     </member>
     <member name="M:NLog.Logger.#ctor">
       <summary>
@@ -18862,7 +18863,7 @@
     </member>
     <member name="M:NLog.MappedDiagnosticsContext.Clear">
       <summary>
-        Clears the content of current thread MDC.
+        Clears the assessmentContent of current thread MDC.
       </summary>
     </member>
     <member name="T:NLog.MappedDiagnosticsLogicalContext">
@@ -18953,12 +18954,12 @@
     </member>
     <member name="M:NLog.MappedDiagnosticsLogicalContext.Clear">
       <summary>
-        Clears the content of current logical context.
+        Clears the assessmentContent of current logical context.
       </summary>
     </member>
     <member name="M:NLog.MappedDiagnosticsLogicalContext.Clear(System.Boolean)">
       <summary>
-        Clears the content of current logical context.
+        Clears the assessmentContent of current logical context.
       </summary>
       <param name="free">Free the full slot.</param>
     </member>
@@ -19010,7 +19011,7 @@
     </member>
     <member name="M:NLog.MDC.Clear">
       <summary>
-        Clears the content of current thread MDC.
+        Clears the assessmentContent of current thread MDC.
       </summary>
     </member>
     <member name="T:NLog.NDC">
@@ -19984,13 +19985,13 @@
     </member>
     <member name="P:NLog.Targets.NLogViewerTarget.IncludeMdc">
       <summary>
-        Gets or sets a value indicating whether to include <see cref="T:NLog.MappedDiagnosticsContext" /> dictionary contents.
+        Gets or sets a value indicating whether to include <see cref="T:NLog.MappedDiagnosticsContext" /> dictionary assessmentContents.
       </summary>
       <docgen category="Payload Options" order="10" />
     </member>
     <member name="P:NLog.Targets.NLogViewerTarget.IncludeNdc">
       <summary>
-        Gets or sets a value indicating whether to include <see cref="T:NLog.NestedDiagnosticsContext" /> stack contents.
+        Gets or sets a value indicating whether to include <see cref="T:NLog.NestedDiagnosticsContext" /> stack assessmentContents.
       </summary>
       <docgen category="Payload Options" order="10" />
     </member>
@@ -21809,13 +21810,13 @@
     <member
       name="M:NLog.Targets.FileTarget.WriteToFile(System.String,NLog.LogEventInfo,System.ArraySegment{System.Byte},System.Boolean)">
       <summary>
-        Evaluates which parts of a file should be written (header, content, footer) based on various properties of
+        Evaluates which parts of a file should be written (header, assessmentContent, footer) based on various properties of
         <see cref="T:NLog.Targets.FileTarget" /> instance and writes them.
       </summary>
       <param name="fileName">File name to be written.</param>
       <param name="logEvent">Log event that the <see cref="T:NLog.Targets.FileTarget" /> instance is currently processing.</param>
-      <param name="bytes">Raw sequence of <see langword="byte" /> to be written into the content part of the file.</param>
-      <param name="justData">Indicates that only content section should be written in the file.</param>
+      <param name="bytes">Raw sequence of <see langword="byte" /> to be written into the assessmentContent part of the file.</param>
+      <param name="justData">Indicates that only assessmentContent section should be written in the file.</param>
     </member>
     <member name="M:NLog.Targets.FileTarget.InitializeFile(System.String,NLog.LogEventInfo,System.Boolean)">
       <summary>
@@ -21824,7 +21825,7 @@
       </summary>
       <param name="fileName">File name to be written.</param>
       <param name="logEvent">Log event that the <see cref="T:NLog.Targets.FileTarget" /> instance is currently processing.</param>
-      <param name="justData">Indicates that only content section should be written in the file.</param>
+      <param name="justData">Indicates that only assessmentContent section should be written in the file.</param>
       <returns><see langword="true" /> when file header should be written; <see langword="false" /> otherwise.</returns>
     </member>
     <member name="M:NLog.Targets.FileTarget.FinalizeFile(System.String,System.Boolean)">
@@ -21850,15 +21851,15 @@
       <param name="logEvent">Log event that the <see cref="T:NLog.Targets.FileTarget" /> instance is currently processing.</param>
     </member>
     <member
-      name="M:NLog.Targets.FileTarget.ReplaceFileContent(System.String,System.ArraySegment{System.Byte},System.Boolean)">
+      name="M:NLog.Targets.FileTarget.ReplaceFileAssessmentContent(System.String,System.ArraySegment{System.Byte},System.Boolean)">
       <summary>
-        Creates the file specified in <paramref name="fileName" /> and writes the file content in each entirety i.e.
-        Header, Content and Footer.
+        Creates the file specified in <paramref name="fileName" /> and writes the file assessmentContent in each entirety i.e.
+        Header, AssessmentContent and Footer.
       </summary>
       <param name="fileName">The name of the file to be written.</param>
-      <param name="bytes">Sequence of <see langword="byte" /> to be written in the content section of the file.</param>
+      <param name="bytes">Sequence of <see langword="byte" /> to be written in the assessmentContent section of the file.</param>
       <param name="firstAttempt">First attempt to write?</param>
-      <remarks>This method is used when the content of the log file is re-written on every write.</remarks>
+      <remarks>This method is used when the assessmentContent of the log file is re-written on every write.</remarks>
     </member>
     <member name="M:NLog.Targets.FileTarget.WriteHeader(NLog.Internal.FileAppenders.BaseFileAppender)">
       <summary>
@@ -21922,9 +21923,9 @@
       </remarks>
       <docgen category='Output Options' order='10' />
     </member>
-    <member name="P:NLog.Targets.FileTarget.ReplaceFileContentsOnEachWrite">
+    <member name="P:NLog.Targets.FileTarget.ReplaceFileAssessmentContentsOnEachWrite">
       <summary>
-        Gets or sets a value indicating whether to replace file contents on each write instead of appending log message at the end.
+        Gets or sets a value indicating whether to replace file assessmentContents on each write instead of appending log message at the end.
       </summary>
       <docgen category='Output Options' order='10' />
     </member>
@@ -23575,7 +23576,7 @@
       <summary>
         base class for POST formatters, that
         implement former <c>PrepareRequest()</c> method,
-        that creates the content for
+        that creates the assessmentContent for
         the requested kind of HTTP request
       </summary>
     </member>
@@ -23637,12 +23638,12 @@
     </member>
     <member name="F:NLog.Targets.Win32FileAttributes.Compressed">
       <summary>
-        Compress file contents.
+        Compress file assessmentContents.
       </summary>
     </member>
-    <member name="F:NLog.Targets.Win32FileAttributes.NotContentIndexed">
+    <member name="F:NLog.Targets.Win32FileAttributes.NotAssessmentContentIndexed">
       <summary>
-        File should not be indexed by the content indexing service.
+        File should not be indexed by the assessmentContent indexing service.
       </summary>
     </member>
     <member name="F:NLog.Targets.Win32FileAttributes.Encrypted">
@@ -24071,7 +24072,7 @@
     </member>
     <member name="P:NLog.Targets.Wrappers.BufferingTargetWrapper.FlushTimeout">
       <summary>
-        Gets or sets the timeout (in milliseconds) after which the contents of buffer will be flushed
+        Gets or sets the timeout (in milliseconds) after which the assessmentContents of buffer will be flushed
         if there's no write in the specified period of time. Use -1 to disable timed flushes.
       </summary>
       <docgen category='Buffering Options' order='100' />

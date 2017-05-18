@@ -38,12 +38,18 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\LoggerExtenstions.cs" />
+    <Compile Include="Models\AssessmentContent.cs" />
+    <Compile Include="Models\AssessmentInfo.cs" />
+    <Compile Include="Models\ItemContentMetadata.cs" />
     <Compile Include="Models\ErrorReportItem.cs" />
     <Compile Include="Models\GitLabInfo.cs" />
     <Compile Include="Models\ItemInput.cs" />
+    <Compile Include="Models\ItemScoringInformation.cs" />
     <Compile Include="Models\PackageType.cs" />
     <Compile Include="Models\ProcessingReportItem.cs" />
     <Compile Include="Utilities\CsvExtractor.cs" />

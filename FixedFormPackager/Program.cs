@@ -27,8 +27,6 @@ namespace FixedFormPackager
                             $"Incorrect parameters provided at the command line [{args.Aggregate((x, y) => $"{x},{y}")}]. Terminating.");
                     }))
                 {
-                    ExtractionSettings.UniqueId = options.UniqueId;
-                    ExtractionSettings.Input = options.Input;
                     ExtractionSettings.GitLabInfo = new GitLabInfo
                     {
                         BaseUrl = options.GitLabBaseUrl,
@@ -36,8 +34,10 @@ namespace FixedFormPackager
                         Password = options.GitLabPassword,
                         Username = options.GitLabUsername
                     };
-                    var result = CsvExtractor.ExtractItemInput(ExtractionSettings.Input).ToList();
-                    result.ForEach(x =>
+                    ExtractionSettings.ItemInput = CsvExtractor.Extract<ItemInput>(options.ItemInput).ToList();
+                    ExtractionSettings.AssessmentInfo =
+                        CsvExtractor.Extract<AssessmentInfo>(options.AssessmentInput).First();
+                    ExtractionSettings.ItemInput.ForEach(x =>
                     {
                         ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
                         if (!string.IsNullOrEmpty(x.AssociatedStimuliId))
@@ -45,9 +45,11 @@ namespace FixedFormPackager
                             ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
                         }
                     });
-                    var itemContent = result.Select(x => ContentAccess.RetrieveDocument($"item-{x.ItemId}")).ToList();
+                    var itemContent =
+                        ExtractionSettings.ItemInput.Select(x => ContentAccess.RetrieveDocument($"item-{x.ItemId}"))
+                            .ToList();
                     var stimContent =
-                        result.Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId))
+                        ExtractionSettings.ItemInput.Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId))
                             .Select(x => ContentAccess.RetrieveDocument($"stim-{x.AssociatedStimuliId}")).ToList();
                 }
             }

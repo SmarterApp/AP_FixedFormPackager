@@ -14,7 +14,7 @@ namespace FixedFormPackager.Common.Utilities
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static IList<ItemInput> ExtractItemInput(string fileName)
+        public static IList<T> Extract<T>(string fileName)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace FixedFormPackager.Common.Utilities
                 {
                     HasHeaderRecord = true
                 });
-                var itemInputProperties = typeof(ItemInput).GetProperties().Select(x => x.Name).ToList();
+                var itemInputProperties = typeof(T).GetProperties().Select(x => x.Name).ToList();
                 csvReader.ReadHeader();
                 var csvInputHeaders = csvReader.FieldHeaders;
                 if (csvInputHeaders.Except(itemInputProperties).Any() ||
@@ -33,7 +33,7 @@ namespace FixedFormPackager.Common.Utilities
                         $"FATAL - Input file {fileName} headers: [{csvInputHeaders.Aggregate((x, y) => $"{x},{y}")}] " +
                         $"do not match ItemInput required properties: [{itemInputProperties.Aggregate((x, y) => $"{x},{y}")}]");
                 }
-                return csvReader.GetRecords<ItemInput>().ToList();
+                return csvReader.GetRecords<T>().ToList();
             }
             catch (Exception ex)
             {

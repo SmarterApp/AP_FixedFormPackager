@@ -43,9 +43,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Content.cs" />
     <Compile Include="Utilities\ContentAccess.cs" />
     <Compile Include="GitLab\ResourceGenerator.cs" />
     <Compile Include="Utilities\PathHelper.cs" />
