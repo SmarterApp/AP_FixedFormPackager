@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using AssessmentPackageBuilder.Common;
 using CommandLine;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Utilities;
@@ -46,8 +47,8 @@ namespace FixedFormPackager
                         }
                     });
                     var itemContent =
-                        ExtractionSettings.ItemInput.Select(x => ContentAccess.RetrieveDocument($"item-{x.ItemId}"))
-                            .ToList();
+                        ExtractionSettings.ItemInput.Select(x => ContentAccess.RetrieveDocument($"Item-{x.ItemId}"))
+                            .Select(TestItem.Construct).ToList();
                     var stimContent =
                         ExtractionSettings.ItemInput.Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId))
                             .Select(x => ContentAccess.RetrieveDocument($"stim-{x.AssociatedStimuliId}")).ToList();

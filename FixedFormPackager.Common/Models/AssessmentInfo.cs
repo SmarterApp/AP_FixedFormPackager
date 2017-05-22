@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace FixedFormPackager.Common.Models
+﻿namespace FixedFormPackager.Common.Models
 {
     public class AssessmentInfo
     {
