@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -9,12 +11,10 @@ namespace AssessmentPackageBuilder.Common
 {
     public static class TestItem
     {
-        public static XElement Construct(AssessmentContent assessmentContent)
+        public static XElement Construct(AssessmentContent assessmentContent, ItemInput itemInput)
         {
             var itemElement = assessmentContent.MainDocument.XPathSelectElement("/itemrelease/item");
             var uniqueId = $"{itemElement.Attribute("bankkey")?.Value}-{itemElement.Attribute("id")?.Value}";
-
-            var test = itemElement.XPathSelectElement("//attrib[@attid='itm_att_Grade']/val");
 
             var result = new XElement("testitem",
                 new XAttribute("filename",
@@ -33,9 +33,22 @@ namespace AssessmentPackageBuilder.Common
             var languages =
                 itemElement.XPathSelectElements("//content[@name='language']/@value")
                     .Select(x => PoolProperty.Construct("Language", x.Value));
+            if (!string.IsNullOrEmpty(itemInput.AssociatedStimuliId))
+            {
+                result.Add(new XElement("passageref", itemInput.AssociatedStimuliId));
+            }
             result.Add(bprefs);
             result.Add(languages);
+            ConstructItemScoringNodes(itemInput);
             return result;
+        }
+
+        private static IEnumerable<XElement> ConstructItemScoringNodes(ItemInput itemInput)
+        {
+            var result = itemInput.GetType().GetProperties()
+                .Where(x => Regex.IsMatch(x.Name, @"^.+\d$"))
+                .GroupBy(x => x.Name.Last());
+            return null;
         }
     }
 }

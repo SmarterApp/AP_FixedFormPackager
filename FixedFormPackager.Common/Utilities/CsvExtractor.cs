@@ -6,6 +6,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using FixedFormPackager.Common.Extensions;
 using FixedFormPackager.Common.Models;
+using FixedFormPackager.Common.Utilities.CsvMappers;
 using NLog;
 
 namespace FixedFormPackager.Common.Utilities
@@ -44,6 +45,17 @@ namespace FixedFormPackager.Common.Utilities
                 }, ex.Message);
                 throw;
             }
+        }
+
+        public static IList<ItemInput> Extract(string fileName)
+        {
+            ValidateFile(fileName);
+            var csvReader = new CsvReader(new StreamReader(File.OpenRead(fileName)), new CsvConfiguration
+            {
+                HasHeaderRecord = true
+            });
+            csvReader.Configuration.RegisterClassMap(new ItemInputMapper());
+            return csvReader.GetRecords<ItemInput>().ToList();
         }
 
         private static void ValidateFile(string fileName)

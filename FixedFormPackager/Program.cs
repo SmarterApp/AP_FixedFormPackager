@@ -35,6 +35,7 @@ namespace FixedFormPackager
                         Password = options.GitLabPassword,
                         Username = options.GitLabUsername
                     };
+                    var test = CsvExtractor.Extract(options.ItemInput);
                     ExtractionSettings.ItemInput = CsvExtractor.Extract<ItemInput>(options.ItemInput).ToList();
                     ExtractionSettings.AssessmentInfo =
                         CsvExtractor.Extract<AssessmentInfo>(options.AssessmentInput).First();
@@ -47,8 +48,12 @@ namespace FixedFormPackager
                         }
                     });
                     var itemContent =
-                        ExtractionSettings.ItemInput.Select(x => ContentAccess.RetrieveDocument($"Item-{x.ItemId}"))
-                            .Select(TestItem.Construct).ToList();
+                        ExtractionSettings.ItemInput.Select(
+                                x => new {Content = ContentAccess.RetrieveDocument($"Item-{x.ItemId}"), x.ItemId})
+                            .Select(
+                                x =>
+                                    TestItem.Construct(x.Content,
+                                        ExtractionSettings.ItemInput.First(y => y.ItemId.Equals(x.ItemId)))).ToList();
                     var stimContent =
                         ExtractionSettings.ItemInput.Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId))
                             .Select(x => ContentAccess.RetrieveDocument($"stim-{x.AssociatedStimuliId}")).ToList();
