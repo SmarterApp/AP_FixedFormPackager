@@ -1,6 +1,4 @@
 ﻿using System.Xml.Linq;
-using AssessmentPackageBuilder.Common;
-using FixedFormPackager.Common.Models;
 
 namespace AssessmentPackageBuilder
 {
@@ -9,7 +7,6 @@ namespace AssessmentPackageBuilder
         public XDocument Assemble()
         {
             var document = new XDocument();
-            document = TestSpecificationBuilder.Construct(document, PackageType.Administration);
             return document;
         }
     }

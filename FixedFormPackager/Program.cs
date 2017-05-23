@@ -3,6 +3,7 @@ using System.Linq;
 using AssessmentPackageBuilder.Common;
 using CommandLine;
 using FixedFormPackager.Common.Models;
+using FixedFormPackager.Common.Models.Csv;
 using FixedFormPackager.Common.Utilities;
 using ItemRetriever.GitLab;
 using ItemRetriever.Utilities;
@@ -36,9 +37,9 @@ namespace FixedFormPackager
                         Username = options.GitLabUsername
                     };
                     var test = CsvExtractor.Extract(options.ItemInput);
-                    ExtractionSettings.ItemInput = CsvExtractor.Extract<ItemInput>(options.ItemInput).ToList();
+                    ExtractionSettings.ItemInput = CsvExtractor.Extract<Item>(options.ItemInput).ToList();
                     ExtractionSettings.AssessmentInfo =
-                        CsvExtractor.Extract<AssessmentInfo>(options.AssessmentInput).First();
+                        CsvExtractor.Extract<Assessment>(options.AssessmentInput).First();
                     ExtractionSettings.ItemInput.ForEach(x =>
                     {
                         ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");

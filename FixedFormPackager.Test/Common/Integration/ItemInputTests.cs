@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using FixedFormPackager.Common.Models;
+using FixedFormPackager.Common.Models.Csv;
 using FixedFormPackager.Common.Utilities;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
@@ -21,7 +21,7 @@ namespace FixedFormPackager.Test.Common.Integration
             const string filePath = "randomfilepath";
 
             //Act
-            ActualValueDelegate<object> testDelegate = () => CsvExtractor.Extract<ItemInput>(filePath);
+            ActualValueDelegate<object> testDelegate = () => CsvExtractor.Extract<Item>(filePath);
 
             //Assert
             Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
@@ -34,7 +34,7 @@ namespace FixedFormPackager.Test.Common.Integration
             var filePath = Path.Combine(ResourcesDirectory, "FFP_Sample.csv");
 
             // Act
-            var result = CsvExtractor.Extract<ItemInput>(filePath);
+            var result = CsvExtractor.Extract<Item>(filePath);
 
             // Assert
             Assert.IsTrue(result.Any());
@@ -51,7 +51,7 @@ namespace FixedFormPackager.Test.Common.Integration
             var filePath = Path.Combine(ResourcesDirectory, "BAD-FFP_Sample.csv");
 
             //Act
-            ActualValueDelegate<object> testDelegate = () => CsvExtractor.Extract<ItemInput>(filePath);
+            ActualValueDelegate<object> testDelegate = () => CsvExtractor.Extract<Item>(filePath);
 
             //Assert
             Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
@@ -64,7 +64,7 @@ namespace FixedFormPackager.Test.Common.Integration
             var filePath = Path.Combine(ResourcesDirectory, "test.txt");
 
             //Act
-            ActualValueDelegate<object> testDelegate = () => CsvExtractor.Extract<ItemInput>(filePath);
+            ActualValueDelegate<object> testDelegate = () => CsvExtractor.Extract<Item>(filePath);
 
             //Assert
             Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());

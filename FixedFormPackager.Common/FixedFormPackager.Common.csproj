@@ -44,14 +44,15 @@
   <ItemGroup>
     <Compile Include="Extensions\LoggerExtenstions.cs" />
     <Compile Include="Models\AssessmentContent.cs" />
-    <Compile Include="Models\AssessmentInfo.cs" />
-    <Compile Include="Models\ItemContentMetadata.cs" />
+    <Compile Include="Models\Csv\Assessment.cs" />
+    <Compile Include="Models\Csv\AssessmentScoringParameterComputationRule.cs" />
+    <Compile Include="Models\Csv\AssessmentScoringParameter.cs" />
+    <Compile Include="Models\Csv\AssessmentScoringParameterProperty.cs" />
     <Compile Include="Models\ErrorReportItem.cs" />
     <Compile Include="Models\GitLabInfo.cs" />
-    <Compile Include="Models\ItemInput.cs" />
-    <Compile Include="Models\ItemScoringInformation.cs" />
-    <Compile Include="Models\ItemScoringInput.cs" />
-    <Compile Include="Models\PackageType.cs" />
+    <Compile Include="Models\Csv\Item.cs" />
+    <Compile Include="Models\Csv\AssessmentScoring.cs" />
+    <Compile Include="Models\Csv\ItemScoring.cs" />
     <Compile Include="Models\ProcessingReportItem.cs" />
     <Compile Include="Utilities\CsvExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,11 +2,11 @@
 using System.Text.RegularExpressions;
 using CsvHelper;
 using CsvHelper.Configuration;
-using FixedFormPackager.Common.Models;
+using FixedFormPackager.Common.Models.Csv;
 
 namespace FixedFormPackager.Common.Utilities.CsvMappers
 {
-    public sealed class ItemInputMapper : CsvClassMap<ItemInput>
+    public sealed class ItemInputMapper : CsvClassMap<Item>
     {
         public ItemInputMapper()
         {
@@ -19,7 +19,7 @@ namespace FixedFormPackager.Common.Utilities.CsvMappers
                 (row as CsvReader)?.FieldHeaders
                 .Where(header => Regex.IsMatch(header, @"^.+\d$"))
                 .GroupBy(x => x.Last())
-                .Select(x => new ItemScoringInput
+                .Select(x => new ItemScoring
                 {
                     MeasurementModel =
                         row.GetField(x.FirstOrDefault(y => y.Equals($"MeasurementModel{x.Key}")) ?? string.Empty),

@@ -6,12 +6,13 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using AssessmentPackageBuilder.Utilities;
 using FixedFormPackager.Common.Models;
+using FixedFormPackager.Common.Models.Csv;
 
 namespace AssessmentPackageBuilder.Common
 {
     public static class TestItem
     {
-        public static XElement Construct(AssessmentContent assessmentContent, ItemInput itemInput)
+        public static XElement Construct(AssessmentContent assessmentContent, Item itemInput)
         {
             var itemElement = assessmentContent.MainDocument.XPathSelectElement("/itemrelease/item");
             var uniqueId = $"{itemElement.Attribute("bankkey")?.Value}-{itemElement.Attribute("id")?.Value}";
@@ -43,7 +44,7 @@ namespace AssessmentPackageBuilder.Common
             return result;
         }
 
-        private static IEnumerable<XElement> ConstructItemScoringNodes(ItemInput itemInput)
+        private static IEnumerable<XElement> ConstructItemScoringNodes(Item itemInput)
         {
             var result = itemInput.GetType().GetProperties()
                 .Where(x => Regex.IsMatch(x.Name, @"^.+\d$"))
