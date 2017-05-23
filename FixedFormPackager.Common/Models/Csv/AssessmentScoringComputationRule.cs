@@ -2,7 +2,7 @@
 
 namespace FixedFormPackager.Common.Models.Csv
 {
-    public class AssessmentScoring
+    public class AssessmentScoringComputationRule
     {
         public string Name { get; set; }
         public string ComputationOrder { get; set; }
