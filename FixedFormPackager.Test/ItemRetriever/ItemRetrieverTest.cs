@@ -10,7 +10,7 @@ namespace FixedFormPackager.Test.ItemRetriever
         [Test]
         public void ItemRetrieverCanRetrieveItem()
         {
-            ResourceRetriever.Retrieve(new GitLabInfo(), "Item-187-1072");
+            ResourceGenerator.Retrieve(new GitLabInfo(), "Item-187-1072");
         }
     }
 }

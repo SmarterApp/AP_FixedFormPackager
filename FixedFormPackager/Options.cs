@@ -4,13 +4,13 @@ namespace FixedFormPackager
 {
     public class Options
     {
-        [Option('i', "input", Required = true,
+        [Option('i', "itemInput", Required = true,
             HelpText = "Path to a valid .csv file containing the items to be packaged")]
-        public string Input { get; set; }
+        public string ItemInput { get; set; }
 
-        [Option('u', "uniqueIdentifier", Required = true,
-            HelpText = "The unique identifier of the assessment to be constructed")]
-        public string UniqueId { get; set; }
+        [Option('a', "assessmentInput", Required = true,
+            HelpText = "Path to a valid .csv file containing the metadata about the assessment to be packaged")]
+        public string AssessmentInput { get; set; }
 
         [Option('n', "gitLabUsername", Required = true,
             HelpText = "Username for GitLab account where items and stimuli are located")]

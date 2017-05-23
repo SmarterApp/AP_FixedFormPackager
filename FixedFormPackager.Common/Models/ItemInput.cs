@@ -1,4 +1,6 @@
-﻿namespace FixedFormPackager.Common.Models
+﻿using System.Collections.Generic;
+
+namespace FixedFormPackager.Common.Models
 {
     public class ItemInput
     {
@@ -7,5 +9,6 @@
         public string FormPartitionId { get; set; }
         public string SegmentId { get; set; }
         public string SegmentPosition { get; set; }
+        public IEnumerable<ItemScoringInput> ItemScoringInformation { get; set; }
     }
 }

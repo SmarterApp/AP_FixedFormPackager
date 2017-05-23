@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using AssessmentPackageBuilder.Common;
 using CommandLine;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Utilities;
 using ItemRetriever.GitLab;
+using ItemRetriever.Utilities;
 using NLog;
 
 namespace FixedFormPackager
@@ -26,8 +28,6 @@ namespace FixedFormPackager
                             $"Incorrect parameters provided at the command line [{args.Aggregate((x, y) => $"{x},{y}")}]. Terminating.");
                     }))
                 {
-                    ExtractionSettings.UniqueId = options.UniqueId;
-                    ExtractionSettings.Input = options.Input;
                     ExtractionSettings.GitLabInfo = new GitLabInfo
                     {
                         BaseUrl = options.GitLabBaseUrl,
@@ -35,15 +35,28 @@ namespace FixedFormPackager
                         Password = options.GitLabPassword,
                         Username = options.GitLabUsername
                     };
-                    var result = CsvExtractor.ExtractItemInput(ExtractionSettings.Input);
-                    result.ToList().ForEach(x =>
+                    var test = CsvExtractor.Extract(options.ItemInput);
+                    ExtractionSettings.ItemInput = CsvExtractor.Extract<ItemInput>(options.ItemInput).ToList();
+                    ExtractionSettings.AssessmentInfo =
+                        CsvExtractor.Extract<AssessmentInfo>(options.AssessmentInput).First();
+                    ExtractionSettings.ItemInput.ForEach(x =>
                     {
-                        ResourceRetriever.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
+                        ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
                         if (!string.IsNullOrEmpty(x.AssociatedStimuliId))
                         {
-                            ResourceRetriever.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
+                            ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
                         }
                     });
+                    var itemContent =
+                        ExtractionSettings.ItemInput.Select(
+                                x => new {Content = ContentAccess.RetrieveDocument($"Item-{x.ItemId}"), x.ItemId})
+                            .Select(
+                                x =>
+                                    TestItem.Construct(x.Content,
+                                        ExtractionSettings.ItemInput.First(y => y.ItemId.Equals(x.ItemId)))).ToList();
+                    var stimContent =
+                        ExtractionSettings.ItemInput.Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId))
+                            .Select(x => ContentAccess.RetrieveDocument($"stim-{x.AssociatedStimuliId}")).ToList();
                 }
             }
             catch (Exception e)

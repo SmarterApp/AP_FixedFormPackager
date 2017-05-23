@@ -6,6 +6,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using FixedFormPackager.Common.Extensions;
 using FixedFormPackager.Common.Models;
+using FixedFormPackager.Common.Utilities.CsvMappers;
 using NLog;
 
 namespace FixedFormPackager.Common.Utilities
@@ -14,7 +15,7 @@ namespace FixedFormPackager.Common.Utilities
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static IList<ItemInput> ExtractItemInput(string fileName)
+        public static IList<T> Extract<T>(string fileName)
         {
             try
             {
@@ -23,7 +24,7 @@ namespace FixedFormPackager.Common.Utilities
                 {
                     HasHeaderRecord = true
                 });
-                var itemInputProperties = typeof(ItemInput).GetProperties().Select(x => x.Name).ToList();
+                var itemInputProperties = typeof(T).GetProperties().Select(x => x.Name).ToList();
                 csvReader.ReadHeader();
                 var csvInputHeaders = csvReader.FieldHeaders;
                 if (csvInputHeaders.Except(itemInputProperties).Any() ||
@@ -33,7 +34,7 @@ namespace FixedFormPackager.Common.Utilities
                         $"FATAL - Input file {fileName} headers: [{csvInputHeaders.Aggregate((x, y) => $"{x},{y}")}] " +
                         $"do not match ItemInput required properties: [{itemInputProperties.Aggregate((x, y) => $"{x},{y}")}]");
                 }
-                return csvReader.GetRecords<ItemInput>().ToList();
+                return csvReader.GetRecords<T>().ToList();
             }
             catch (Exception ex)
             {
@@ -44,6 +45,17 @@ namespace FixedFormPackager.Common.Utilities
                 }, ex.Message);
                 throw;
             }
+        }
+
+        public static IList<ItemInput> Extract(string fileName)
+        {
+            ValidateFile(fileName);
+            var csvReader = new CsvReader(new StreamReader(File.OpenRead(fileName)), new CsvConfiguration
+            {
+                HasHeaderRecord = true
+            });
+            csvReader.Configuration.RegisterClassMap(new ItemInputMapper());
+            return csvReader.GetRecords<ItemInput>().ToList();
         }
 
         private static void ValidateFile(string fileName)

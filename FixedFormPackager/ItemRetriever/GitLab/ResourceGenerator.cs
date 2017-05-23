@@ -4,12 +4,13 @@ using System.IO;
 using System.Linq;
 using FixedFormPackager.Common.Extensions;
 using FixedFormPackager.Common.Models;
+using ItemRetriever.Utilities;
 using LibGit2Sharp;
 using NLog;
 
 namespace ItemRetriever.GitLab
 {
-    public class ResourceRetriever
+    public class ResourceGenerator
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -21,9 +22,7 @@ namespace ItemRetriever.GitLab
                     GenerateCredentials(gitLabInfo)
             };
 
-            var resourcePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                identifier.Contains("Item") ? "Items" : "Stimuli",
-                identifier);
+            var resourcePath = PathHelper.RetrievePathForId(identifier);
             if (!Directory.Exists(resourcePath))
             {
                 Logger.LogInfo(new ProcessingReportItem
