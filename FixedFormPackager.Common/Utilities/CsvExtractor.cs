@@ -34,12 +34,14 @@ namespace FixedFormPackager.Common.Utilities
                 }
                 else if (typeof(T) == typeof(AssessmentScoringComputationRule))
                 {
-                    Logger.Debug($"File {fileName} being processed as an AssessmentScoringComputationRule using the AssessmentScoringMapper");
+                    Logger.Debug(
+                        $"File {fileName} being processed as an AssessmentScoringComputationRule using the AssessmentScoringMapper");
                     csvReader.Configuration.RegisterClassMap(new AssessmentScoringMapper());
                 }
                 else
                 {
-                    Logger.Debug($"File {fileName} being processed as a {typeof(T).FullName} using the Generic 1 <-> 1 Mapper");
+                    Logger.Debug(
+                        $"File {fileName} being processed as a {typeof(T).FullName} using the Generic 1 <-> 1 Mapper");
                     // Items will be mapped to an object where CSV header row == object property name. Mismatches will throw
                     var itemInputProperties = typeof(T).GetProperties().Select(x => x.Name).ToList();
                     csvReader.ReadHeader();

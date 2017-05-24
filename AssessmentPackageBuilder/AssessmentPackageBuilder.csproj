@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministrationPackage.cs" />
+    <Compile Include="Common\ItemPool.cs" />
     <Compile Include="Common\PoolProperty.cs" />
     <Compile Include="Common\Identifier.cs" />
     <Compile Include="Common\TestItem.cs" />
@@ -54,6 +55,10 @@
     <ProjectReference Include="..\FixedFormPackager.Common\FixedFormPackager.Common.csproj">
       <Project>{bd149ca6-9857-473c-ad46-4b71f5e67d05}</Project>
       <Name>FixedFormPackager.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FixedFormPackager\ItemRetriever\ContentPackageGenerator.csproj">
+      <Project>{D879E03E-B597-47E3-8786-0407AA0FE13B}</Project>
+      <Name>ContentPackageGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

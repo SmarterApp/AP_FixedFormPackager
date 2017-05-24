@@ -26,19 +26,15 @@ namespace AssessmentPackageBuilder.Common
                     itemElement.XPathSelectElement("//attrib[@attid='itm_att_Grade']/val").Value));
             var sXmlNs = new XmlNamespaceManager(new NameTable());
             sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
-            var bprefs =
-                assessmentContent.MetaDocument.XPathSelectElements(
-                        "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
-                    .Select(x => BpElementUtilities.GetBprefs(x.Value));
-            var languages =
-                itemElement.XPathSelectElements("//content[@name='language']/@value")
-                    .Select(x => PoolProperty.Construct("Language", x.Value));
             if (!string.IsNullOrEmpty(itemInput.AssociatedStimuliId))
             {
                 result.Add(new XElement("passageref", itemInput.AssociatedStimuliId));
             }
-            result.Add(bprefs);
-            result.Add(languages);
+            result.Add(assessmentContent.MetaDocument.XPathSelectElements(
+                    "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
+                .Select(x => BpElementUtilities.GetBprefs(x.Value)));
+            result.Add(itemElement.XPathSelectElements("//content[@name='language']/@value")
+                .Select(x => PoolProperty.Construct("Language", x.Value)));
             result.Add(ConstructItemScoringNodes(itemInput));
             return result;
         }

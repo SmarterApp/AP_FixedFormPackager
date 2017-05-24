@@ -55,6 +55,7 @@ namespace FixedFormPackager
                                 x =>
                                     TestItem.Construct(x.Content,
                                         ExtractionSettings.ItemInput.First(y => y.ItemId.Equals(x.ItemId)))).ToList();
+                    var itemPool = ItemPool.Construct(ExtractionSettings.ItemInput);
                     var stimContent =
                         ExtractionSettings.ItemInput.Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId))
                             .Select(x => ContentAccess.RetrieveDocument($"stim-{x.AssociatedStimuliId}")).ToList();
