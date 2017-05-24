@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -40,16 +39,65 @@ namespace AssessmentPackageBuilder.Common
             }
             result.Add(bprefs);
             result.Add(languages);
-            ConstructItemScoringNodes(itemInput);
+            result.Add(ConstructItemScoringNodes(itemInput));
             return result;
         }
 
         private static IEnumerable<XElement> ConstructItemScoringNodes(Item itemInput)
         {
-            var result = itemInput.GetType().GetProperties()
-                .Where(x => Regex.IsMatch(x.Name, @"^.+\d$"))
-                .GroupBy(x => x.Name.Last());
-            return null;
+            var result = new List<XElement>();
+            foreach (var item in itemInput.ItemScoringInformation.Where(x => !string.IsNullOrEmpty(x.MeasurementModel)))
+            {
+                var itemScoreDimension = new XElement("itemscoredimension",
+                    new XAttribute("measurementmodel", item.MeasurementModel),
+                    new XAttribute("scorepoints", item.ScorePoints),
+                    new XAttribute("weight", item.Weight));
+                if (!string.IsNullOrEmpty(item.Dimension))
+                {
+                    itemScoreDimension.Add(new XAttribute("dimension", item.Dimension));
+                }
+                if (!string.IsNullOrEmpty(item.a))
+                {
+                    itemScoreDimension.Add(ConstructItemScoreParameter("a", item.a));
+                }
+                if (!string.IsNullOrEmpty(item.b))
+                {
+                    itemScoreDimension.Add(ConstructItemScoreParameter("b", item.b));
+                }
+                if (!string.IsNullOrEmpty(item.b0))
+                {
+                    itemScoreDimension.Add(ConstructItemScoreParameter("b0", item.b0));
+                }
+                if (!string.IsNullOrEmpty(item.b1))
+                {
+                    itemScoreDimension.Add(ConstructItemScoreParameter("b1", item.b1));
+                }
+                if (!string.IsNullOrEmpty(item.b2))
+                {
+                    itemScoreDimension.Add(ConstructItemScoreParameter("b2", item.b2));
+                }
+                if (!string.IsNullOrEmpty(item.b3))
+                {
+                    itemScoreDimension.Add(ConstructItemScoreParameter("b3", item.b3));
+                }
+                if (!string.IsNullOrEmpty(item.b4))
+                {
+                    itemScoreDimension.Add(ConstructItemScoreParameter("b4", item.b4));
+                }
+                if (!string.IsNullOrEmpty(item.c))
+                {
+                    itemScoreDimension.Add(ConstructItemScoreParameter("c", item.c));
+                }
+                result.Add(itemScoreDimension);
+            }
+            return result;
+        }
+
+        private static XElement ConstructItemScoreParameter(string parameter, string value)
+        {
+            return new XElement("itemscoreparameter",
+                new XAttribute("measurementparameter", parameter),
+                new XAttribute("value", value));
         }
     }
 }

@@ -36,7 +36,7 @@ namespace FixedFormPackager
                         Password = options.GitLabPassword,
                         Username = options.GitLabUsername
                     };
-                    var test = CsvExtractor.Extract(options.ItemInput);
+                    var test = CsvExtractor.Extract<AssessmentScoringComputationRule>(options.AssessmentScoringInput);
                     ExtractionSettings.ItemInput = CsvExtractor.Extract<Item>(options.ItemInput).ToList();
                     ExtractionSettings.AssessmentInfo =
                         CsvExtractor.Extract<Assessment>(options.AssessmentInput).First();

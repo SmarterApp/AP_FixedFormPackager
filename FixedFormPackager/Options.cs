@@ -12,6 +12,10 @@ namespace FixedFormPackager
             HelpText = "Path to a valid .csv file containing the metadata about the assessment to be packaged")]
         public string AssessmentInput { get; set; }
 
+        [Option('s', "assessmentScoringInput", Required = true,
+            HelpText = "Path to a valid .csv file containing the metadata about the assessment scoring to be packaged")]
+        public string AssessmentScoringInput { get; set; }
+
         [Option('n', "gitLabUsername", Required = true,
             HelpText = "Username for GitLab account where items and stimuli are located")]
         public string GitLabUsername { get; set; }
