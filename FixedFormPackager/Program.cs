@@ -6,7 +6,6 @@ using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Models.Csv;
 using FixedFormPackager.Common.Utilities;
 using ItemRetriever.GitLab;
-using ItemRetriever.Utilities;
 using NLog;
 
 namespace FixedFormPackager
@@ -36,7 +35,8 @@ namespace FixedFormPackager
                         Password = options.GitLabPassword,
                         Username = options.GitLabUsername
                     };
-                    var test = CsvExtractor.Extract<AssessmentScoringComputationRule>(options.AssessmentScoringInput);
+                    ExtractionSettings.AssessmentScoring =
+                        CsvExtractor.Extract<AssessmentScoringComputationRule>(options.AssessmentScoringInput).ToList();
                     ExtractionSettings.ItemInput = CsvExtractor.Extract<Item>(options.ItemInput).ToList();
                     ExtractionSettings.AssessmentInfo =
                         CsvExtractor.Extract<Assessment>(options.AssessmentInput).First();
@@ -48,17 +48,9 @@ namespace FixedFormPackager
                             ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
                         }
                     });
-                    var itemContent =
-                        ExtractionSettings.ItemInput.Select(
-                                x => new {Content = ContentAccess.RetrieveDocument($"Item-{x.ItemId}"), x.ItemId})
-                            .Select(
-                                x =>
-                                    TestItem.Construct(x.Content,
-                                        ExtractionSettings.ItemInput.First(y => y.ItemId.Equals(x.ItemId)))).ToList();
                     var itemPool = ItemPool.Construct(ExtractionSettings.ItemInput);
-                    var stimContent =
-                        ExtractionSettings.ItemInput.Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId))
-                            .Select(x => ContentAccess.RetrieveDocument($"stim-{x.AssociatedStimuliId}")).ToList();
+                    var testBlueprint = TestBlueprint.Construct(ExtractionSettings.ItemInput, itemPool,
+                        ExtractionSettings.AssessmentInfo.UniqueId);
                 }
             }
             catch (Exception e)
