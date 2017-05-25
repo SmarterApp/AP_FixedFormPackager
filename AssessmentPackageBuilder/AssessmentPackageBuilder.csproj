@@ -41,10 +41,13 @@
   <ItemGroup>
     <Compile Include="AdministrationPackage.cs" />
     <Compile Include="Common\BpElement.cs" />
+    <Compile Include="Common\FormPartition.cs" />
+    <Compile Include="Common\ItemGroup.cs" />
     <Compile Include="Common\ItemPool.cs" />
     <Compile Include="Common\PoolProperty.cs" />
     <Compile Include="Common\Identifier.cs" />
     <Compile Include="Common\TestBlueprint.cs" />
+    <Compile Include="Common\TestForm.cs" />
     <Compile Include="Common\TestItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scoring\PerformanceLevels.cs" />
