@@ -29,8 +29,8 @@ namespace FixedFormPackager.Common.Utilities
                 // The mappers are necessary for these types to support mapping from flat CSV files to hierarchal objects
                 if (typeof(T) == typeof(Item))
                 {
-                    Logger.Debug($"File {fileName} being processed as an Item using the ItemInputMapper");
-                    csvReader.Configuration.RegisterClassMap(new ItemInputMapper());
+                    Logger.Debug($"File {fileName} being processed as an Item using the ItemMapper");
+                    csvReader.Configuration.RegisterClassMap(new ItemMapper());
                 }
                 else if (typeof(T) == typeof(AssessmentScoringComputationRule))
                 {

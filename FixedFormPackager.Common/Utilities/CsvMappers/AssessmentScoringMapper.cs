@@ -27,8 +27,8 @@ namespace FixedFormPackager.Common.Utilities.CsvMappers
                             .Where(
                                 y =>
                                     y.All(
-                                        z => z.Contains("ParameterPropertyName") || 
-                                        z.Contains("ParameterPropertyValue")))
+                                        z => z.Contains("ParameterPropertyName") ||
+                                             z.Contains("ParameterPropertyValue")))
                             .Select(y => new AssessmentScoringComputationRuleParameterProperty
                             {
                                 Name =

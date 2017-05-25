@@ -53,6 +53,9 @@ namespace FixedFormPackager
                     var itemPool = ItemPool.Construct(ExtractionSettings.ItemInput);
                     var testBlueprint = TestBlueprint.Construct(ExtractionSettings.ItemInput, itemPool,
                         ExtractionSettings.AssessmentInfo.UniqueId);
+                    var testForms = TestForm.Construct(ExtractionSettings.ItemInput, itemPool,
+                        ExtractionSettings.AssessmentInfo).ToList();
+                    var performanceLevels = PerformanceLevels.Construct(ExtractionSettings.AssessmentInfo);
                 }
             }
             catch (Exception e)

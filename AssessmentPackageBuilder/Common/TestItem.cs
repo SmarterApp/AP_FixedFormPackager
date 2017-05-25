@@ -22,6 +22,7 @@ namespace AssessmentPackageBuilder.Common
                 new XAttribute("itemtype", itemElement.Attribute("format")?.Value),
                 Identifier.Construct(uniqueId, itemElement.Attribute("version")?.Value),
                 PoolProperty.Construct("--ITEMTYPE--", itemElement.Attribute("format")?.Value),
+                PoolProperty.Construct("Language", "ENU"),
                 PoolProperty.Construct("Grade",
                     itemElement.XPathSelectElement("//attrib[@attid='itm_att_Grade']/val").Value));
             var sXmlNs = new XmlNamespaceManager(new NameTable());
