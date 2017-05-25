@@ -33,6 +33,7 @@ namespace AssessmentPackageBuilder.Common
             result.Add(assessmentContent.MetaDocument.XPathSelectElements(
                     "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
                 .Select(x => BpElementUtilities.GetBprefs(x.Value)));
+            result.Add(new XElement("bpref", itemInput.SegmentId));
             result.Add(itemElement.XPathSelectElements("//content[@name='language']/@value")
                 .Select(x => PoolProperty.Construct("Language", x.Value)));
             result.Add(ConstructItemScoringNodes(itemInput));
