@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AssessmentPackageBuilder.Common;
+using AssessmentPackageBuilder.Scoring;
 using CommandLine;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Models.Csv;
@@ -48,6 +49,7 @@ namespace FixedFormPackager
                             ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
                         }
                     });
+                    var scoringRules = ScoringRules.Construct(ExtractionSettings.AssessmentScoring);
                     var itemPool = ItemPool.Construct(ExtractionSettings.ItemInput);
                     var testBlueprint = TestBlueprint.Construct(ExtractionSettings.ItemInput, itemPool,
                         ExtractionSettings.AssessmentInfo.UniqueId);

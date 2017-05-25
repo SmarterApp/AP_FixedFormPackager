@@ -7,6 +7,8 @@ namespace FixedFormPackager.Common.Models.Csv
         public string Name { get; set; }
         public string ComputationOrder { get; set; }
         public string BpElementId { get; set; }
-        public IEnumerable<AssessmentScoringParameter> ScoringParameters { get; set; }
+
+        public IEnumerable<AssessmentScoringParameter> ScoringParameters { get; set; } =
+            new List<AssessmentScoringParameter>();
     }
 }

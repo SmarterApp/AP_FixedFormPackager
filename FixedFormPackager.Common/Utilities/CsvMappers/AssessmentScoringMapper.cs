@@ -19,35 +19,47 @@ namespace FixedFormPackager.Common.Utilities.CsvMappers
                 .GroupBy(x => x.Split('_').Skip(1).First())
                 .Select(x => new AssessmentScoringParameter
                 {
-                    Type = row.GetField(x.FirstOrDefault(y => y.Equals($"ParameterType_{x.Key}")) ?? string.Empty),
-                    Name = row.GetField(x.FirstOrDefault(y => y.Equals($"ParameterName_{x.Key}")) ?? string.Empty),
+                    Type = row.GetField(x.First(y => y.Equals($"ParameterType_{x.Key}"))) ?? string.Empty,
+                    Name = row.GetField(x.First(y => y.Equals($"ParameterName_{x.Key}"))) ?? string.Empty,
                     Position = x.Key,
                     Properties =
                         x.GroupBy(y => y.Split('_').Last())
+                            .Where(
+                                y =>
+                                    y.All(
+                                        z => z.Contains("ParameterPropertyName") || 
+                                        z.Contains("ParameterPropertyValue")))
                             .Select(y => new AssessmentScoringComputationRuleParameterProperty
                             {
                                 Name =
                                     row.GetField(
-                                        x.FirstOrDefault(z => z.Equals($"ParameterPropertyName_{x.Key}_{y.Key}")) ??
-                                        string.Empty),
+                                        x.First(z => z.Equals($"ParameterPropertyName_{x.Key}_{y.Key}"))) ??
+                                    string.Empty,
                                 Value =
                                     row.GetField(
-                                        x.FirstOrDefault(z => z.Equals($"ParameterPropertyValue_{x.Key}_{y.Key}")) ??
-                                        string.Empty)
-                            }),
+                                        x.First(z => z.Equals($"ParameterPropertyValue_{x.Key}_{y.Key}"))) ??
+                                    string.Empty
+                            }).ToList(),
                     ComputationValues =
                         x.GroupBy(y => y.Split('_').Last())
+                            .Where(
+                                y =>
+                                    y.All(
+                                        z =>
+                                            z.Contains("ParameterComputationRuleIndex") ||
+                                            z.Contains("ParameterComputationRuleValue")))
+                            .Where(y => y.Any())
                             .Select(y => new AssessmentScoringComputationRuleParameterValue
                             {
                                 Index =
                                     row.GetField(
-                                        x.FirstOrDefault(z => z.Equals($"ParameterComputationRuleIndex_{x.Key}_{y.Key}")) ??
-                                        string.Empty),
+                                        x.First(z => z.Equals($"ParameterComputationRuleIndex_{x.Key}_{y.Key}"))) ??
+                                    string.Empty,
                                 Value =
                                     row.GetField(
-                                        x.FirstOrDefault(z => z.Equals($"ParameterComputationRuleValue_{x.Key}_{y.Key}")) ??
-                                        string.Empty)
-                            })
+                                        x.First(z => z.Equals($"ParameterComputationRuleValue_{x.Key}_{y.Key}"))) ??
+                                    string.Empty
+                            }).ToList()
                 }).ToList()
             );
         }

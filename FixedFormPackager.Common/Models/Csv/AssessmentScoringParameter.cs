@@ -7,7 +7,11 @@ namespace FixedFormPackager.Common.Models.Csv
         public string Type { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
-        public IEnumerable<AssessmentScoringComputationRuleParameterProperty> Properties { get; set; }
-        public IEnumerable<AssessmentScoringComputationRuleParameterValue> ComputationValues { get; set; }
+
+        public IEnumerable<AssessmentScoringComputationRuleParameterProperty> Properties { get; set; } =
+            new List<AssessmentScoringComputationRuleParameterProperty>();
+
+        public IEnumerable<AssessmentScoringComputationRuleParameterValue> ComputationValues { get; set; } =
+            new List<AssessmentScoringComputationRuleParameterValue>();
     }
 }
