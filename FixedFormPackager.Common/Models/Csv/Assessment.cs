@@ -1,6 +1,6 @@
-﻿namespace FixedFormPackager.Common.Models
+﻿namespace FixedFormPackager.Common.Models.Csv
 {
-    public class AssessmentInfo
+    public class Assessment
     {
         public string UniqueId { get; set; }
         public string Publisher { get; set; }

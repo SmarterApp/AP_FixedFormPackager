@@ -40,8 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministrationPackage.cs" />
+    <Compile Include="Common\ItemPool.cs" />
     <Compile Include="Common\PoolProperty.cs" />
-    <Compile Include="Common\TestSpecificationBuilder.cs" />
     <Compile Include="Common\Identifier.cs" />
     <Compile Include="Common\TestItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

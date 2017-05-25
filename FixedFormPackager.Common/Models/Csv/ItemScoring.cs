@@ -1,6 +1,6 @@
-﻿namespace FixedFormPackager.Common.Models
+﻿namespace FixedFormPackager.Common.Models.Csv
 {
-    public class ItemScoringInput
+    public class ItemScoring
     {
         public string MeasurementModel { get; set; }
         public string ScorePoints { get; set; }
