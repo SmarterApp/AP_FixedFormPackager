@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using AssessmentPackageBuilder.Utilities;
 using FixedFormPackager.Common.Models.Csv;
 
 namespace AssessmentPackageBuilder.Common
@@ -30,20 +31,8 @@ namespace AssessmentPackageBuilder.Common
                             new XAttribute("property", "Language"),
                             new XAttribute("value", x),
                             new XAttribute("itemcount", items.Count().ToString())),
-                        GeneratePoolPropertyTypes(itemPool),
+                        PoolPropertyUtilities.GeneratePoolPropertyTypes(itemPool),
                         FormPartition.Construct(items, itemPool, assessment)));
-        }
-
-        private static IEnumerable<XElement> GeneratePoolPropertyTypes(XNode itemPool)
-        {
-            return itemPool.XPathSelectElements("//poolproperty")
-                .Where(x => x.Attribute("property").Value.Equals("--ITEMTYPE"))
-                .GroupBy(x => x.Attribute("value").Value)
-                .Select(
-                    x =>
-                        new XElement("poolproperty", new XAttribute("property", "--ITEMTYPE--"),
-                            new XAttribute("value", x.Key), new XAttribute("label", x.Key),
-                            new XAttribute("itemcount", x.Count())));
         }
     }
 }

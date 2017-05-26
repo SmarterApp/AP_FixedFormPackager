@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using AssessmentPackageBuilder.Administration;
 using AssessmentPackageBuilder.Scoring;
+using AssessmentPackageBuilder.Utilities;
 using FixedFormPackager.Common.Utilities;
 
 namespace AssessmentPackageBuilder.Common
@@ -20,6 +22,7 @@ namespace AssessmentPackageBuilder.Common
             var testForms = TestForm.Construct(ExtractionSettings.ItemInput, itemPool,
                 ExtractionSettings.AssessmentInfo).ToList();
             var performanceLevels = PerformanceLevels.Construct(ExtractionSettings.AssessmentInfo);
+            var adminSegments = AdminSegment.Construct(itemPool, ExtractionSettings.ItemInput);
 
             var scoringSpecification = BuildGlobalProperties("scoring");
             scoringSpecification.Add(new XElement("scoring",
@@ -32,6 +35,14 @@ namespace AssessmentPackageBuilder.Common
             result.Add(scoringSpecification);
 
             var administrationSpecification = BuildGlobalProperties("administration");
+            administrationSpecification.Add(new XElement("administration",
+                testBlueprint,
+                PoolPropertyUtilities.GeneratePoolPropertyTypes(itemPool),
+                PoolPropertyUtilities.GeneratePoolPropertyLanguages(itemPool),
+                itemPool,
+                testForms,
+                adminSegments));
+            result.Add(administrationSpecification);
 
             return result;
         }

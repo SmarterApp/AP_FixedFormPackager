@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministrationPackage.cs" />
+    <Compile Include="Administration\AdminSegment.cs" />
+    <Compile Include="Administration\SegmentBpElement.cs" />
     <Compile Include="Common\BpElement.cs" />
     <Compile Include="Common\FormPartition.cs" />
     <Compile Include="Common\ItemGroup.cs" />
@@ -54,10 +56,9 @@
     <Compile Include="Scoring\PerformanceLevels.cs" />
     <Compile Include="Scoring\ScoringRules.cs" />
     <Compile Include="Utilities\BpElementUtilities.cs" />
+    <Compile Include="Utilities\PoolPropertyUtilities.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Administration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\FixedFormPackager.Common\FixedFormPackager.Common.csproj">
       <Project>{bd149ca6-9857-473c-ad46-4b71f5e67d05}</Project>
