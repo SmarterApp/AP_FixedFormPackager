@@ -61,17 +61,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AssessmentPackageBuilder\AssessmentPackageBuilder.csproj">
+    <ProjectReference Include="..\AssessmentPackageBuilder\FixedFormPackager.Builder.csproj">
       <Project>{152c0f0d-42aa-4a99-b0be-552f9b2b4cb4}</Project>
-      <Name>AssessmentPackageBuilder</Name>
+      <Name>FixedFormPackager.Builder</Name>
     </ProjectReference>
     <ProjectReference Include="..\FixedFormPackager.Common\FixedFormPackager.Common.csproj">
       <Project>{bd149ca6-9857-473c-ad46-4b71f5e67d05}</Project>
       <Name>FixedFormPackager.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="ItemRetriever\ContentPackageGenerator.csproj">
+    <ProjectReference Include="ItemRetriever\ResourceRetriever.csproj">
       <Project>{d879e03e-b597-47e3-8786-0407aa0fe13b}</Project>
-      <Name>ContentPackageGenerator</Name>
+      <Name>ResourceRetriever</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

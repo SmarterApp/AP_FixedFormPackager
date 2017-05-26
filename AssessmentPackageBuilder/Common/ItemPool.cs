@@ -19,11 +19,11 @@ namespace AssessmentPackageBuilder.Common
                         TestItem.Construct(x.Content,
                             itemInput.First(y => y.ItemId.Equals(x.ItemId)))));
             result.Add(itemInput
-                .Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId))
+                .Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId)).Select(x => x.AssociatedStimuliId)
                 .Distinct()
                 .Select(x => new XElement("passage",
-                    new XAttribute("filename", $"stim-{x.AssociatedStimuliId}.xml"),
-                    Identifier.Construct(x.AssociatedStimuliId, "1"))));
+                    new XAttribute("filename", $"stim-{x}.xml"),
+                    Identifier.Construct(x, "1"))));
             return result;
         }
     }

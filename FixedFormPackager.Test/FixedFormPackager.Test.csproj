@@ -89,9 +89,9 @@
       <Project>{bd149ca6-9857-473c-ad46-4b71f5e67d05}</Project>
       <Name>FixedFormPackager.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FixedFormPackager\ItemRetriever\ContentPackageGenerator.csproj">
+    <ProjectReference Include="..\FixedFormPackager\ItemRetriever\ResourceRetriever.csproj">
       <Project>{d879e03e-b597-47e3-8786-0407aa0fe13b}</Project>
-      <Name>ContentPackageGenerator</Name>
+      <Name>ResourceRetriever</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
