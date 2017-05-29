@@ -17,15 +17,10 @@ namespace AssessmentPackageBuilder.Administration
                     new XAttribute("segmentid", x.First().SegmentId),
                     new XAttribute("position", x.Key),
                     new XAttribute("itemselection", "fixedform"),
-                    // TODO: Investigate strange counts on segmentbpelements
                     new XElement("segmentblueprint",
-                        testItems.Where(y => x.Select(z => z.ItemId)
-                                .Contains(y.XPathSelectElement("identifier")
-                                    .Attribute("uniqueid").Value))
-                            .SelectMany(y => y.XPathSelectElements("//bpref"))
-                            .Where(y => !items.Any(z => z.SegmentId.Equals(y.Value, StringComparison.OrdinalIgnoreCase)))
-                            .GroupBy(y => y.Value)
-                            .Select(y => SegmentBpElement.Construct(y.Key, y.Count().ToString()))),
+                        x.SelectMany(y => GetBprefsForItemId(itemPool, y.ItemId))
+                        .GroupBy(y => y)
+                        .Select(y => SegmentBpElement.Construct(y.Key, y.Count().ToString()))),
                     new XElement("itemselector",
                         new XAttribute("type", "fixedform"),
                         new XElement("identifier",
@@ -45,6 +40,14 @@ namespace AssessmentPackageBuilder.Administration
                                 new XAttribute("label", "intercept")))),
                     new XElement("segmentform",
                         new XAttribute("formpartitionid", x.First().FormPartitionId))));
+        }
+
+        private static IEnumerable<string> GetBprefsForItemId(XNode itempool, string uniqueId)
+        {
+            return
+                itempool.XPathSelectElement($"./testitem[identifier/@uniqueid='{uniqueId}']")
+                    .XPathSelectElements("./bpref")
+                    .Select(x => x.Value);
         }
     }
 }

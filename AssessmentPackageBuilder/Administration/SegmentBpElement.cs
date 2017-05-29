@@ -4,12 +4,12 @@ namespace AssessmentPackageBuilder.Administration
 {
     public static class SegmentBpElement
     {
-        public static XElement Construct(string uniqueid, string count)
+        public static XElement Construct(string bpelementid, string count)
         {
             return new XElement("segmentbpelement",
                 new XAttribute("minopitems", count),
                 new XAttribute("maxopitems", count),
-                new XAttribute("bpelementid", uniqueid));
+                new XAttribute("bpelementid", bpelementid));
         }
     }
 }
