@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Xml.XPath;
 using AssessmentPackageBuilder.Common;
 using CommandLine;
 using FixedFormPackager.Common.Models;
@@ -40,15 +41,12 @@ namespace FixedFormPackager
                     ExtractionSettings.ItemInput = CsvExtractor.Extract<Item>(options.ItemInput).ToList();
                     ExtractionSettings.AssessmentInfo =
                         CsvExtractor.Extract<Assessment>(options.AssessmentInput).First();
-                    ExtractionSettings.ItemInput.ForEach(x =>
-                    {
-                        ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
-                        if (!string.IsNullOrEmpty(x.AssociatedStimuliId))
-                        {
-                            ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"stim-{x.AssociatedStimuliId}");
-                        }
-                    });
+                    ExtractionSettings.ItemInput.ForEach(
+                        x => { ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}"); });
                     var result = TestSpecification.Construct();
+                    result.ToList().ForEach(x =>
+                        x.Save(
+                            $"{x.XPathSelectElement("./identifier").Attribute("uniqueid")?.Value}_{x.Attribute("purpose")?.Value}.xml"));
                 }
             }
             catch (Exception e)

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -11,7 +10,6 @@ namespace AssessmentPackageBuilder.Administration
     {
         public static IEnumerable<XElement> Construct(XElement itemPool, IList<Item> items)
         {
-            var testItems = itemPool.XPathSelectElements("testitem");
             return items.GroupBy(x => x.SegmentPosition)
                 .Select(x => new XElement("adminsegment",
                     new XAttribute("segmentid", x.First().SegmentId),
@@ -19,8 +17,8 @@ namespace AssessmentPackageBuilder.Administration
                     new XAttribute("itemselection", "fixedform"),
                     new XElement("segmentblueprint",
                         x.SelectMany(y => GetBprefsForItemId(itemPool, y.ItemId))
-                        .GroupBy(y => y)
-                        .Select(y => SegmentBpElement.Construct(y.Key, y.Count().ToString()))),
+                            .GroupBy(y => y)
+                            .Select(y => SegmentBpElement.Construct(y.Key, y.Count().ToString()))),
                     new XElement("itemselector",
                         new XAttribute("type", "fixedform"),
                         new XElement("identifier",
