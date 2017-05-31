@@ -9,8 +9,8 @@ namespace AssessmentPackageBuilder.Utilities
     {
         public static IEnumerable<XElement> GeneratePoolPropertyTypes(XNode itemPool)
         {
-            return itemPool.XPathSelectElements("//poolproperty")
-                .Where(x => x.Attribute("property").Value.Equals("--ITEMTYPE"))
+            return itemPool.XPathSelectElements(".//poolproperty")
+                .Where(x => x.Attribute("property").Value.Equals("--ITEMTYPE--"))
                 .GroupBy(x => x.Attribute("value").Value)
                 .Select(
                     x =>
@@ -21,7 +21,7 @@ namespace AssessmentPackageBuilder.Utilities
 
         public static IEnumerable<XElement> GeneratePoolPropertyLanguages(XNode itemPool)
         {
-            return itemPool.XPathSelectElements("//poolproperty")
+            return itemPool.XPathSelectElements(".//poolproperty")
                 .Where(x => x.Attribute("property").Value.Equals("Language"))
                 .GroupBy(x => x.Attribute("value").Value)
                 .Select(
