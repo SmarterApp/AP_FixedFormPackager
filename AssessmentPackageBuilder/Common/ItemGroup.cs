@@ -10,7 +10,7 @@ namespace AssessmentPackageBuilder.Common
         public static IEnumerable<XElement> Construct(IList<Item> items, string partitionIdentifier)
         {
             return items.GroupBy(x => x.FormPartitionPosition).Select(x => new XElement("itemgroup",
-                new XAttribute("formposition", x.Key),
+                new XAttribute("formposition", "1"),
                 new XAttribute("maxitems", "ALL"),
                 new XAttribute("maxresponses", "ALL"),
                 IdentifierAndResources(x.ToList(), partitionIdentifier)));

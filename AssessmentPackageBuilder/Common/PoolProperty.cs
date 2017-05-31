@@ -8,7 +8,8 @@ namespace AssessmentPackageBuilder.Common
         {
             return new XElement("poolproperty",
                 new XAttribute("property", name),
-                new XAttribute("value", value));
+                new XAttribute("value", value),
+                new XAttribute("label", value));
         }
     }
 }

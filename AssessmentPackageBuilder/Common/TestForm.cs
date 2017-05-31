@@ -26,10 +26,12 @@ namespace AssessmentPackageBuilder.Common
                             new XAttribute("version", "1")),
                         new XElement("property",
                             new XAttribute("name", "language"),
-                            new XAttribute("value", x)),
+                            new XAttribute("value", x),
+                            new XAttribute("label", x)),
                         new XElement("poolproperty",
                             new XAttribute("property", "Language"),
                             new XAttribute("value", x),
+                            new XAttribute("label", x),
                             new XAttribute("itemcount", items.Count().ToString())),
                         PoolPropertyUtilities.GeneratePoolPropertyTypes(itemPool),
                         FormPartition.Construct(items, itemPool, assessment)));

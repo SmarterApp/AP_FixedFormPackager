@@ -29,6 +29,15 @@ namespace AssessmentPackageBuilder.Common
                         ? uniqueid.Split('-').Skip(1).Aggregate((x, y) => $"{x}-{y}")
                         : uniqueid));
             }
+            if (elementtype.Equals("contentlevel", StringComparison.OrdinalIgnoreCase))
+            {
+                result.Add(new XAttribute("parentid", identifier.Attribute("uniqueid").Value
+                    .Split('|')
+                    .Reverse()
+                    .Skip(1)
+                    .Reverse()
+                    .Aggregate((x, y) => $"{x}|{y}")));
+            }
             result.Add(identifier);
             return result;
         }

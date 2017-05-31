@@ -58,7 +58,7 @@ namespace AssessmentPackageBuilder.Common
                     new XAttribute("uniqueid", ExtractionSettings.AssessmentInfo.UniqueId),
                     new XAttribute("name",
                         Regex.Matches(ExtractionSettings.AssessmentInfo.UniqueId,
-                                @"^(\(" + ExtractionSettings.AssessmentInfo?.Publisher + @"\)).*$")
+                                @"^(\(" + ExtractionSettings.AssessmentInfo?.Publisher + @"\))(.*)$")
                             .Cast<Match>().FirstOrDefault(x => x.Success)?.Groups.Cast<Group>()
                             .LastOrDefault()?.Value ?? ExtractionSettings.AssessmentInfo.UniqueId),
                     new XAttribute("label", ExtractionSettings.AssessmentInfo.UniqueId),
