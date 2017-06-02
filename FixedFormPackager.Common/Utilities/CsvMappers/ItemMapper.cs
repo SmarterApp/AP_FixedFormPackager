@@ -24,10 +24,10 @@ namespace FixedFormPackager.Common.Utilities.CsvMappers
                 .Select(x => new ItemScoring
                 {
                     MeasurementModel =
-                        row.GetField(x.FirstOrDefault(y => y.Equals($"MeasurementModel{x.Key}")) ?? string.Empty),
-                    ScorePoints = row.GetField(x.FirstOrDefault(y => y.Equals($"ScorePoints{x.Key}")) ?? string.Empty),
-                    Dimension = row.GetField(x.FirstOrDefault(y => y.Equals($"Dimension{x.Key}")) ?? string.Empty),
-                    Weight = row.GetField(x.FirstOrDefault(y => y.Equals($"Weight{x.Key}")) ?? string.Empty),
+                        row.GetField(x.FirstOrDefault(y => y.Equals($"MeasurementModel_{x.Key}")) ?? string.Empty),
+                    ScorePoints = row.GetField(x.FirstOrDefault(y => y.Equals($"ScorePoints_{x.Key}")) ?? string.Empty),
+                    Dimension = row.GetField(x.FirstOrDefault(y => y.Equals($"Dimension_{x.Key}")) ?? string.Empty),
+                    Weight = row.GetField(x.FirstOrDefault(y => y.Equals($"Weight_{x.Key}")) ?? string.Empty),
                     a = row.GetField(x.FirstOrDefault(y => y.Equals($"a_{x.Key}")) ?? string.Empty),
                     b0 = row.GetField(x.FirstOrDefault(y => y.Equals($"b0_{x.Key}")) ?? string.Empty),
                     b1 = row.GetField(x.FirstOrDefault(y => y.Equals($"b1_{x.Key}")) ?? string.Empty),
