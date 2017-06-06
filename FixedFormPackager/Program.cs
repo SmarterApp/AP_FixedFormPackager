@@ -3,6 +3,7 @@ using System.Linq;
 using System.Xml.XPath;
 using AssessmentPackageBuilder.Common;
 using CommandLine;
+using FixedFormPackager.Common.Extensions;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Models.Csv;
 using FixedFormPackager.Common.Utilities;
@@ -43,6 +44,25 @@ namespace FixedFormPackager
                         CsvExtractor.Extract<Assessment>(options.AssessmentInput).First();
                     ExtractionSettings.ItemInput.ForEach(
                         x => { ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}"); });
+
+                    var uniqueHash = GenerationHash.GenerateUniqueHash(ExtractionSettings.AssessmentInfo.UniqueId,
+                        ExtractionSettings.ItemInput.FirstOrDefault()?.SegmentId,
+                        ExtractionSettings.ItemInput.FirstOrDefault()?.FormPartitionId);
+
+                    Logger.Debug($"Generated unique hash: {uniqueHash}");
+
+                    ExtractionSettings.AssessmentInfo.UniqueId += $"_{uniqueHash}";
+                    ExtractionSettings.ItemInput = ExtractionSettings.ItemInput.Select(x => new Item
+                    {
+                        ItemId = x.ItemId,
+                        AssociatedStimuliId = x.AssociatedStimuliId,
+                        FormPartitionId = x.FormPartitionId + $"_{uniqueHash}",
+                        FormPartitionPosition = x.FormPartitionPosition,
+                        FormPosition = x.FormPosition,
+                        ItemScoringInformation = x.ItemScoringInformation,
+                        SegmentId = x.SegmentId + $"_{uniqueHash}",
+                        SegmentPosition = x.SegmentPosition
+                    }).ToList();
                     var result = TestSpecification.Construct();
                     result.ToList().ForEach(x =>
                         x.Save(
