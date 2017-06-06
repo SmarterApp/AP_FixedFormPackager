@@ -42,7 +42,11 @@ namespace FixedFormPackager
                     ExtractionSettings.AssessmentInfo =
                         CsvExtractor.Extract<Assessment>(options.AssessmentInput).First();
                     ExtractionSettings.ItemInput.ForEach(
-                        x => { ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}"); });
+                        x =>
+                        {
+                            ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
+                        });
+
                     var result = TestSpecification.Construct();
                     result.ToList().ForEach(x =>
                         x.Save(
