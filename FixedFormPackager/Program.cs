@@ -3,7 +3,6 @@ using System.Linq;
 using System.Xml.XPath;
 using AssessmentPackageBuilder.Common;
 using CommandLine;
-using FixedFormPackager.Common.Extensions;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Models.Csv;
 using FixedFormPackager.Common.Utilities;
@@ -45,9 +44,9 @@ namespace FixedFormPackager
                     ExtractionSettings.ItemInput.ForEach(
                         x => { ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}"); });
 
-                    var uniqueHash = GenerationHash.GenerateUniqueHash(ExtractionSettings.AssessmentInfo.UniqueId,
-                        ExtractionSettings.ItemInput.FirstOrDefault()?.SegmentId,
-                        ExtractionSettings.ItemInput.FirstOrDefault()?.FormPartitionId);
+                    var uniqueHash = HashGenerator.Hash(ExtractionSettings.AssessmentInfo.UniqueId.GetHashCode(),
+                        ExtractionSettings.ItemInput.First().SegmentId.GetHashCode(),
+                        ExtractionSettings.ItemInput.First().FormPartitionId.GetHashCode());
 
                     Logger.Debug($"Generated unique hash: {uniqueHash}");
 
