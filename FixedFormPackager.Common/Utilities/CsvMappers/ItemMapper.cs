@@ -11,12 +11,11 @@ namespace FixedFormPackager.Common.Utilities.CsvMappers
         public ItemMapper()
         {
             Map(m => m.ItemId).Name("ItemId").Index(0);
-            Map(m => m.AssociatedStimuliId).Name("AssociatedStimuliId").Index(1);
-            Map(m => m.FormPartitionId).Name("FormPartitionId").Index(2);
-            Map(m => m.FormPartitionPosition).Name("FormPartitionPosition").Index(3);
-            Map(m => m.FormPosition).Name("FormPosition").Index(4);
-            Map(m => m.SegmentId).Name("SegmentId").Index(5);
-            Map(m => m.SegmentPosition).Name("SegmentPosition").Index(6);
+            Map(m => m.FormPartitionId).Name("FormPartitionId").Index(1);
+            Map(m => m.FormPartitionPosition).Name("FormPartitionPosition").Index(2);
+            Map(m => m.FormPosition).Name("FormPosition").Index(3);
+            Map(m => m.SegmentId).Name("SegmentId").Index(4);
+            Map(m => m.SegmentPosition).Name("SegmentPosition").Index(5);
             Map(m => m.ItemScoringInformation).ConvertUsing(row =>
                 (row as CsvReader)?.FieldHeaders
                 .Where(header => Regex.IsMatch(header, @"^.+\d$"))
