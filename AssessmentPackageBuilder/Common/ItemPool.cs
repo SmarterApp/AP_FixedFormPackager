@@ -9,7 +9,7 @@ namespace AssessmentPackageBuilder.Common
 {
     public static class ItemPool
     {
-        public static XElement Construct(IEnumerable<Item> itemInput)
+        public static XElement Construct(IEnumerable<Item> itemInput, string publisher)
         {
             var result = new XElement("itempool");
             result.Add(ExtractionSettings.ItemInput.Select(
@@ -17,7 +17,7 @@ namespace AssessmentPackageBuilder.Common
                 .Select(
                     x =>
                         TestItem.Construct(x.Content,
-                            itemInput.First(y => y.ItemId.Equals(x.ItemId)))));
+                            ItemStimuliMapper.Map(x.Content, itemInput.First(y => y.ItemId.Equals(x.ItemId))), publisher)));
             result.Add(itemInput
                 .Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId)).Select(x => x.AssociatedStimuliId)
                 .Distinct()

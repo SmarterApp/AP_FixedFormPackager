@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Utilities\ContentAccess.cs" />
     <Compile Include="GitLab\ResourceGenerator.cs" />
+    <Compile Include="Utilities\IrtMapper.cs" />
     <Compile Include="Utilities\PathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
