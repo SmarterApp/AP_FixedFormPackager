@@ -16,7 +16,7 @@ namespace AssessmentPackageBuilder.Common
         {
             var result = new List<XElement>();
             var scoringRules = ScoringRules.Construct(ExtractionSettings.AssessmentScoring);
-            var itemPool = ItemPool.Construct(ExtractionSettings.ItemInput);
+            var itemPool = ItemPool.Construct(ExtractionSettings.ItemInput, ExtractionSettings.AssessmentInfo.Publisher);
             var testBlueprint = TestBlueprint.Construct(ExtractionSettings.ItemInput, itemPool,
                 ExtractionSettings.AssessmentInfo.UniqueId);
             var testForms = TestForm.Construct(ExtractionSettings.ItemInput, itemPool,

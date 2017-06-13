@@ -11,7 +11,7 @@ namespace AssessmentPackageBuilder.Common
 {
     public static class TestItem
     {
-        public static XElement Construct(AssessmentContent assessmentContent, Item itemInput)
+        public static XElement Construct(AssessmentContent assessmentContent, Item itemInput, string publisher)
         {
             var itemElement = assessmentContent.MainDocument.XPathSelectElement("/itemrelease/item");
             var uniqueId = $"{itemElement.Attribute("bankkey")?.Value}-{itemElement.Attribute("id")?.Value}";
@@ -33,7 +33,7 @@ namespace AssessmentPackageBuilder.Common
             }
             result.Add(assessmentContent.MetaDocument.XPathSelectElements(
                     "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
-                .Select(x => BpElementUtilities.GetBprefs(x.Value)));
+                .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)));
             result.Add(new XElement("bpref", itemInput.SegmentId));
             result.Add(itemElement.XPathSelectElements("//content[@name='language']/@value")
                 .Select(x => PoolProperty.Construct("Language", x.Value)));
