@@ -59,6 +59,8 @@
     <Compile Include="Utilities\CsvMappers\AssessmentScoringMapper.cs" />
     <Compile Include="Utilities\CsvMappers\ItemMapper.cs" />
     <Compile Include="Utilities\ExtractionSettings.cs" />
+    <Compile Include="Utilities\HashGenerator.cs" />
+    <Compile Include="Utilities\ItemStimuliMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
