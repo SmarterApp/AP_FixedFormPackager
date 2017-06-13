@@ -7,6 +7,7 @@ using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Models.Csv;
 using FixedFormPackager.Common.Utilities;
 using ItemRetriever.GitLab;
+using ItemRetriever.Utilities;
 using NLog;
 
 namespace FixedFormPackager
@@ -42,7 +43,17 @@ namespace FixedFormPackager
                     ExtractionSettings.AssessmentInfo =
                         CsvExtractor.Extract<Assessment>(options.AssessmentInput).First();
                     ExtractionSettings.ItemInput.ForEach(
-                        x => { ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}"); });
+                        x =>
+                        {
+                            ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");
+                            // If there is no scoring information provided in the input document, look for it in the item XML
+                            if (x.ItemScoringInformation.All(y => string.IsNullOrEmpty(y.MeasurementModel)))
+                            {
+                                ExtractionSettings.ItemInput[ExtractionSettings.ItemInput.FindIndex(
+                                        y => y.ItemId.Equals(x.ItemId, StringComparison.OrdinalIgnoreCase))]
+                                    .ItemScoringInformation = IrtMapper.RetrieveIrtParameters(x.ItemId);
+                            }
+                        });
 
                     var uniqueHash = HashGenerator.Hash(ExtractionSettings.AssessmentInfo.UniqueId.GetHashCode(),
                         ExtractionSettings.ItemInput.First().SegmentId.GetHashCode(),
