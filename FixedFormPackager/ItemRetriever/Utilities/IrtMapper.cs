@@ -21,14 +21,30 @@ namespace ItemRetriever.Utilities
                 Dimension = x.XPathSelectElement("./sa:IrtDimensionPurpose", sXmlNs)?.Value,
                 ScorePoints = x.XPathSelectElement("./sa:IrtScore", sXmlNs)?.Value,
                 Weight = x.XPathSelectElement("./sa:IrtWeight", sXmlNs)?.Value,
-                a = x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"a\"]/sa:Value", sXmlNs)?.Value ?? string.Empty,
-                b = x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b\"]/sa:Value", sXmlNs)?.Value ?? string.Empty,
-                b0 = x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b0\"]/sa:Value", sXmlNs)?.Value ?? string.Empty,
-                b1 = x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b1\"]/sa:Value", sXmlNs)?.Value ?? string.Empty,
-                b2 = x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b2\"]/sa:Value", sXmlNs)?.Value ?? string.Empty,
-                b3 = x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b3\"]/sa:Value", sXmlNs)?.Value ?? string.Empty,
-                b4 = x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b4\"]/sa:Value", sXmlNs)?.Value ?? string.Empty,
-                c = x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"c\"]/sa:Value", sXmlNs)?.Value ?? string.Empty
+                a =
+                    x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"a\"]/sa:Value", sXmlNs)?.Value ??
+                    string.Empty,
+                b =
+                    x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b\"]/sa:Value", sXmlNs)?.Value ??
+                    string.Empty,
+                b0 =
+                    x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b0\"]/sa:Value", sXmlNs)?.Value ??
+                    string.Empty,
+                b1 =
+                    x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b1\"]/sa:Value", sXmlNs)?.Value ??
+                    string.Empty,
+                b2 =
+                    x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b2\"]/sa:Value", sXmlNs)?.Value ??
+                    string.Empty,
+                b3 =
+                    x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b3\"]/sa:Value", sXmlNs)?.Value ??
+                    string.Empty,
+                b4 =
+                    x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"b4\"]/sa:Value", sXmlNs)?.Value ??
+                    string.Empty,
+                c =
+                    x.XPathSelectElement("./sa:IrtParameter[sa:Name/text() = \"c\"]/sa:Value", sXmlNs)?.Value ??
+                    string.Empty
             });
         }
     }

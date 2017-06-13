@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using NLog;
 
 namespace AssessmentPackageBuilder.Utilities
 {
     public static class BpElementUtilities
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         public static List<XElement> GetBprefs(string input, string publisher)
         {
             var result = new List<XElement>();

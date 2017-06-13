@@ -9,7 +9,8 @@ namespace FixedFormPackager.Common.Utilities
         public static Item Map(AssessmentContent assessmentContent, Item item)
         {
             item.AssociatedStimuliId =
-                assessmentContent.MainDocument.XPathSelectElement("./itemrelease/item/associatedpassage")?.Value ?? string.Empty;
+                assessmentContent.MainDocument.XPathSelectElement("./itemrelease/item/associatedpassage")?.Value ??
+                string.Empty;
             return item;
         }
     }
