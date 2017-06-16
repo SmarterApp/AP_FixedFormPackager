@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -42,10 +43,17 @@ namespace AssessmentPackageBuilder.Administration
 
         private static IEnumerable<string> GetBprefsForItemId(XNode itempool, string uniqueId)
         {
-            return
-                itempool.XPathSelectElement($"./testitem[identifier/@uniqueid='{uniqueId}']")
-                    .XPathSelectElements("./bpref")
-                    .Select(x => x.Value);
+            try
+            {
+                return
+                    itempool.XPathSelectElement($"./testitem[identifier/@uniqueid='{uniqueId}']")
+                        .XPathSelectElements("./bpref")
+                        .Select(x => x.Value);
+            }
+            catch (Exception) // If there was no metadata file provided with the items packaged, return an empty list
+            {
+                return new List<string>();
+            }
         }
     }
 }

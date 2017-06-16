@@ -11,6 +11,10 @@ namespace ItemRetriever.Utilities
         public static IEnumerable<ItemScoring> RetrieveIrtParameters(string itemId)
         {
             var document = ContentAccess.RetrieveDocument($"Item-{itemId}");
+            if (document.MetaDocument == null)
+            {
+                return new List<ItemScoring>();
+            }
             var sXmlNs = new XmlNamespaceManager(new NameTable());
             sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
             var irt = document.MetaDocument.XPathSelectElements(
