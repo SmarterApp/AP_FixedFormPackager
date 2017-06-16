@@ -4,13 +4,16 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using AssessmentPackageBuilder.Utilities;
+using FixedFormPackager.Common.Extensions;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Models.Csv;
+using NLog;
 
 namespace AssessmentPackageBuilder.Common
 {
     public static class TestItem
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public static XElement Construct(AssessmentContent assessmentContent, Item itemInput, string publisher)
         {
             var itemElement = assessmentContent.MainDocument.XPathSelectElement("/itemrelease/item");
@@ -22,18 +25,33 @@ namespace AssessmentPackageBuilder.Common
                 new XAttribute("itemtype", itemElement.Attribute("format")?.Value),
                 Identifier.Construct(uniqueId, itemElement.Attribute("version")?.Value),
                 PoolProperty.Construct("--ITEMTYPE--", itemElement.Attribute("format")?.Value),
-                PoolProperty.Construct("Language", "ENU"),
-                PoolProperty.Construct("Grade",
-                    itemElement.XPathSelectElement("//attrib[@attid='itm_att_Grade']/val").Value));
-            var sXmlNs = new XmlNamespaceManager(new NameTable());
-            sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
+                PoolProperty.Construct("Language", "ENU"));
+            var grade = itemElement.XPathSelectElement("//attrib[@attid='itm_att_Grade']/val")?.Value;
+            if (grade != null)
+            {
+                result.Add(
+                    PoolProperty.Construct("Grade", grade));
+            }
+            else
+            {
+                Logger.LogError(new ErrorReportItem
+                {
+                    Location = $"Test Item Construction: {uniqueId}",
+                    Severity = LogLevel.Warn
+                }, "Item contains no 'itm_att_Grade' element");
+            }
             if (!string.IsNullOrEmpty(itemInput.AssociatedStimuliId))
             {
                 result.Add(new XElement("passageref", itemInput.AssociatedStimuliId));
             }
-            result.Add(assessmentContent.MetaDocument.XPathSelectElements(
-                    "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
-                .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)));
+            if (assessmentContent.MetaDocument != null)
+            {
+                var sXmlNs = new XmlNamespaceManager(new NameTable());
+                sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
+                result.Add(assessmentContent.MetaDocument.XPathSelectElements(
+                        "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
+                    .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)));
+            }
             result.Add(new XElement("bpref", itemInput.SegmentId));
             result.Add(itemElement.XPathSelectElements("//content[@name='language']/@value")
                 .Select(x => PoolProperty.Construct("Language", x.Value)));

@@ -18,10 +18,10 @@ namespace AssessmentPackageBuilder.Common
             var segments =
                 bprefs.First(x => x.Key).Select(x => BpElement.Construct("segment", x.Value.ToString(), x.Key));
             var strands =
-                bprefs.First(x => !x.Key)
+                bprefs.FirstOrDefault(x => !x.Key)?
                     .Where(x => !x.Key.Contains('|'))
                     .Select(x => BpElement.Construct("strand", x.Value.ToString(), x.Key));
-            var contentLevels = bprefs.First(x => !x.Key)
+            var contentLevels = bprefs.FirstOrDefault(x => !x.Key)?
                 .Where(x => x.Key.Contains('|'))
                 .Select(x => BpElement.Construct("contentlevel", x.Value.ToString(), x.Key));
             result.Add(BpElement.Construct("test", bprefs.First(x => x.Key).Sum(x => x.Value).ToString(), assessmentId));
