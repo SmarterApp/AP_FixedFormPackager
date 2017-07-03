@@ -59,20 +59,34 @@ namespace FixedFormPackager
                         ExtractionSettings.ItemInput.First().SegmentId.GetHashCode(),
                         ExtractionSettings.ItemInput.First().FormPartitionId.GetHashCode());
 
+
                     Logger.Debug($"Generated unique hash: {uniqueHash}");
 
-                    ExtractionSettings.AssessmentInfo.UniqueId += $"_{uniqueHash}";
+                    ExtractionSettings.AssessmentInfo.UniqueId += $"{uniqueHash}";
                     ExtractionSettings.ItemInput = ExtractionSettings.ItemInput.Select(x => new Item
                     {
                         ItemId = x.ItemId,
                         AssociatedStimuliId = x.AssociatedStimuliId,
-                        FormPartitionId = x.FormPartitionId + $"_{uniqueHash}",
+                        FormPartitionId = x.FormPartitionId + $"{uniqueHash}",
                         FormPartitionPosition = x.FormPartitionPosition,
                         FormPosition = x.FormPosition,
                         ItemScoringInformation = x.ItemScoringInformation,
-                        SegmentId = x.SegmentId + $"_{uniqueHash}",
+                        SegmentId = x.SegmentId + $"{uniqueHash}",
                         SegmentPosition = x.SegmentPosition
                     }).ToList();
+                    // Validate that the segment unique IDs and assessment IDs are either the same or different depending on # of segments
+                    var segmentIds = ExtractionSettings.ItemInput.Select(x => x.SegmentId).Distinct().ToList();
+                    if(segmentIds.Count() > 1 && segmentIds.Any(x => x.Equals(ExtractionSettings.AssessmentInfo.UniqueId, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        throw new Exception("Identifiers of segments and assessments must not match in multi-segmented assessments");
+
+                    }
+                    if (segmentIds.Count() == 1 &&
+                               !segmentIds.First()
+                                   .Equals(ExtractionSettings.AssessmentInfo.UniqueId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        throw new Exception("Identifiers of segments and assessments must match in single-segmented assessments");
+                    }
                     var result = TestSpecification.Construct();
                     result.ToList().ForEach(x =>
                         x.Save(

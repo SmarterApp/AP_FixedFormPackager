@@ -9,6 +9,7 @@ using ItemRetriever.Utilities;
 using LibGit2Sharp;
 using LibGit2Sharp.Handlers;
 using NLog;
+using LogLevel = NLog.LogLevel;
 
 namespace ItemRetriever.GitLab
 {
@@ -83,6 +84,7 @@ namespace ItemRetriever.GitLab
                 {"SBAC content package format", $"{locationBase}/{identifier}.git" },
                 {"IAT item format", $"{locationBase}/{identifier.Split('-').LastOrDefault() ?? string.Empty}.git" },
                 {"No bank key", $"{locationBase}/Item-{identifier.Split('-').LastOrDefault() ?? string.Empty}.git" }
+                   // Potentially adding item type mappings for IAT
             };
             return potentialItemFormats.Values.FirstOrDefault(x =>
             {
@@ -92,8 +94,14 @@ namespace ItemRetriever.GitLab
                         GenerateCredentials(gitLabInfo));
                     return true;
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
+                    Logger.LogError(new ErrorReportItem
+                    {
+                        Location = "Resource Generator - locate repository",
+                        Severity = LogLevel.Fatal
+                    },
+                    $"An error occurred when attempting to resolve remote repository references: {exception.Message}");
                     return false;
                 }
             });
