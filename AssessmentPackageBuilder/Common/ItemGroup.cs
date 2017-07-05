@@ -18,6 +18,7 @@ namespace AssessmentPackageBuilder.Common
 
         private static IEnumerable<XElement> IdentifierAndResources(IList<Item> items, string partitionIdentifier)
         {
+            var fullItemId = items.First().ItemId.Contains('-') ? items.First().ItemId : $"187-{items.First().ItemId}";
             var result = new List<XElement>();
             if (!string.IsNullOrEmpty(items.First().AssociatedStimuliId))
             {
@@ -30,12 +31,12 @@ namespace AssessmentPackageBuilder.Common
             else
             {
                 result.Add(new XElement("identifier",
-                    new XAttribute("uniqueid", $"{partitionIdentifier}:I-{items.First().ItemId}"),
-                    new XAttribute("name", $"{partitionIdentifier}:I-{items.First().ItemId}"),
+                    new XAttribute("uniqueid", $"{partitionIdentifier}:I-{fullItemId}"),
+                    new XAttribute("name", $"{partitionIdentifier}:I-{fullItemId}"),
                     new XAttribute("version", "1")));
             }
             result.AddRange(items.Select(x => new XElement("groupitem",
-                new XAttribute("itemid", x.ItemId),
+                new XAttribute("itemid", x.ItemId.Contains('-') ? x.ItemId : $"187-{x.ItemId}"),
                 new XAttribute("formposition", x.FormPosition),
                 new XAttribute("groupposition", x.FormPosition),
                 new XAttribute("adminrequired", "false"),
