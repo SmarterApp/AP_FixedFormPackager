@@ -14,6 +14,7 @@ namespace AssessmentPackageBuilder.Common
     public static class TestItem
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public static XElement Construct(AssessmentContent assessmentContent, Item itemInput, string publisher)
         {
             var itemElement = assessmentContent.MainDocument.XPathSelectElement("/itemrelease/item");

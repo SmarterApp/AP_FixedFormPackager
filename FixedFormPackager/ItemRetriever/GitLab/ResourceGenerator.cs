@@ -7,7 +7,6 @@ using FixedFormPackager.Common.Extensions;
 using FixedFormPackager.Common.Models;
 using ItemRetriever.Utilities;
 using LibGit2Sharp;
-using LibGit2Sharp.Handlers;
 using NLog;
 using LogLevel = NLog.LogLevel;
 
@@ -79,12 +78,12 @@ namespace ItemRetriever.GitLab
                 default: // This  is an error
                     return null;
             }
-               var potentialItemFormats = new Dictionary<string, string>
+            var potentialItemFormats = new Dictionary<string, string>
             {
-                {"SBAC content package format", $"{locationBase}/{identifier}.git" },
-                {"IAT item format", $"{locationBase}/{identifier.Split('-').LastOrDefault() ?? string.Empty}.git" },
-                {"No bank key", $"{locationBase}/Item-{identifier.Split('-').LastOrDefault() ?? string.Empty}.git" }
-                   // Potentially adding item type mappings for IAT
+                {"SBAC content package format", $"{locationBase}/{identifier}.git"},
+                {"IAT item format", $"{locationBase}/{identifier.Split('-').LastOrDefault() ?? string.Empty}.git"},
+                {"No bank key", $"{locationBase}/Item-{identifier.Split('-').LastOrDefault() ?? string.Empty}.git"}
+                // Potentially adding item type mappings for IAT
             };
             return potentialItemFormats.Values.FirstOrDefault(x =>
             {
@@ -97,11 +96,11 @@ namespace ItemRetriever.GitLab
                 catch (Exception exception)
                 {
                     Logger.LogError(new ErrorReportItem
-                    {
-                        Location = "Resource Generator - locate repository",
-                        Severity = LogLevel.Fatal
-                    },
-                    $"An error occurred when attempting to resolve remote repository references: {exception.Message}");
+                        {
+                            Location = "Resource Generator - locate repository",
+                            Severity = LogLevel.Fatal
+                        },
+                        $"An error occurred when attempting to resolve remote repository references: {exception.Message}");
                     return false;
                 }
             });

@@ -61,7 +61,10 @@ namespace AssessmentPackageBuilder.Common
                                 @"^(\(" + ExtractionSettings.AssessmentInfo?.Publisher + @"\))(.*)$")
                             .Cast<Match>().FirstOrDefault(x => x.Success)?.Groups.Cast<Group>()
                             .LastOrDefault()?.Value ?? ExtractionSettings.AssessmentInfo.UniqueId),
-                    new XAttribute("label", ExtractionSettings.AssessmentInfo.UniqueId),
+                    new XAttribute("label",
+                        string.IsNullOrEmpty(ExtractionSettings.AssessmentInfo.Label)
+                            ? ExtractionSettings.AssessmentInfo.UniqueId
+                            : ExtractionSettings.AssessmentInfo.Label),
                     new XAttribute("version", "1")),
                 new XElement("property",
                     new XAttribute("name", "subject"),

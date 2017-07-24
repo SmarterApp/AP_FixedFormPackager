@@ -8,8 +8,8 @@ namespace ItemRetriever.Utilities
 {
     public static class ContentAccess
     {
-
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public static AssessmentContent RetrieveDocument(string identifier)
         {
             var content = new AssessmentContent();
@@ -26,11 +26,11 @@ namespace ItemRetriever.Utilities
             catch (IOException)
             {
                 Logger.LogError(new ErrorReportItem
-                {
-                    Location = "Retrieve Document metadata.xml",
-                    Severity = LogLevel.Warn
-                },
-                "Retrieved item does not contain a metadata.xml file!");
+                    {
+                        Location = "Retrieve Document metadata.xml",
+                        Severity = LogLevel.Warn
+                    },
+                    "Retrieved item does not contain a metadata.xml file!");
             }
             content.BasePath = basePath;
             return content;
