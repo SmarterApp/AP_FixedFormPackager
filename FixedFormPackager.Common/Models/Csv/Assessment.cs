@@ -4,6 +4,7 @@
     {
         public string UniqueId { get; set; }
         public string Publisher { get; set; }
+        public string Label { get; set; }
         public string Subject { get; set; }
         public string Grade { get; set; }
         public string AssessmentType { get; set; }

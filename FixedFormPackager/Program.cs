@@ -76,16 +76,20 @@ namespace FixedFormPackager
                     }).ToList();
                     // Validate that the segment unique IDs and assessment IDs are either the same or different depending on # of segments
                     var segmentIds = ExtractionSettings.ItemInput.Select(x => x.SegmentId).Distinct().ToList();
-                    if(segmentIds.Count() > 1 && segmentIds.Any(x => x.Equals(ExtractionSettings.AssessmentInfo.UniqueId, StringComparison.OrdinalIgnoreCase)))
+                    if (segmentIds.Count() > 1 &&
+                        segmentIds.Any(
+                            x =>
+                                x.Equals(ExtractionSettings.AssessmentInfo.UniqueId, StringComparison.OrdinalIgnoreCase)))
                     {
-                        throw new Exception("Identifiers of segments and assessments must not match in multi-segmented assessments");
-
+                        throw new Exception(
+                            "Identifiers of segments and assessments must not match in multi-segmented assessments. Please adjust the assessment and/or item inputs.");
                     }
                     if (segmentIds.Count() == 1 &&
-                               !segmentIds.First()
-                                   .Equals(ExtractionSettings.AssessmentInfo.UniqueId, StringComparison.OrdinalIgnoreCase))
+                        !segmentIds.First()
+                            .Equals(ExtractionSettings.AssessmentInfo.UniqueId, StringComparison.OrdinalIgnoreCase))
                     {
-                        throw new Exception("Identifiers of segments and assessments must match in single-segmented assessments");
+                        throw new Exception(
+                            "Identifiers of segments and assessments must match in single-segmented assessments. Please adjust the assessment and/or item inputs.");
                     }
                     var result = TestSpecification.Construct();
                     result.ToList().ForEach(x =>
