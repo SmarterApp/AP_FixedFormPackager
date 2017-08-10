@@ -11,7 +11,7 @@ namespace FixedFormPackager.Common.Models.Csv
         public string FormPosition { get; set; }
         public string SegmentId { get; set; }
         public string SegmentPosition { get; set; }
-        public IEnumerable<ItemStandard> Standards { get; set; }
+        public IEnumerable<string> Standards { get; set; }
         public IEnumerable<ItemScoring> ItemScoringInformation { get; set; } = new List<ItemScoring>();
     }
 }

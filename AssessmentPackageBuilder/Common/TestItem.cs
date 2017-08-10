@@ -47,7 +47,13 @@ namespace AssessmentPackageBuilder.Common
             {
                 result.Add(new XElement("passageref", itemInput.AssociatedStimuliId));
             }
-            if (assessmentContent.MetaDocument != null)
+
+            var itemStandards = ExtractionSettings.ItemInput
+                .FirstOrDefault(x => x.ItemId.Equals(itemInput.ItemId, StringComparison.OrdinalIgnoreCase))?
+                .Standards?
+                .Where(x => !string.IsNullOrEmpty(x)).ToList();
+
+            if (assessmentContent.MetaDocument != null && (!itemStandards?.Any() ?? false))
             {
                 var sXmlNs = new XmlNamespaceManager(new NameTable());
                 sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
@@ -55,13 +61,10 @@ namespace AssessmentPackageBuilder.Common
                         "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
                     .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)));
             }
-            else
+            else if (itemStandards?.Any() ?? false)
             {
-                ExtractionSettings.ItemInput
-                    .FirstOrDefault(x => x.ItemId.Equals(itemInput.ItemId, StringComparison.OrdinalIgnoreCase))?
-                    .Standards
-                    .Where(x => !string.IsNullOrEmpty(x.Standard))
-                    .Select(x => BpElementUtilities.GetBprefs(x.Standard, publisher))
+                itemStandards
+                    .Select(x => BpElementUtilities.GetBprefs(x, publisher))
                     .ToList()
                     .ForEach(x => result.Add(x));
             }

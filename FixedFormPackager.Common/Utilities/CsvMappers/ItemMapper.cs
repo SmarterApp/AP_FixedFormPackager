@@ -20,11 +20,9 @@ namespace FixedFormPackager.Common.Utilities.CsvMappers
                 (row as CsvReader)?.FieldHeaders
                 .Where(header => Regex.IsMatch(header, @"^Standard_\d$"))
                 .GroupBy(x => x.Last())
-                .Select(x => new ItemStandard
-                {
-                    Standard = row.GetField(x.FirstOrDefault(y =>
-                                                y.Equals($"Standard_{x.Key}")) ?? string.Empty)
-                }).ToList()
+                .Select(x => row.GetField(x.FirstOrDefault(y =>
+                                              y.Equals($"Standard_{x.Key}")) ?? string.Empty)
+                ).ToList()
             );
             Map(m => m.ItemScoringInformation).ConvertUsing(row =>
                 (row as CsvReader)?.FieldHeaders

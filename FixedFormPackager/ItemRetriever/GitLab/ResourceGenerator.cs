@@ -63,10 +63,11 @@ namespace ItemRetriever.GitLab
                 catch (Exception ex)
                 {
                     Logger.LogError(new ErrorReportItem
-                    {
-                        Location = "Resource Generator - pull repository",
-                        Severity = LogLevel.Error
-                    }, $"An error occurred attempting to connect to the remote GitLab instance. Execution will attempt to continue with local resources. Exception: {ex.Message}");
+                        {
+                            Location = "Resource Generator - pull repository",
+                            Severity = LogLevel.Error
+                        },
+                        $"An error occurred attempting to connect to the remote GitLab instance. Execution will attempt to continue with local resources. Exception: {ex.Message}");
                 }
             }
             return remoteRepoPath?.Split('/').LastOrDefault()?.Replace(".git", string.Empty);
