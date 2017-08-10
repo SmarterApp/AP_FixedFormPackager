@@ -72,7 +72,8 @@ namespace FixedFormPackager
                         FormPosition = x.FormPosition,
                         ItemScoringInformation = x.ItemScoringInformation,
                         SegmentId = x.SegmentId + $"{uniqueHash}",
-                        SegmentPosition = x.SegmentPosition
+                        SegmentPosition = x.SegmentPosition,
+                        Standards = x.Standards
                     }).ToList();
                     // Validate that the segment unique IDs and assessment IDs are either the same or different depending on # of segments
                     var segmentIds = ExtractionSettings.ItemInput.Select(x => x.SegmentId).Distinct().ToList();

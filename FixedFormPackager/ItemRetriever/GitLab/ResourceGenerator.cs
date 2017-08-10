@@ -52,13 +52,24 @@ namespace ItemRetriever.GitLab
                     Type = identifier.Contains("Item") ? "Item" : "Stimulus",
                     UniqueId = identifier
                 }, $"Local repository found. Pulling {resourcePath.Split('\\').LastOrDefault() ?? string.Empty}");
-                Commands.Pull(repository,
-                    new Signature(new Identity(
-                            ConfigurationManager.AppSettings["userName"],
-                            ConfigurationManager.AppSettings["userEmail"])
-                        , DateTimeOffset.Now), pullOptions);
+                try
+                {
+                    Commands.Pull(repository,
+                        new Signature(new Identity(
+                                ConfigurationManager.AppSettings["userName"],
+                                ConfigurationManager.AppSettings["userEmail"])
+                            , DateTimeOffset.Now), pullOptions);
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogError(new ErrorReportItem
+                    {
+                        Location = "Resource Generator - pull repository",
+                        Severity = LogLevel.Error
+                    }, $"An error occurred attempting to connect to the remote GitLab instance. Execution will attempt to continue with local resources. Exception: {ex.Message}");
+                }
             }
-            return remoteRepoPath.Split('/').LastOrDefault()?.Replace(".git", string.Empty);
+            return remoteRepoPath?.Split('/').LastOrDefault()?.Replace(".git", string.Empty);
         }
 
         private static string GenerateValidRemoteRepositoryPath(GitLabInfo gitLabInfo, string identifier)
@@ -98,7 +109,7 @@ namespace ItemRetriever.GitLab
                     Logger.LogError(new ErrorReportItem
                         {
                             Location = "Resource Generator - locate repository",
-                            Severity = LogLevel.Fatal
+                            Severity = LogLevel.Error
                         },
                         $"An error occurred when attempting to resolve remote repository references: {exception.Message}");
                     return false;

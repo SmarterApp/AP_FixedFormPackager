@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
@@ -7,6 +8,7 @@ using AssessmentPackageBuilder.Utilities;
 using FixedFormPackager.Common.Extensions;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Models.Csv;
+using FixedFormPackager.Common.Utilities;
 using NLog;
 
 namespace AssessmentPackageBuilder.Common
@@ -52,6 +54,16 @@ namespace AssessmentPackageBuilder.Common
                 result.Add(assessmentContent.MetaDocument.XPathSelectElements(
                         "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
                     .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)));
+            }
+            else
+            {
+                ExtractionSettings.ItemInput
+                    .FirstOrDefault(x => x.ItemId.Equals(itemInput.ItemId, StringComparison.OrdinalIgnoreCase))?
+                    .Standards
+                    .Where(x => !string.IsNullOrEmpty(x.Standard))
+                    .Select(x => BpElementUtilities.GetBprefs(x.Standard, publisher))
+                    .ToList()
+                    .ForEach(x => result.Add(x));
             }
             result.Add(new XElement("bpref", itemInput.SegmentId));
             result.Add(itemElement.XPathSelectElements("//content[@name='language']/@value")

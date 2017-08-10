@@ -16,9 +16,20 @@ namespace FixedFormPackager.Common.Utilities.CsvMappers
             Map(m => m.FormPosition).Name("FormPosition").Index(3);
             Map(m => m.SegmentId).Name("SegmentId").Index(4);
             Map(m => m.SegmentPosition).Name("SegmentPosition").Index(5);
+            Map(m => m.Standards).ConvertUsing(row =>
+                (row as CsvReader)?.FieldHeaders
+                .Where(header => Regex.IsMatch(header, @"^Standard_\d$"))
+                .GroupBy(x => x.Last())
+                .Select(x => new ItemStandard
+                {
+                    Standard = row.GetField(x.FirstOrDefault(y =>
+                                                y.Equals($"Standard_{x.Key}")) ?? string.Empty)
+                }).ToList()
+            );
             Map(m => m.ItemScoringInformation).ConvertUsing(row =>
                 (row as CsvReader)?.FieldHeaders
-                .Where(header => Regex.IsMatch(header, @"^.+\d$"))
+                .Where(header => Regex.IsMatch(header, @"^.+_\d$")
+                                 && !Regex.IsMatch(header, @"^Standard_\d$"))
                 .GroupBy(x => x.Last())
                 .Select(x => new ItemScoring
                 {

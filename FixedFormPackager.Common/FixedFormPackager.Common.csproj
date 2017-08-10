@@ -48,6 +48,7 @@
     <Compile Include="Models\Csv\AssessmentScoringComputationRuleParameter.cs" />
     <Compile Include="Models\Csv\AssessmentScoringParameter.cs" />
     <Compile Include="Models\Csv\AssessmentScoringComputationRuleParameterProperty.cs" />
+    <Compile Include="Models\Csv\ItemStandard.cs" />
     <Compile Include="Models\ErrorReportItem.cs" />
     <Compile Include="Models\GitLabInfo.cs" />
     <Compile Include="Models\Csv\Item.cs" />
