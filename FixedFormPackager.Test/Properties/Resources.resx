@@ -133,21 +133,26 @@
   <data name="NLog2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NLog.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <!--
   <data name="ProcessSmarterTestPackage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProcessSmarterTestPackage.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  
   <data name="ProcessSmarterTestPackage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProcessSmarterTestPackage.pdb;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  
   <data name="SmarterTestPackage_Common" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SmarterTestPackage.Common.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SmarterTestPackage_Common1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SmarterTestPackage.Common.pdb;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  
   <data name="TabulateSmarterTestAdminPackage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabulateSmarterTestAdminPackage.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+ 
   <data name="TabulateSmarterTestAdminPackage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabulateSmarterTestAdminPackage.pdb;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -157,6 +162,7 @@
   <data name="TabulateSmarterTestAdminPackage_exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabulateSmarterTestAdminPackage.exe.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  -->
   <data name="TabulateSmarterTestAdminPackage_vshost_exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabulateSmarterTestAdminPackage.vshost.exe.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -166,9 +172,11 @@
   <data name="TabulateSmarterTestPackage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabulateSmarterTestPackage.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <!--
   <data name="TabulateSmarterTestPackage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabulateSmarterTestPackage.pdb;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  -->
   <data name="TabulateSmarterTestPackage_exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabulateSmarterTestPackage.exe.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -184,10 +192,13 @@
   <data name="test" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\test.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <!--
   <data name="ValidateSmarterTestPackage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ValidateSmarterTestPackage.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+ 
   <data name="ValidateSmarterTestPackage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ValidateSmarterTestPackage.pdb;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  -->
 </root>

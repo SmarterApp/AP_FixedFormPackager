@@ -101,37 +101,10 @@
     <None Include="Resources\NLog.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ProcessSmarterTestPackage.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProcessSmarterTestPackage.pdb" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SmarterTestPackage.Common.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SmarterTestPackage.Common.pdb" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TabulateSmarterTestAdminPackage.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TabulateSmarterTestAdminPackage.pdb" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\TabulateSmarterTestPackage.exe" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TabulateSmarterTestPackage.pdb" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\TabulateSmarterTestPackage.vshost.exe" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ValidateSmarterTestPackage.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ValidateSmarterTestPackage.pdb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\test.txt" />
