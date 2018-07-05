@@ -22,11 +22,12 @@ namespace AssessmentPackageBuilder.Common
             var result = new List<XElement>();
             if (!string.IsNullOrEmpty(items.First().AssociatedStimuliId))
             {
-                result.Add(new XElement("passageref", items.First().AssociatedStimuliId));
                 result.Add(new XElement("identifier",
                     new XAttribute("uniqueid", $"{partitionIdentifier}:G-{items.First().AssociatedStimuliId}"),
                     new XAttribute("name", $"{partitionIdentifier}:G-{items.First().AssociatedStimuliId}"),
                     new XAttribute("version", "1")));
+                result.Add(new XElement("passageref", items.First().AssociatedStimuliId));
+
             }
             else
             {

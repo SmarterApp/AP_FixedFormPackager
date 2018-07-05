@@ -24,10 +24,25 @@ namespace AssessmentPackageBuilder.Common
                 new XAttribute("filename",
                     $"item-{uniqueId}.xml"),
                 new XAttribute("itemtype", itemElement.Attribute("format")?.Value),
-                Identifier.Construct(uniqueId, itemElement.Attribute("version")?.Value),
-                PoolProperty.Construct("--ITEMTYPE--", itemElement.Attribute("format")?.Value),
-                PoolProperty.Construct("Language", "ENU"));
+                Identifier.Construct(uniqueId, itemElement.Attribute("version")?.Value));
             var grade = itemElement.XPathSelectElement("//attrib[@attid='itm_att_Grade']/val")?.Value;
+
+            result.Add(new XElement("bpref", itemInput.SegmentId));
+            
+            if (assessmentContent.MetaDocument != null)
+            {
+                var sXmlNs = new XmlNamespaceManager(new NameTable());
+                sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
+                result.Add(assessmentContent.MetaDocument.XPathSelectElements(
+                        "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
+                    .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)));
+            }
+            if (!string.IsNullOrEmpty(itemInput.AssociatedStimuliId))
+            {
+                result.Add(new XElement("passageref", itemInput.AssociatedStimuliId));
+            }
+            result.Add(PoolProperty.Construct("--ITEMTYPE--", itemElement.Attribute("format")?.Value));
+            result.Add(PoolProperty.Construct("Language", "ENU"));
             if (grade != null)
             {
                 result.Add(
@@ -41,19 +56,6 @@ namespace AssessmentPackageBuilder.Common
                     Severity = LogLevel.Warn
                 }, "Item contains no 'itm_att_Grade' element");
             }
-            if (!string.IsNullOrEmpty(itemInput.AssociatedStimuliId))
-            {
-                result.Add(new XElement("passageref", itemInput.AssociatedStimuliId));
-            }
-            if (assessmentContent.MetaDocument != null)
-            {
-                var sXmlNs = new XmlNamespaceManager(new NameTable());
-                sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
-                result.Add(assessmentContent.MetaDocument.XPathSelectElements(
-                        "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
-                    .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)));
-            }
-            result.Add(new XElement("bpref", itemInput.SegmentId));
             result.Add(itemElement.XPathSelectElements("//content[@name='language']/@value")
                 .Select(x => PoolProperty.Construct("Language", x.Value)));
             result.Add(ConstructItemScoringNodes(itemInput));
