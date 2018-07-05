@@ -52,7 +52,7 @@ namespace AssessmentPackageBuilder.Common
             return new XElement("testspecification",
                 new XAttribute("purpose", purpose),
                 new XAttribute("publisher", ExtractionSettings.AssessmentInfo.Publisher),
-                new XAttribute("publishdate", DateTime.Now.ToString("MMM dd yyyy h:mm tt")),
+                new XAttribute("publishdate", DateTime.Now.ToString("MMM dd yyyy h:mmtt")),
                 new XAttribute("version", "1.0"),
                 new XElement("identifier",
                     new XAttribute("uniqueid", ExtractionSettings.AssessmentInfo.UniqueId),

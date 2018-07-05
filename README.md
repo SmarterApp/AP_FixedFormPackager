@@ -28,6 +28,8 @@ This input file contains item-level details about the test packages. It has seve
 •	FormPosition The position of the item within its form and partition. This defines the order in which the items will be presented. (Ex. 2)
 •	SegmentId The unique identifier of the segment to which the item belongs. In single-segmented assessments, this value must match the test ID given in the assessment CSV input. In multi-segmented assessments, the opposite is true – this ID in that case must NOT match the test ID. (Ex. (SBAC_PT)SBAC-IRP-Perf-MATH-11-Summer-2015-2016)
 •	SegmentPosition The position of the segment in relation to any other segments in the assessment. Like the FormPartitionId and FormPartitionPosition, values in this field must agree with the SegmentId. (ex. 1)
+
+
 Scoring Information for Items
 
 The following fields are also part of the item input. Each item may have one or more sets of these fields and values for them will be added as separate node sets when the assessment is created. This is done by convention – the grouping of relevant values accomplished by convention. All values in this space are followed by an underscore and then the grouping identifier of the property. For example, MeasurementModel_1 refers to the measurement model for an itemscoredimension that ends up as a sub-node of a testitem in the itempool of both Administration and Scoring packages. If the item requires more than one itemscoredimension, additional sets may be specified by repeating the entire group of column headers below with the next consecutive integer grouping ID (Ex. MeasurementModel_2, ScorePoints_2, … Etc.) If no information is provided in the input file, the application will attempt to generate scoring information by referencing the metadata.xml file for the item.
@@ -52,6 +54,7 @@ Assessment Information
 The following fields appear in the assessment CSV document:
 
 •	UniqueId Note this MUST match the segment outlined in the item input for single-segmented assessments and must NOT match in the case of multi-segmented assessments (Ex. (SBAC_PT)SBAC-IRP-Perf-MATH-11-Summer-2015-2016)
+•	Label (Ex. Grade 3 ELA)
 •	Publisher (Ex. SBAC)	
 •	Subject	(Ex. ELA)
 •	Grade (Ex. 3)
