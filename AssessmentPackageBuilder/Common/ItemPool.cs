@@ -18,7 +18,7 @@ namespace AssessmentPackageBuilder.Common
                     x =>
                         TestItem.Construct(x.Content,
                             ItemStimuliMapper.Map(x.Content, itemInput.First(y => y.ItemId.Equals(x.ItemId))), publisher)));
-            result.Add(itemInput
+            result.AddFirst(itemInput
                 .Where(x => !string.IsNullOrEmpty(x.AssociatedStimuliId)).Select(x => x.AssociatedStimuliId)
                 .Distinct()
                 .Select(x => new XElement("passage",
