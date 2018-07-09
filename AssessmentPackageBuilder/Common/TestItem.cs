@@ -35,7 +35,7 @@ namespace AssessmentPackageBuilder.Common
                 sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
                 result.Add(assessmentContent.MetaDocument.XPathSelectElements(
                         "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
-                    .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)));
+                    .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)).First());
             }
             if (!string.IsNullOrEmpty(itemInput.AssociatedStimuliId))
             {

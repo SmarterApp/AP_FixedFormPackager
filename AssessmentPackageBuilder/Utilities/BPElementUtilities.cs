@@ -6,6 +6,7 @@ namespace AssessmentPackageBuilder.Utilities
 {
     public static class BpElementUtilities
     {
+
         public static List<XElement> GetBprefs(string input, string publisher)
         {
             var result = new List<XElement>();
