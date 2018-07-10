@@ -28,6 +28,7 @@ namespace FixedFormPackager.Common.Utilities.CsvMappers
                     Dimension = row.GetField(x.FirstOrDefault(y => y.Equals($"Dimension_{x.Key}")) ?? string.Empty),
                     Weight = row.GetField(x.FirstOrDefault(y => y.Equals($"Weight_{x.Key}")) ?? string.Empty),
                     a = row.GetField(x.FirstOrDefault(y => y.Equals($"a_{x.Key}")) ?? string.Empty),
+                    b = row.GetField(x.FirstOrDefault(y => y.Equals($"b_{x.Key}")) ?? string.Empty),
                     b0 = row.GetField(x.FirstOrDefault(y => y.Equals($"b0_{x.Key}")) ?? string.Empty),
                     b1 = row.GetField(x.FirstOrDefault(y => y.Equals($"b1_{x.Key}")) ?? string.Empty),
                     b2 = row.GetField(x.FirstOrDefault(y => y.Equals($"b2_{x.Key}")) ?? string.Empty),
