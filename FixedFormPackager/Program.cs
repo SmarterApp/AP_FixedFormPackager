@@ -55,23 +55,26 @@ namespace FixedFormPackager
                             }
                         });
 
-                    var uniqueHash = HashGenerator.Hash(ExtractionSettings.AssessmentInfo.UniqueId.GetHashCode(),
+                    /*var uniqueHash = HashGenerator.Hash(ExtractionSettings.AssessmentInfo.UniqueId.GetHashCode(),
                         ExtractionSettings.ItemInput.First().SegmentId.GetHashCode(),
                         ExtractionSettings.ItemInput.First().FormPartitionId.GetHashCode());
+                        */
 
 
-                    Logger.Debug($"Generated unique hash: {uniqueHash}");
+                    //Logger.Debug($"Generated unique hash: {uniqueHash}");
 
-                    ExtractionSettings.AssessmentInfo.UniqueId += $"{uniqueHash}";
+                    //ExtractionSettings.AssessmentInfo.UniqueId += $"{uniqueHash}";
                     ExtractionSettings.ItemInput = ExtractionSettings.ItemInput.Select(x => new Item
                     {
                         ItemId = x.ItemId,
                         AssociatedStimuliId = x.AssociatedStimuliId,
-                        FormPartitionId = x.FormPartitionId + $"{uniqueHash}",
+                        //FormPartitionId = x.FormPartitionId + $"{uniqueHash}",
+                        FormPartitionId = x.FormPartitionId,
                         FormPartitionPosition = x.FormPartitionPosition,
                         FormPosition = x.FormPosition,
                         ItemScoringInformation = x.ItemScoringInformation,
-                        SegmentId = x.SegmentId + $"{uniqueHash}",
+                        //SegmentId = x.SegmentId + $"{uniqueHash}",
+                        SegmentId = x.SegmentId,
                         SegmentPosition = x.SegmentPosition
                     }).ToList();
                     // Validate that the segment unique IDs and assessment IDs are either the same or different depending on # of segments

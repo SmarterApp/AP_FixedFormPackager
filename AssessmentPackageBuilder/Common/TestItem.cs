@@ -39,7 +39,11 @@ namespace AssessmentPackageBuilder.Common
             }
             if (!string.IsNullOrEmpty(itemInput.AssociatedStimuliId))
             {
-                result.Add(new XElement("passageref", itemInput.AssociatedStimuliId));
+                var bank = itemElement.Attribute("bankkey")?.Value;
+                var stimuliId = itemInput.AssociatedStimuliId.Contains(bank+"-")
+                    ? itemInput.AssociatedStimuliId
+                    : bank + "-" + itemInput.AssociatedStimuliId;
+                result.Add(new XElement("passageref", stimuliId));
             }
             result.Add(PoolProperty.Construct("--ITEMTYPE--", itemElement.Attribute("format")?.Value));
             result.Add(PoolProperty.Construct("Language", "ENU"));

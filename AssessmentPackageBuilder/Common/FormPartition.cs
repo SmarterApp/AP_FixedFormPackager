@@ -4,14 +4,45 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using FixedFormPackager.Common.Models.Csv;
+using NLog;
 
 namespace AssessmentPackageBuilder.Common
 {
     public static class FormPartition
     {
+        //private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public static IEnumerable<XElement> Construct(IList<Item> items,
             XElement itemPool, Assessment assessment)
         {
+            var formPartions = items.GroupBy(x => x.FormPartitionId);
+            var formPartitionElements = new List<XElement>();
+            foreach (var formpartition in formPartions)
+            {                
+                var itemgroups = formpartition.GroupBy(x => x.FormPartitionPosition).ToList();
+
+                var formpartitionelement = new XElement("formpartition",
+                    new XElement("identifier",
+                        new XAttribute("uniqueid", itemgroups.First().First().FormPartitionId),
+                        new XAttribute("version", "1"),
+                        new XAttribute("name", ParsePartitionName(assessment, formpartition.Key))));
+                var index = 1;
+                foreach (var group in itemgroups)
+                {
+                    formpartitionelement.Add(ItemGroup.Construct(group.ToList(), group.First().FormPartitionId, index++));
+                }
+                formPartitionElements.Add(formpartitionelement);
+            }
+            /*
+            foreach (var thing in formPartitionElements)
+            {
+                Logger.Debug(thing);
+
+            }*/
+
+            return formPartitionElements;
+
+            /* orig
             return items.GroupBy(x => x.FormPartitionPosition)
                 .Select(x => new XElement("formpartition",
                     new XElement("identifier",
@@ -19,6 +50,7 @@ namespace AssessmentPackageBuilder.Common
                         new XAttribute("version", "1"),
                         new XAttribute("name", ParsePartitionName(assessment, x.Key))),
                     ItemGroup.Construct(x.ToList(), x.First().FormPartitionId)));
+             */
         }
 
         private static string ParsePartitionName(Assessment assessment, string position)

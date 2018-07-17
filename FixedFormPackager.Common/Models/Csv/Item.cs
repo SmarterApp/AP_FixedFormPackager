@@ -4,6 +4,7 @@ namespace FixedFormPackager.Common.Models.Csv
 {
     public class Item
     {
+        public string BankKey { get; set; }
         public string ItemId { get; set; }
         public string AssociatedStimuliId { get; set; } = string.Empty;
         public string FormPartitionId { get; set; }
