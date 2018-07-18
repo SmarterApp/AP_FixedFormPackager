@@ -42,7 +42,6 @@ namespace AssessmentPackageBuilder.Common
                 {
                     result.Add(PoolProperty.Construct("Calculator", calc.Equals("N", StringComparison.OrdinalIgnoreCase) ? "No" : "Yes"));
                 }
-                Logger.Debug($"CALC IS {calc}");
             }
             if (!string.IsNullOrEmpty(itemInput.AssociatedStimuliId))
             {
