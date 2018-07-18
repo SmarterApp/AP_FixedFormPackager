@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Xml.Linq;
 using FixedFormPackager.Common.Models.Csv;
-using NLog;
 
 namespace AssessmentPackageBuilder.Common
 {
@@ -12,11 +11,29 @@ namespace AssessmentPackageBuilder.Common
 
         public static IEnumerable<XElement> Construct(IList<Item> items, string partitionIdentifier, int index)
         {
-            return items.GroupBy(x => x.FormPartitionPosition).Select(x => new XElement("itemgroup",
-                new XAttribute("formposition", index.ToString()),
-                new XAttribute("maxitems", "ALL"),
-                new XAttribute("maxresponses", "ALL"),
-                IdentifierAndResources(x.ToList(), partitionIdentifier)));
+            var result = new List<XElement>();
+            // this is a G: or group
+            if (!string.IsNullOrEmpty(items.First().AssociatedStimuliId))
+            {
+                return items.GroupBy(x => x.FormPartitionPosition).Select(x => new XElement("itemgroup",
+                    new XAttribute("formposition", index.ToString()),
+                    new XAttribute("maxitems", "ALL"),
+                    new XAttribute("maxresponses", "ALL"),
+                    IdentifierAndResources(x.ToList(), partitionIdentifier)));
+            }
+            else // I: individual groupitem per itemgroup
+            {
+                foreach (var item in items)
+                {
+                    var itemList = new List<Item>{item};
+                    result.Add(new XElement("itemgroup",
+                        new XAttribute("formposition", index.ToString()),
+                        new XAttribute("maxitems", "ALL"),
+                        new XAttribute("maxresponses", "ALL"),
+                        IdentifierAndResources(itemList, partitionIdentifier)));
+                }
+            }
+            return result;
         }
 
         private static IEnumerable<XElement> IdentifierAndResources(IList<Item> items, string partitionIdentifier)
@@ -34,7 +51,15 @@ namespace AssessmentPackageBuilder.Common
                     new XAttribute("name", $"{partitionIdentifier}:G-{stimuliId}-1"),
                     new XAttribute("version", "1")));
                 result.Add(new XElement("passageref", stimuliId));
-
+                result.AddRange(items.Select((x, i) => new XElement("groupitem",
+                    new XAttribute("itemid", x.ItemId.Contains('-') ? x.ItemId : $"200-{x.ItemId}"),
+                    new XAttribute("formposition", x.FormPosition),
+                    new XAttribute("groupposition", i + 1),
+                    new XAttribute("adminrequired", "false"),
+                    new XAttribute("responserequired", "false"),
+                    new XAttribute("isactive", "true"),
+                    new XAttribute("isfieldtest", "false"),
+                    new XAttribute("blockid", "A"))));
             }
             else
             {
@@ -42,16 +67,21 @@ namespace AssessmentPackageBuilder.Common
                     new XAttribute("uniqueid", $"{partitionIdentifier}:I-{fullItemId}"),
                     new XAttribute("name", $"{partitionIdentifier}:I-{fullItemId}"),
                     new XAttribute("version", "1")));
+                foreach (var x in items)
+                {
+                    result.Add(new XElement("groupitem",
+                        new XAttribute("itemid", x.ItemId.Contains('-') ? x.ItemId : $"200-{x.ItemId}"),
+                        new XAttribute("formposition", x.FormPosition),
+                        new XAttribute("groupposition", 1),
+                        new XAttribute("adminrequired", "false"),
+                        new XAttribute("responserequired", "false"),
+                        new XAttribute("isactive", "true"),
+                        new XAttribute("isfieldtest", "false"),
+                        new XAttribute("blockid", "A")
+                        ));
+                }
             }
-            result.AddRange(items.Select((x, i) => new XElement("groupitem",
-                new XAttribute("itemid", x.ItemId.Contains('-') ? x.ItemId : $"200-{x.ItemId}"),
-                new XAttribute("formposition", x.FormPosition),
-                new XAttribute("groupposition", i +1),
-                new XAttribute("adminrequired", "false"),
-                new XAttribute("responserequired", "false"),
-                new XAttribute("isactive", "true"),
-                new XAttribute("isfieldtest", "false"),
-                new XAttribute("blockid", "A"))));
+           
             return result;
         }
     }
