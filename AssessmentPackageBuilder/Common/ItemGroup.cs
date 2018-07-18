@@ -27,7 +27,7 @@ namespace AssessmentPackageBuilder.Common
                 {
                     var itemList = new List<Item>{item};
                     result.Add(new XElement("itemgroup",
-                        new XAttribute("formposition", index.ToString()),
+                        new XAttribute("formposition", item.FormPosition),
                         new XAttribute("maxitems", "ALL"),
                         new XAttribute("maxresponses", "ALL"),
                         IdentifierAndResources(itemList, partitionIdentifier)));
