@@ -17,9 +17,9 @@ namespace AssessmentPackageBuilder.Common
             if (elementtype.Equals("test", StringComparison.OrdinalIgnoreCase) ||
                 elementtype.Equals("segment", StringComparison.OrdinalIgnoreCase))
             {
-                result.Add(new XAttribute("minftitems", "1"));
-                result.Add(new XAttribute("maxftitems", "1"));
-                result.Add(new XAttribute("ftitemcount", "1"));
+                result.Add(new XAttribute("minftitems", "0"));
+                result.Add(new XAttribute("maxftitems", "0"));
+                result.Add(new XAttribute("ftitemcount", "0"));
                 identifier.Add(new XAttribute("name", uniqueid));
             }
             else
