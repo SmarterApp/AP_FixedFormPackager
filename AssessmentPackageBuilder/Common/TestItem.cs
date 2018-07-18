@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
@@ -36,6 +37,12 @@ namespace AssessmentPackageBuilder.Common
                 result.Add(assessmentContent.MetaDocument.XPathSelectElements(
                         "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
                     .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)).First());
+                var calc = assessmentContent.MetaDocument.XPathSelectElement("metadata/sa:smarterAppMetadata/sa:AllowCalculator", sXmlNs)?.Value;
+                if (!string.IsNullOrEmpty(calc))
+                {
+                    result.Add(PoolProperty.Construct("Calculator", calc.Equals("N", StringComparison.OrdinalIgnoreCase) ? "No" : "Yes"));
+                }
+                Logger.Debug($"CALC IS {calc}");
             }
             if (!string.IsNullOrEmpty(itemInput.AssociatedStimuliId))
             {
