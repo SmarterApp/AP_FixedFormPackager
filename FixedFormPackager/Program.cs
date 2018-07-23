@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Linq;
 using System.Xml.XPath;
 using AssessmentPackageBuilder.Common;
@@ -22,7 +23,9 @@ namespace FixedFormPackager
             Logger.Debug("Fixed Form Packager Initialized");
             try
             {
+
                 var options = new Options();
+
                 if (Parser.Default.ParseArgumentsStrict(args, options,
                     () =>
                     {
@@ -39,10 +42,17 @@ namespace FixedFormPackager
                     };
                     ExtractionSettings.AssessmentScoring =
                         CsvExtractor.Extract<AssessmentScoringComputationRule>(options.AssessmentScoringInput).ToList();
-                    ExtractionSettings.ItemInput = CsvExtractor.Extract<Item>(options.ItemInput).ToList();
+
+                    foreach (var itemInput in options.ItemInputs)
+                    {
+                        Logger.Debug($"extracting items for {itemInput}");
+                        ExtractionSettings.ItemInputs.Add(CsvExtractor.Extract<Item>(itemInput).ToList());
+                    }
+                    //ExtractionSettings.ItemInput = CsvExtractor.Extract<Item>(options.ItemInputs).ToList();
                     ExtractionSettings.AssessmentInfo =
                         CsvExtractor.Extract<Assessment>(options.AssessmentInput).First();
-                    ExtractionSettings.ItemInput.ForEach(
+                    //ExtractionSettings.ItemInput.ForEach(
+                    ExtractionSettings.UniqueItems().ForEach(
                         x =>
                         {
                             ResourceGenerator.Retrieve(ExtractionSettings.GitLabInfo, $"Item-{x.ItemId}");

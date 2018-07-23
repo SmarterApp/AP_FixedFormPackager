@@ -1,12 +1,13 @@
-﻿using CommandLine;
+﻿using System.Collections.Generic;
+using CommandLine;
 
 namespace FixedFormPackager
 {
     public class Options
     {
-        [Option('i', "itemInput", Required = true,
+        [OptionList('i', "itemInputs",Required = true,
             HelpText = "Path to a valid .csv file containing the items to be packaged")]
-        public string ItemInput { get; set; }
+        public IList<string> ItemInputs { get; set; }
 
         [Option('a', "assessmentInput", Required = true,
             HelpText = "Path to a valid .csv file containing the metadata about the assessment to be packaged")]

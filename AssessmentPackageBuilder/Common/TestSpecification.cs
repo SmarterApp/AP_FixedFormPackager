@@ -16,10 +16,10 @@ namespace AssessmentPackageBuilder.Common
         {
             var result = new List<XElement>();
             var scoringRules = ScoringRules.Construct(ExtractionSettings.AssessmentScoring);
-            var itemPool = ItemPool.Construct(ExtractionSettings.ItemInput, ExtractionSettings.AssessmentInfo.Publisher);
-            var testBlueprint = TestBlueprint.Construct(ExtractionSettings.ItemInput, itemPool,
+            var itemPool = ItemPool.Construct(ExtractionSettings.UniqueItems(), ExtractionSettings.AssessmentInfo.Publisher);
+            var testBlueprint = TestBlueprint.Construct(ExtractionSettings.UniqueItems(), itemPool,
                 ExtractionSettings.AssessmentInfo.UniqueId);
-            var testForms = TestForm.Construct(ExtractionSettings.ItemInput, itemPool,
+            var testForms = TestForm.Construct(ExtractionSettings.ItemInputs, itemPool,
                 ExtractionSettings.AssessmentInfo).ToList();
             var performanceLevels = PerformanceLevels.Construct(ExtractionSettings.AssessmentInfo);
             var adminSegments = AdminSegment.Construct(itemPool, ExtractionSettings.ItemInput);
