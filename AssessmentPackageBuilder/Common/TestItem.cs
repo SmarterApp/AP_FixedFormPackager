@@ -24,7 +24,7 @@ namespace AssessmentPackageBuilder.Common
             var result = new XElement("testitem",
                 new XAttribute("filename",
                     $"item-{uniqueId}.xml"),
-                new XAttribute("itemtype", itemElement.Attribute("format")?.Value),
+                new XAttribute("itemtype", itemElement.Attribute("format")?.Value.ToUpper()),
                 Identifier.Construct(uniqueId, itemElement.Attribute("version")?.Value));
             var grade = itemElement.XPathSelectElement("//attrib[@attid='itm_att_Grade']/val")?.Value;
 
