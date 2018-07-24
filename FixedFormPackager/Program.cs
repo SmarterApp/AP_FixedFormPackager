@@ -65,10 +65,11 @@ namespace FixedFormPackager
                             }
                         });
 
-                    /*var uniqueHash = HashGenerator.Hash(ExtractionSettings.AssessmentInfo.UniqueId.GetHashCode(),
+                    /*
+                    var uniqueHash = HashGenerator.Hash(ExtractionSettings.AssessmentInfo.UniqueId.GetHashCode(),
                         ExtractionSettings.ItemInput.First().SegmentId.GetHashCode(),
                         ExtractionSettings.ItemInput.First().FormPartitionId.GetHashCode());
-                        */
+                      */  
 
 
                     //Logger.Debug($"Generated unique hash: {uniqueHash}");

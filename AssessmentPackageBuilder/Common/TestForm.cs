@@ -34,7 +34,7 @@ namespace AssessmentPackageBuilder.Common
                             new XAttribute("property", "Language"),
                             new XAttribute("value", languageValue),
                             new XAttribute("label", language),
-                            new XAttribute("itemcount", items.Count().ToString())),
+                            new XAttribute("itemcount", itemSet.Count().ToString())),
                         PoolPropertyUtilities.GeneratePoolPropertyTypes(itemPool),
                         FormPartition.Construct(itemSet, itemPool, assessment))
                 );
