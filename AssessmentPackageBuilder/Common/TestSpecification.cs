@@ -7,11 +7,14 @@ using AssessmentPackageBuilder.Administration;
 using AssessmentPackageBuilder.Scoring;
 using AssessmentPackageBuilder.Utilities;
 using FixedFormPackager.Common.Utilities;
+using NLog;
 
 namespace AssessmentPackageBuilder.Common
 {
     public static class TestSpecification
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public static IEnumerable<XElement> Construct()
         {
             var result = new List<XElement>();

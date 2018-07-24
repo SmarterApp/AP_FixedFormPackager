@@ -15,7 +15,7 @@ namespace AssessmentPackageBuilder.Utilities
                 .Select(
                     x =>
                         new XElement("poolproperty", new XAttribute("property", "--ITEMTYPE--"),
-                            new XAttribute("value", x.Key.ToUpper()), new XAttribute("label", x.Key),
+                            new XAttribute("value", x.Key.ToUpper()), new XAttribute("label", x.Key.ToUpper()),
                             new XAttribute("itemcount", x.Count())));
         }
 

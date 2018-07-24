@@ -2,24 +2,32 @@
 using System.Linq;
 using System.Xml.Linq;
 using FixedFormPackager.Common.Models.Csv;
+using FixedFormPackager.Common.Utilities;
+using NLog;
 
 namespace AssessmentPackageBuilder.Common
 {
     public static class ItemGroup
     {
-        //private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public static IEnumerable<XElement> Construct(IList<Item> items, string partitionIdentifier, int index)
         {
             var result = new List<XElement>();
+            var firstItem = items.First();
+            var referenceItem = ExtractionSettings.ItemInput.FirstOrDefault(x => x.ItemId == firstItem.ItemId);
+
             // this is a G: or group
-            if (!string.IsNullOrEmpty(items.First().AssociatedStimuliId))
+            if (!string.IsNullOrEmpty(firstItem.AssociatedStimuliId) || !string.IsNullOrEmpty(referenceItem?.AssociatedStimuliId))
             {
+                var stimId = !string.IsNullOrEmpty(firstItem.AssociatedStimuliId)
+                    ? firstItem.AssociatedStimuliId
+                    : referenceItem?.AssociatedStimuliId;
                 return items.GroupBy(x => x.FormPartitionPosition).Select(x => new XElement("itemgroup",
                     new XAttribute("formposition", index.ToString()),
                     new XAttribute("maxitems", "ALL"),
                     new XAttribute("maxresponses", "ALL"),
-                    IdentifierAndResources(x.ToList(), partitionIdentifier)));
+                    IdentifierAndResources(x.ToList(), partitionIdentifier, stimId)));
             }
             else // I: individual groupitem per itemgroup
             {
@@ -30,21 +38,21 @@ namespace AssessmentPackageBuilder.Common
                         new XAttribute("formposition", item.FormPosition),
                         new XAttribute("maxitems", "ALL"),
                         new XAttribute("maxresponses", "ALL"),
-                        IdentifierAndResources(itemList, partitionIdentifier)));
+                        IdentifierAndResources(itemList, partitionIdentifier, "")));
                 }
             }
             return result;
         }
 
-        private static IEnumerable<XElement> IdentifierAndResources(IList<Item> items, string partitionIdentifier)
+        private static IEnumerable<XElement> IdentifierAndResources(IList<Item> items, string partitionIdentifier, string assocaitaedStimuliId)
         {
             var fullItemId = items.First().ItemId.Contains('-') ? items.First().ItemId : $"200-{items.First().ItemId}";
             var bank = fullItemId.Split('-').First();
-            var stimuliId = items.First().AssociatedStimuliId.Contains(bank)
-                ? items.First().AssociatedStimuliId
-                : bank + "-" + items.First().AssociatedStimuliId;
+            var stimuliId = assocaitaedStimuliId.Contains(bank)
+                ? assocaitaedStimuliId
+                : bank + "-" + assocaitaedStimuliId;
             var result = new List<XElement>();
-            if (!string.IsNullOrEmpty(items.First().AssociatedStimuliId))
+            if (!string.IsNullOrEmpty(assocaitaedStimuliId))
             {
                 result.Add(new XElement("identifier",
                     new XAttribute("uniqueid", $"{partitionIdentifier}:G-{stimuliId}-1"),

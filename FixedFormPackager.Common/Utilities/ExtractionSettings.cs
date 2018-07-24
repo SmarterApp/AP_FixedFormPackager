@@ -3,11 +3,14 @@ using System.Linq;
 using System.Security.Policy;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Models.Csv;
+using NLog;
 
 namespace FixedFormPackager.Common.Utilities
 {
     public static class ExtractionSettings
     {
+        //private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public static List<Item> ItemInput { get; set; } = new List<Item>();
 
         public static List<List<Item>> ItemInputs { get; set; } = new List<List<Item>>();

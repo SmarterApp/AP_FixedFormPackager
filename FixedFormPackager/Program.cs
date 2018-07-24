@@ -45,9 +45,9 @@ namespace FixedFormPackager
 
                     foreach (var itemInput in options.ItemInputs)
                     {
-                        Logger.Debug($"extracting items for {itemInput}");
                         ExtractionSettings.ItemInputs.Add(CsvExtractor.Extract<Item>(itemInput).ToList());
                     }
+                    
                     //ExtractionSettings.ItemInput = CsvExtractor.Extract<Item>(options.ItemInputs).ToList();
                     ExtractionSettings.AssessmentInfo =
                         CsvExtractor.Extract<Assessment>(options.AssessmentInput).First();
@@ -64,17 +64,17 @@ namespace FixedFormPackager
                                     .ItemScoringInformation = IrtMapper.RetrieveIrtParameters(x.ItemId);
                             }
                         });
-
                     /*
                     var uniqueHash = HashGenerator.Hash(ExtractionSettings.AssessmentInfo.UniqueId.GetHashCode(),
                         ExtractionSettings.ItemInput.First().SegmentId.GetHashCode(),
                         ExtractionSettings.ItemInput.First().FormPartitionId.GetHashCode());
-                      */  
+                      */
 
 
                     //Logger.Debug($"Generated unique hash: {uniqueHash}");
 
                     //ExtractionSettings.AssessmentInfo.UniqueId += $"{uniqueHash}";
+                   
                     ExtractionSettings.ItemInput = ExtractionSettings.ItemInput.Select(x => new Item
                     {
                         ItemId = x.ItemId,
@@ -88,6 +88,7 @@ namespace FixedFormPackager
                         SegmentId = x.SegmentId,
                         SegmentPosition = x.SegmentPosition
                     }).ToList();
+
                     // Validate that the segment unique IDs and assessment IDs are either the same or different depending on # of segments
                     var segmentIds = ExtractionSettings.ItemInput.Select(x => x.SegmentId).Distinct().ToList();
                     if (segmentIds.Count() > 1 &&

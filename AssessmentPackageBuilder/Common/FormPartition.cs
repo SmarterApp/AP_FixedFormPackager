@@ -18,9 +18,8 @@ namespace AssessmentPackageBuilder.Common
             var formPartions = items.GroupBy(x => x.FormPartitionId);
             var formPartitionElements = new List<XElement>();
             foreach (var formpartition in formPartions)
-            {                
+            {
                 var itemgroups = formpartition.GroupBy(x => x.FormPartitionPosition).ToList();
-
                 var formpartitionelement = new XElement("formpartition",
                     new XElement("identifier",
                         new XAttribute("uniqueid", itemgroups.First().First().FormPartitionId),
@@ -32,25 +31,8 @@ namespace AssessmentPackageBuilder.Common
                     formpartitionelement.Add(ItemGroup.Construct(group.ToList(), group.First().FormPartitionId, index++));
                 }
                 formPartitionElements.Add(formpartitionelement);
-            }
-            /*
-            foreach (var thing in formPartitionElements)
-            {
-                Logger.Debug(thing);
-
-            }*/
-
+            }           
             return formPartitionElements;
-
-            /* orig
-            return items.GroupBy(x => x.FormPartitionPosition)
-                .Select(x => new XElement("formpartition",
-                    new XElement("identifier",
-                        new XAttribute("uniqueid", x.First().FormPartitionId),
-                        new XAttribute("version", "1"),
-                        new XAttribute("name", ParsePartitionName(assessment, x.Key))),
-                    ItemGroup.Construct(x.ToList(), x.First().FormPartitionId)));
-             */
         }
 
         private static string ParsePartitionName(Assessment assessment, string position)
