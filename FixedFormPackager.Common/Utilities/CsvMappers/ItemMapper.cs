@@ -16,9 +16,7 @@ namespace FixedFormPackager.Common.Utilities.CsvMappers
             Map(m => m.FormPosition).Name("FormPosition").Index(3);
             Map(m => m.SegmentId).Name("SegmentId").Index(4);
             Map(m => m.SegmentPosition).Name("SegmentPosition").Index(5);
-            Map(m => m.Presentation).ConvertUsing(row =>
-                row.TryGetField("Presentation", out string lang) ? row.GetField("Presentation") : string.Empty
-            );
+            Map(m => m.Presentation).Name("Presentation").Index(6);
             Map(m => m.ItemScoringInformation).ConvertUsing(row =>
                 (row as CsvReader)?.FieldHeaders
                 .Where(header => Regex.IsMatch(header, @"^.+\d$"))
