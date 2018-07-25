@@ -18,7 +18,7 @@ namespace AssessmentPackageBuilder.Common
             foreach (var itemSet in items)
             {
                 var language = itemSet.First().Presentation;
-                var languageValue = LanguageMapping.GetLabel(language);
+                var languageValue = LanguageMapping.GetLanguageCode(language);
                 forms.Add(
                     new XElement("testform",
                         new XAttribute("length", itemSet.Count().ToString()),

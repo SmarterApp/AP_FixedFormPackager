@@ -8,6 +8,7 @@ using AssessmentPackageBuilder.Utilities;
 using FixedFormPackager.Common.Extensions;
 using FixedFormPackager.Common.Models;
 using FixedFormPackager.Common.Models.Csv;
+using FixedFormPackager.Common.Utilities;
 using NLog;
 
 namespace AssessmentPackageBuilder.Common
@@ -51,8 +52,13 @@ namespace AssessmentPackageBuilder.Common
                     : bank + "-" + itemInput.AssociatedStimuliId;
                 result.Add(new XElement("passageref", stimuliId));
             }
-            result.Add(PoolProperty.Construct("--ITEMTYPE--", itemElement.Attribute("format")?.Value));
-            result.Add(PoolProperty.Construct("Language", "ENU"));
+            result.Add(PoolProperty.Construct("--ITEMTYPE--", itemElement.Attribute("format")?.Value.ToUpper()));
+            var langsList = ExtractionSettings.GetItemLanguages(itemInput.ItemId);
+            foreach (var item in langsList)
+            {
+                result.Add(PoolProperty.Construct("Language", LanguageMapping.GetLanguageCode(item.Presentation)));
+            }
+            
             if (grade != null)
             {
                 result.Add(

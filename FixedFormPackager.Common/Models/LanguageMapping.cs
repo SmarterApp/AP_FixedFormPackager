@@ -12,10 +12,10 @@ namespace FixedFormPackager.Common.Models
         {
             {"English", "ENU" },
             {"Spanish", "ESN"},
-            {"Braille", "BRA" }
+            {"Braille", "ENU-Braille" }
         };
 
-        public static string GetLabel(string language)
+        public static string GetLanguageCode(string language)
         {
             if (_langs.TryGetValue(language, out var label))
             {

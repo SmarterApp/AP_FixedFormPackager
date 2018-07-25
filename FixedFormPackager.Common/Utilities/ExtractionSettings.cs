@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
 using FixedFormPackager.Common.Models;
@@ -20,6 +21,23 @@ namespace FixedFormPackager.Common.Utilities
             var masterList = ItemInputs.SelectMany(x => x);
             ItemInput =  masterList.GroupBy(x => x.ItemId).Select(i => i.First()).ToList();
             return ItemInput;
+        }
+
+        public static List<Item> GetItemLanguages(string itemId)
+        {
+            List<Item> result = new List<Item>();
+            foreach (var itemGroup in ItemInputs)
+            {
+                foreach (var item in itemGroup)
+                {
+                    if (item.ItemId.Equals(itemId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        result.Add(item);
+                    }
+                }
+            }
+
+            return result;
         }
 
         public static Assessment AssessmentInfo { get; set; }
