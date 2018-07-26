@@ -3,11 +3,14 @@ using System.Linq;
 using System.Xml;
 using System.Xml.XPath;
 using FixedFormPackager.Common.Models.Csv;
+using NLog;
 
 namespace ItemRetriever.Utilities
 {
     public static class IrtMapper
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public static IEnumerable<ItemScoring> RetrieveIrtParameters(string itemId)
         {
             var document = ContentAccess.RetrieveDocument($"Item-{itemId}");
@@ -19,9 +22,17 @@ namespace ItemRetriever.Utilities
             sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
             var irt = document.MetaDocument.XPathSelectElements(
                 "metadata/sa:smarterAppMetadata/sa:IrtDimension", sXmlNs);
-            return irt.Select(x => new ItemScoring
+            var measElement = document.MetaDocument
+                .XPathSelectElement("metadata/sa:smarterAppMetadata/sa:IrtDimension/sa:IrtModelType", sXmlNs)?.Value;
+            if (measElement != null && measElement.Equals("IRT3PLN"))
             {
-                MeasurementModel = x.XPathSelectElement("./sa:IrtModelType", sXmlNs)?.Value,
+                measElement = "IRT3PLn";
+            }
+            Logger.Debug($"thing is {measElement}");
+            return  irt.Select(x => new ItemScoring
+            {
+                //MeasurementModel = x.XPathSelectElement("./sa:IrtModelType", sXmlNs)?.Value,
+                MeasurementModel = measElement,
                 Dimension = x.XPathSelectElement("./sa:IrtDimensionPurpose", sXmlNs)?.Value,
                 ScorePoints = x.XPathSelectElement("./sa:IrtScore", sXmlNs)?.Value,
                 Weight = x.XPathSelectElement("./sa:IrtWeight", sXmlNs)?.Value,
