@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using FixedFormPackager.Common.Models.Csv;
+using FixedFormPackager.Common.Utilities;
 
 namespace AssessmentPackageBuilder.Administration
 {
@@ -37,19 +38,24 @@ namespace AssessmentPackageBuilder.Administration
                                 new XAttribute("name", "intercept"),
                                 new XAttribute("value", "2508.2"),
                                 new XAttribute("label", "intercept")))),
-                    GetSegmentForms(x.ToList())
+                    GetSegmentForms(x.Key)
                     ));
         }
 
-        
-        private static IEnumerable<XElement> GetSegmentForms(IList<Item> items)
+        // Foreach language : foreach formpartitionposition : find unique formpartitionid and make a segmentform
+        private static IEnumerable<XElement> GetSegmentForms(string position)
         {
             var result = new List<XElement>();
-            var segforms = items.GroupBy(i => i.FormPartitionId).Select(j => j.First()).ToList();
-            foreach (var segform in segforms)
+            var stuffitems = new List<Item>();
+            foreach (var lang in ExtractionSettings.ItemInputs)
+            {
+                stuffitems.AddRange(lang.Select(x => x).Where(item => item.FormPartitionPosition.Equals(position, StringComparison.OrdinalIgnoreCase)));
+            }
+            var ids = stuffitems.GroupBy(i => i.FormPartitionId).Select(j => j.First()).ToList();
+            foreach (var i in ids)
             {
                 result.Add(new XElement("segmentform",
-                    new XAttribute("formpartitionid", segform.FormPartitionId)));
+                    new XAttribute("formpartitionid", i.FormPartitionId)));
             }
             return result;
         }
