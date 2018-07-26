@@ -37,9 +37,23 @@ namespace AssessmentPackageBuilder.Administration
                                 new XAttribute("name", "intercept"),
                                 new XAttribute("value", "2508.2"),
                                 new XAttribute("label", "intercept")))),
-                    new XElement("segmentform",
-                        new XAttribute("formpartitionid", x.First().FormPartitionId))));
+                    GetSegmentForms(x.ToList())
+                    ));
         }
+
+        
+        private static IEnumerable<XElement> GetSegmentForms(IList<Item> items)
+        {
+            var result = new List<XElement>();
+            var segforms = items.GroupBy(i => i.FormPartitionId).Select(j => j.First()).ToList();
+            foreach (var segform in segforms)
+            {
+                result.Add(new XElement("segmentform",
+                    new XAttribute("formpartitionid", segform.FormPartitionId)));
+            }
+            return result;
+        }
+        
 
         private static IEnumerable<string> GetBprefsForItemId(XNode itempool, string uniqueId)
         {
