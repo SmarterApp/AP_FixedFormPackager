@@ -28,7 +28,6 @@ namespace ItemRetriever.Utilities
             {
                 measElement = "IRT3PLn";
             }
-            Logger.Debug($"thing is {measElement}");
             return  irt.Select(x => new ItemScoring
             {
                 //MeasurementModel = x.XPathSelectElement("./sa:IrtModelType", sXmlNs)?.Value,
