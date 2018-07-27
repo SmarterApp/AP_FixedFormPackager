@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -27,18 +28,28 @@ namespace AssessmentPackageBuilder.Utilities
                 .Select(
                     x =>
                         new XElement("poolproperty", new XAttribute("property", "Language"),
-                            new XAttribute("value", _checkBraille(x.Key.ToUpper())), new XAttribute("label", x.Key),
+                            new XAttribute("value", CheckBraille(x.Key.ToUpper())), new XAttribute("label", CheckSpanish(x.Key.ToString())),
                             new XAttribute("itemcount", x.Count())));
         }
 
-        private static string _checkBraille(string language)
+        public static string CheckBraille(string language)
         {
-            if (language.Equals("ENU-BRAILLE"))
+            if (language.Equals("ENU-BRAILLE", StringComparison.OrdinalIgnoreCase))
             {
                 return "ENU-Braille";
             }
 
             return language.ToUpper();
+        }
+
+        public static string CheckSpanish(string label)
+        {
+            if (label.Equals("ESN", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Spanish";
+            }
+
+            return label;
         }
     }
 }

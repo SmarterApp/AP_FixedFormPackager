@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using AssessmentPackageBuilder.Utilities;
 
 namespace AssessmentPackageBuilder.Common
 {
@@ -8,8 +9,10 @@ namespace AssessmentPackageBuilder.Common
         {
             return new XElement("poolproperty",
                 new XAttribute("property", name),
-                new XAttribute("value", value),
-                new XAttribute("label", value));
+                new XAttribute("value", PoolPropertyUtilities.CheckBraille(value) ),
+                new XAttribute("label", PoolPropertyUtilities.CheckSpanish(value)));
         }
+
     }
+
 }

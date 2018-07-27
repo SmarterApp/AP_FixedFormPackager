@@ -35,12 +35,7 @@ namespace AssessmentPackageBuilder.Common
             {
                 var sXmlNs = new XmlNamespaceManager(new NameTable());
                 sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
-                //var primaryStandards = 
-                /*
-                result.Add(assessmentContent.MetaDocument.XPathSelectElements(
-                        "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
-                    .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)).First());
-                */
+                // Select V6 only via http://www.smarterapp.org/documents/InterpretingSmarterBalancedStandardIDs.html
                 result.Add(assessmentContent.MetaDocument.XPathSelectElements(
                         "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard[contains(.,'-v6:')]", sXmlNs)
                     .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)).First());
