@@ -27,8 +27,18 @@ namespace AssessmentPackageBuilder.Utilities
                 .Select(
                     x =>
                         new XElement("poolproperty", new XAttribute("property", "Language"),
-                            new XAttribute("value", x.Key.ToUpper()), new XAttribute("label", x.Key),
+                            new XAttribute("value", _checkBraille(x.Key.ToUpper())), new XAttribute("label", x.Key),
                             new XAttribute("itemcount", x.Count())));
+        }
+
+        private static string _checkBraille(string language)
+        {
+            if (language.Equals("ENU-BRAILLE"))
+            {
+                return "ENU-Braille";
+            }
+
+            return language.ToUpper();
         }
     }
 }
