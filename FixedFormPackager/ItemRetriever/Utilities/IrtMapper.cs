@@ -3,14 +3,11 @@ using System.Linq;
 using System.Xml;
 using System.Xml.XPath;
 using FixedFormPackager.Common.Models.Csv;
-using NLog;
 
 namespace ItemRetriever.Utilities
 {
     public static class IrtMapper
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         public static IEnumerable<ItemScoring> RetrieveIrtParameters(string itemId)
         {
             var document = ContentAccess.RetrieveDocument($"Item-{itemId}");

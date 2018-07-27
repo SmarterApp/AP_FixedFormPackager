@@ -67,7 +67,7 @@ namespace AssessmentPackageBuilder.Administration
             {
                 return
                     itempool.XPathSelectElement($"./testitem[identifier/@uniqueid='{uniqueId}']")
-                        .XPathSelectElements("./bpref")
+                        .XPathSelectElements("./bpref").Skip(1)
                         .Select(x => x.Value);
             }
             catch (Exception) // If there was no metadata file provided with the items packaged, return an empty list

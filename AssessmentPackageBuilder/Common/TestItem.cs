@@ -35,8 +35,14 @@ namespace AssessmentPackageBuilder.Common
             {
                 var sXmlNs = new XmlNamespaceManager(new NameTable());
                 sXmlNs.AddNamespace("sa", "http://www.smarterapp.org/ns/1/assessment_item_metadata");
+                //var primaryStandards = 
+                /*
                 result.Add(assessmentContent.MetaDocument.XPathSelectElements(
                         "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard", sXmlNs)
+                    .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)).First());
+                */
+                result.Add(assessmentContent.MetaDocument.XPathSelectElements(
+                        "metadata/sa:smarterAppMetadata/sa:StandardPublication/sa:PrimaryStandard[contains(.,'-v6:')]", sXmlNs)
                     .Select(x => BpElementUtilities.GetBprefs(x.Value, publisher)).First());
                 var calc = assessmentContent.MetaDocument.XPathSelectElement("metadata/sa:smarterAppMetadata/sa:AllowCalculator", sXmlNs)?.Value;
                 if (!string.IsNullOrEmpty(calc))
@@ -54,6 +60,7 @@ namespace AssessmentPackageBuilder.Common
             }
             result.Add(PoolProperty.Construct("--ITEMTYPE--", itemElement.Attribute("format")?.Value.ToUpper()));
             var langsList = ExtractionSettings.GetItemLanguages(itemInput.ItemId);
+            // langsList.Add(new Item() {Presentation = "English"}); //removing for now but may be required to make the tabulator happy
             foreach (var item in langsList)
             {
                 result.Add(PoolProperty.Construct("Language", LanguageMapping.GetLanguageCode(item.Presentation)));
